@@ -1,13 +1,16 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {useFormik} from 'formik'
 import * as Yup from 'yup';
 import {AiOutlineEye, AiOutlineEyeInvisible, AiFillGithub} from 'react-icons/ai'
 import { FcGoogle } from 'react-icons/fc';
 import {styles} from '../styles/style'
+import { useLoginMutation } from '../../redux/features/auth/authApi';
+import { toast } from 'sonner';
 
 type Props = {
     setRoute: (route: string) => void;   
+    setOpen: (open: boolean) => void;   
 }
 const passwordRules = /^(?=.*[a-z])(?=.*[A-Z])/;
 const passwordNumberRule = /(?=.*[0-9])/;
@@ -21,16 +24,31 @@ const schema = Yup.object().shape({
     .required('Please enter your password'),      
 })
 
-const Login: React.FC<Props> = ({setRoute}) => {
+const Login: React.FC<Props> = ({setRoute, setOpen}) => {
     const [show, setshow] = useState(false);
+    const [login, {isSuccess, error, isLoading}] = useLoginMutation();
 
     const formik = useFormik({
         initialValues: {email:"", password: ""},
         validationSchema: schema,
         onSubmit: async({email, password}) => {
-            console.log(email, password);
-        }
+            await login({email, password})
+        },
     });
+    
+    useEffect(() => {
+        if(isSuccess){
+            setOpen(false)
+            toast.success("Login successful!")
+        }
+        if(error){
+            if("data" in error){
+                console.log('vann');
+                const errorData = error as any;
+                toast.error(errorData.data.message);
+            }
+          }
+    },[error, isSuccess])
 
     const {errors, touched, values, handleChange, handleSubmit} =formik;
   return (

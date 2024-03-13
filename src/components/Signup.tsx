@@ -1,10 +1,12 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {useFormik} from 'formik'
 import * as Yup from 'yup';
 import {AiOutlineEye, AiOutlineEyeInvisible, AiFillGithub} from 'react-icons/ai'
 import { FcGoogle } from 'react-icons/fc';
 import {styles} from '../styles/style'
+import { useRegisterMutation } from '../../redux/features/auth/authApi';
+import { toast } from 'sonner';
 
 type Props = {
     setRoute: (route: string) => void;   
@@ -34,12 +36,39 @@ const schema = Yup.object().shape({
 
 const SignUp: React.FC<Props> = ({setRoute}) => {
     const [show, setshow] = useState(false);
+    const [register, { data, error, isSuccess}] = useRegisterMutation();
+    const promise = () => new Promise((resolve) => setTimeout(resolve, 2000));
+
+    useEffect(() => {
+      if(isSuccess){
+        const message = data?.message || "Registration Successful"
+        // toast.success(message)
+        toast.promise(promise, {
+            loading: "OTP Sending...",
+            success: () => {
+              return `OTP was send to your email address`;
+            },
+            position: "top-center",
+            error: "Error",
+          });
+        setRoute("Verification")
+      }
+      if(error){
+        if("data" in error){
+            const errorData = error as any;
+            toast.error(errorData.data.message.details);
+        }
+      }
+    },[isSuccess, error])
 
     const formik = useFormik({
         initialValues: {name:"", email:"", password: ""},
         validationSchema: schema,
-        onSubmit: async({email, password}) => {
-            setRoute("Verification")
+        onSubmit: async({name, email, password}) => {
+            const data = {
+                name,email,password
+            };
+            await register(data)
         }
     });
 
