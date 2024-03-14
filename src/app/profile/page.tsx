@@ -17,19 +17,19 @@ const page: FC<Props> = (props) => {
         <div>
             <Protected>
 
-            <Heading
-            title={`${user?.name} profile`}
-            description=''
-            keywords=''
-            />
-            <Header 
-            open={open}
-            setOpen={setOpen}
-            activeItem={activeItem}
-            setRoute={setRoute}
-            route={route}
-            />
-            <Profile  user={user}/>
+                <Heading
+                    title={`${user?.name} profile`}
+                    description=''
+                    keywords=''
+                />
+                <Header 
+                    open={open}
+                    setOpen={setOpen}
+                    activeItem={activeItem}
+                    setRoute={setRoute}
+                    route={route}
+                />
+                <Profile  user={user}/>
 
             </Protected>
         </div>
