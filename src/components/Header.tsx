@@ -1,6 +1,6 @@
 "use client"
 import Link from 'next/link';
-import React,{FC, useState} from 'react';
+import React,{FC, useEffect, useState} from 'react';
 import NavItems from '../utils/NavItems'
 import { HiOutlineMenuAlt3 } from 'react-icons/hi';
 import { HiOutlineUser } from 'react-icons/hi2';
@@ -8,6 +8,12 @@ import CustomModal from '../utils/CustomModal';
 import Login from '../components/Login'
 import SignUp from '../components/Signup'
 import Verification from '../components/Verification'
+import { useSelector } from 'react-redux';
+import Image from 'next/image';
+import { useSession, signIn, signOut } from 'next-auth/react';
+import { useLogOutQuery, useSocialAuthMutation } from '../../redux/features/auth/authApi';
+import { toast } from 'sonner';
+
 
 type Props = {
     open: boolean;
@@ -20,6 +26,39 @@ type Props = {
 const Header:FC<Props> = ({activeItem, setOpen, route, open, setRoute}) => {
   const [active, setActive] = useState(false);
   const [openSidebar, setopenSidebar] = useState(false);
+  const {user} = useSelector((state: any) => state.auth);
+  const {data} = useSession();
+  console.log(data, user);
+  const [socialAuth, {isSuccess, error}] = useSocialAuthMutation()
+  const [logout, setLogout] = useState(false);
+
+  // const {} = useLogOutQuery(undefined, {
+  //     skip: !logout ? true : false,
+  // })
+
+  const socialauth = async() => {
+    if(data){
+    await socialAuth({
+      email: data.user?.email,
+      name: data.user?.name,
+      avatar: data.user?.image,
+    })
+    // toast.success("Login Successful")
+  }
+  }
+  useEffect(()=> {
+    if(!user){
+      if(data){
+        // socialauth()
+      }
+    }
+    if(isSuccess && data === null){
+      toast.success("Login Successful")
+    }
+    if(data === null){
+      setLogout(true);
+    }
+  },[data, user])
 
   if(typeof window !== "undefined"){
     window.addEventListener("scroll", () => {
@@ -37,6 +76,7 @@ const Header:FC<Props> = ({activeItem, setOpen, route, open, setRoute}) => {
       setopenSidebar(false)
     }
   }
+
   return (
     <div className='w-full relative shadow-sm'>
       <div className={`${
@@ -67,11 +107,26 @@ const Header:FC<Props> = ({activeItem, setOpen, route, open, setRoute}) => {
               </div>
 
               {/* for desktop */}
-              <HiOutlineUser
-              size={23}
-              className='hidden 800px:block cursor-pointer dark:text-white text-black'
-              onClick={() => setOpen(true)}
-              />
+              {
+                data || user ? (
+                  <Link href={"/profile"}>
+                  <Image 
+                  src={user?.avatar ? user.avatar : "/assets/user.png" }
+                  alt='usericon'
+                  width={30}
+                  height={30}
+                  className='rounded-full cursor-pointer'
+                  style={{border: activeItem === 5 ? "2px solid crimson" : "none"}}
+                  />
+                  </Link>
+                ):(
+                  <HiOutlineUser
+                  size={23}
+                  className='hidden 800px:block cursor-pointer dark:text-white text-black'
+                  onClick={() => setOpen(true)}
+                  />
+                )
+              }
 
            </div>
         </div>

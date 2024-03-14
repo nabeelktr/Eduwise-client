@@ -1,6 +1,8 @@
 "use client"
 import React,{FC, useState} from 'react';
 import Header from '../components/Header'
+import Carousell from '../components/Carousel/Carousel';
+import Heading from '../utils/Heading';
 interface Props {}
 
 const Page: FC<Props> = (props) => {
@@ -9,6 +11,11 @@ const Page: FC<Props> = (props) => {
   const [route, setRoute] = useState("Login")
   return(
     <div>
+      <Heading 
+      description='Eduwise is a platform for students to learn and get help from teachers'
+      keywords='Programming,MERN,Redux,Next,Microservice'
+      title='Eduwise'
+      />
       <Header 
       open={open}
       setOpen={setOpen}
@@ -16,6 +23,7 @@ const Page: FC<Props> = (props) => {
       setRoute={setRoute}
       route={route}
       />
+      <Carousell />
 
     </div>
   )

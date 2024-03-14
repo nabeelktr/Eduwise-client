@@ -7,6 +7,7 @@ import { FcGoogle } from 'react-icons/fc';
 import {styles} from '../styles/style'
 import { useLoginMutation } from '../../redux/features/auth/authApi';
 import { toast } from 'sonner';
+import {signIn} from 'next-auth/react'
 
 type Props = {
     setRoute: (route: string) => void;   
@@ -43,7 +44,6 @@ const Login: React.FC<Props> = ({setRoute, setOpen}) => {
         }
         if(error){
             if("data" in error){
-                console.log('vann');
                 const errorData = error as any;
                 toast.error(errorData.data.message);
             }
@@ -52,7 +52,7 @@ const Login: React.FC<Props> = ({setRoute, setOpen}) => {
 
     const {errors, touched, values, handleChange, handleSubmit} =formik;
   return (
-    <div className='w-full'>
+    <div className='w-full '>
         <h1 className={`${styles.title} text-xl`}>
             Login
         </h1>
@@ -125,8 +125,12 @@ const Login: React.FC<Props> = ({setRoute, setOpen}) => {
             </h5>
 
             <div className='flex items-center justify-center my-3'>
-                <FcGoogle size={30} className='cursor-pointer mr-2' />
-                <AiFillGithub size={30} className='cursor-pointer ml-2' />
+                <FcGoogle size={30} className='cursor-pointer mr-2' 
+                onClick={() => signIn("google")}
+                />
+                <AiFillGithub size={30} className='cursor-pointer ml-2' 
+                onClick={() => signIn("github")}
+                />
             </div>
 
             <h5 className='text-center pt-4 font-Poppins text-[14px]'>

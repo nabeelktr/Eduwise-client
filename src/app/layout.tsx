@@ -1,10 +1,15 @@
-import type { Metadata } from "next";
+'use client'
 import "./globals.css";
 import {Poppins} from "next/font/google"
 import {Josefin_Sans} from 'next/font/google'
 import { ThemeProvider } from "../utils/theme-provider";
 import { Toaster } from "sonner";
 import { Providers } from "./Provider";
+import { SessionProvider } from "next-auth/react";
+import { useLoadUserQuery } from "../../redux/features/api/apiSlice";
+import Loader from '../components/Loader/Loader'
+import { FC } from "react";
+import { BeatLoader } from "react-spinners";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -18,12 +23,6 @@ const josefin = Josefin_Sans({
   variable: "--font-Josefin",
 })
 
-export const metadata: Metadata = {
-  title: "Eduwise",
-  description: "Eduwise is a platform for students to learn and get help from teachers",
-  keywords: "Programming,MERN,Redux,Next,Microservice"
-};
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -33,12 +32,31 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${poppins.variable} ${josefin.variable} !bg-white bg-no-repeat dark:bg-gradient-to-b dark:from-gray-900 dark:to-black duration-300`}>
         <Providers>
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            {children}
-            <Toaster position="top-center"/>
-          </ThemeProvider>
+          <SessionProvider>
+              <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+                {/* <Custom>{children}</Custom> */}
+                {children}
+                <Toaster position="top-center"/>
+              </ThemeProvider>
+            </SessionProvider>
         </Providers>
       </body>
     </html>
   );
+}
+
+const Custom : FC<{children: React.ReactNode}> = ({children}) => {
+  const {isLoading} = useLoadUserQuery({})
+  return (
+    <>
+    {
+    isLoading ? 
+    <BeatLoader />
+    : 
+    <>
+    {children}
+    </>
+    }
+    </>
+  )
 }

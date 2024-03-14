@@ -90,7 +90,7 @@ const SignUp: React.FC<Props> = ({setRoute}) => {
                 value={values.name}
                 onChange={handleChange}
                 id='name'
-                placeholder='Johndoe'
+                placeholder='Enter your name'
                 className={`${
                     errors.name && touched.name && "border-red-500"
                 } ${styles.input} text-sm`}
@@ -109,7 +109,7 @@ const SignUp: React.FC<Props> = ({setRoute}) => {
             value={values.email}
             onChange={handleChange}
             id='email'
-            placeholder='eduwise@gmail.com'
+            placeholder='Enter your email'
             className={`${
                 errors.email && touched.email && "border-red-500"
             } ${styles.input} text-sm`}
@@ -128,7 +128,7 @@ const SignUp: React.FC<Props> = ({setRoute}) => {
             value={values.password}
             onChange={handleChange}
             id='password'
-            placeholder='Eduwise@2024'
+            placeholder='Enter your password'
             className={`${
                 errors.password && touched.password && "border-red-500"
             } ${styles.input} text-sm`}

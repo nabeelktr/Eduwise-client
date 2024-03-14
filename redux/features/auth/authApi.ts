@@ -1,6 +1,6 @@
-import { url } from "inspector";
+import { error } from "console";
 import { apiSlice } from "../api/apiSlice";
-import { userLoggedIn, userRegistration } from "./authSlice";
+import { userLoggedIn, userLoggedOut, userRegistration } from "./authSlice";
 
 type RegistrationResponse = {
     message: string;
@@ -30,7 +30,7 @@ export const authApi = apiSlice.injectEndpoints({
                     })
                 )
             }catch(e: any){
-                console.log(e);
+                console.log(e?.error?.data);
             }
         }
     }),
@@ -61,16 +61,60 @@ export const authApi = apiSlice.injectEndpoints({
                 const result = await queryFulfilled;
                 dispatch(
                     userLoggedIn({
-                        accessToken: result.data.data.accessToken,
-                        user: result.data.data.user,
+                        accessToken: result.data.accessToken,
+                        user: result.data.user,
                     })
                 )
             }catch(e: any){
-                console.log(e);
+                console.log(e?.error?.data);
             }
         }
-    })
+    }),
+
+    socialAuth: builder.mutation({
+        query: ({email, name, avatar}) => ({
+            url: "user/social-auth",
+            method: "POST",
+            body:{
+                email,
+                name,
+                avatar
+            },
+            credentials: "include" as const
+        }),  
+        async onQueryStarted(arg, {queryFulfilled, dispatch}){
+            try{
+                const result = await queryFulfilled;
+                dispatch(
+                    userLoggedIn({
+                        accessToken: result.data.accessToken,
+                        user: result.data.user,
+                    })
+                )
+            }catch(e: any){
+                console.log(e?.error?.data);
+            }
+        }
+    }),
+
+    logOut: builder.query({
+        query: () => ({
+            url: "user/logout",
+            method: "GET",
+            credentials: "include" as const
+        }),  
+        async onQueryStarted(arg, {queryFulfilled, dispatch}){
+            try{
+                dispatch(
+                    userLoggedOut()
+                );
+            }catch(e: any){
+                console.log(e?.error?.data);
+            }
+        }
+    }),
+
     })
 })
 
-export const {useRegisterMutation, useActivationMutation, useLoginMutation} = authApi;
+export const {useRegisterMutation, useActivationMutation, useLoginMutation, useSocialAuthMutation, useLogOutQuery} = authApi;
