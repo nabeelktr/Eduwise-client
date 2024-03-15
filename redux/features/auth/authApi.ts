@@ -1,6 +1,7 @@
 import { error } from "console";
 import { apiSlice } from "../api/apiSlice";
 import { userLoggedIn, userLoggedOut, userRegistration } from "./authSlice";
+import { signOut } from "next-auth/react";
 
 type RegistrationResponse = {
     message: string;
@@ -92,6 +93,10 @@ export const authApi = apiSlice.injectEndpoints({
                     })
                 )
             }catch(e: any){
+                await signOut()
+                dispatch(
+                    userLoggedOut()
+                )
                 console.log(e?.error?.data);
             }
         }

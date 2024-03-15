@@ -30,12 +30,6 @@ const Header:FC<Props> = ({activeItem, setOpen, route, open, setRoute}) => {
   const {data} = useSession();
   const [socialAuth, {isSuccess, error}] = useSocialAuthMutation()
 
-  // const [logout, setLogout] = useState(false);
-
-  // const {} = useLogOutQuery(undefined, {
-  //     skip: !logout ? true : false,
-  // })
-
   const socialauth = async() => {
     if(data){
     await socialAuth({
@@ -43,6 +37,7 @@ const Header:FC<Props> = ({activeItem, setOpen, route, open, setRoute}) => {
       name: data.user?.name,
       avatar: data.user?.image,
     })
+    toast.success("Login Successful")
   }
   }
   useEffect(()=> {
@@ -54,9 +49,7 @@ const Header:FC<Props> = ({activeItem, setOpen, route, open, setRoute}) => {
     if(isSuccess && data === null){
       toast.success("Login Successful")
     }
-    // if(data === null){
-    //   setLogout(true);
-    // }
+
   },[data, user])
 
   if(typeof window !== "undefined"){

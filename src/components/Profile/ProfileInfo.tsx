@@ -25,16 +25,23 @@ const ProfileInfo:FC<Props> = ({avatar, user}) => {
     };
 
     const imageHandler = async (e: any) => {
-        const fileReader = new FileReader();
-        fileReader.onload = () => {
-            if(fileReader.readyState === 2){
-                const avatar = fileReader.result;
-                updateAvatar({
-                    avatar 
-                })
-            }
-        }
-        fileReader.readAsDataURL(e.target.files[0])
+        const formData = new FormData()
+        formData.append('avatar', e.target.files[0])
+
+        updateAvatar(
+            formData
+        )
+        // const fileReader = new FileReader();
+        // fileReader.onload = () => {
+        //     if(fileReader.readyState === 2){
+        //         const avatar = fileReader.result;
+        //         updateAvatar({
+        //             avatar 
+        //         })
+        //     }
+        // }
+        // fileReader.readAsDataURL(e.target.files[0])
+
     }
 
     useEffect(() => {
@@ -69,15 +76,17 @@ const ProfileInfo:FC<Props> = ({avatar, user}) => {
             height={120}
             onClick={handleImageClick}
             />
+            <form encType="multipart/form-data">
             <input 
             type='file'
-            name=''
+            name='avatar'
             id='avatar'
             className='hidden'
             onChange={imageHandler}
             accept='image/png, image/jpg, image/jpeg, image/webp'
             ref={imageRef}
             />
+            </form>
 
             <label>
                 <div className='w-[30px] h-[30px] bg-slate-900 rounded-full absolute bottom-2 right-2 flex items-center justify-center cursor-pointer'>

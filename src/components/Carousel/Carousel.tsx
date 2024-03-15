@@ -1,4 +1,5 @@
 import { Carousel } from '@material-tailwind/react';
+import Image from 'next/image';
 
 const Carousell = () => {
     return (
@@ -21,18 +22,25 @@ const Carousell = () => {
             </div>
           )}
         >
-          <img
+          <Image
             src="https://firebasestorage.googleapis.com/v0/b/ecommerce-image-store-1d566.appspot.com/o/assets%2Fel1.jpg?alt=media&token=d9bfb361-b82b-477f-be76-2ffe5a1a6917"
             className="h-full w-full object-cover"
+            alt=''
+            width={3000}
+            height={3000}
           />
-          <img
+          <Image
             src="https://firebasestorage.googleapis.com/v0/b/ecommerce-image-store-1d566.appspot.com/o/assets%2Fel2.jpg?alt=media&token=dccba883-f112-4041-9e0b-c63166ffc701"
             alt="image 2"
             className="h-full w-full object-cover"
+            width={3000}
+            height={3000}
           />
-          <img
+          <Image
             src="https://firebasestorage.googleapis.com/v0/b/ecommerce-image-store-1d566.appspot.com/o/assets%2Fel3.jpg?alt=media&token=3ae8c6cc-0b2d-4360-8211-901062a9c4b6"
-            alt="image 3"
+            alt=''
+            width={3000}
+            height={3000}
             className="h-full w-full object-cover"
           />
         </Carousel>
