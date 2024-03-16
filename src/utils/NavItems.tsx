@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import React from 'react'
+import { useSelector } from 'react-redux';
 
 export const navItemsData = [
     {
@@ -16,7 +17,7 @@ export const navItemsData = [
     },
     {
         name: "Become a Instructor",
-        url: "/instructor"
+        url: "/instructor/register"
     },
     {
         name: "FAQ",
@@ -27,15 +28,31 @@ export const navItemsData = [
 type Props = {
     activeItem: number;
     isMobile: boolean;
+    user: any
 }
 
-const NavItems: React.FC<Props> = ({activeItem, isMobile}) => {
+const NavItems: React.FC<Props> = ({activeItem, isMobile, user}) => {
+
   return (
     <>
         <div className='hidden 800px:flex px-3'>
             {
                 navItemsData && navItemsData.map((i, index) => (
-
+                    i.name === "Become a Instructor" && user && user.role === "user" ? 
+                    <Link href={`${i.url}`} key={index} passHref>
+                        <span
+                        className={`
+                            ${activeItem === index 
+                            ? "dark:text-[#37a39a] text-[crimson]"
+                            : "dark:text-white text-black"
+                            }  text-[16px] px-4 font-Poppins font-[400]`
+                        }
+                        >
+                            {i.name}
+                        </span>
+                    </Link>
+                    :
+                    i.name !== "Become a Instructor" && 
                     <Link href={`${i.url}`} key={index} passHref>
                         <span
                         className={`
@@ -75,7 +92,7 @@ const NavItems: React.FC<Props> = ({activeItem, isMobile}) => {
                                 block py-5 text-[16px] px-6 font-Poppins font-[400]`
                                 }
                                 >
-                                    {i.name}
+                                   {i.name}
                                 </span>
                             </Link>
                         ))

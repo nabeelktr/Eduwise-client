@@ -23,7 +23,7 @@ const Page: FC<Props> = (props) => {
       setRoute={setRoute}
       route={route}
       />
-      <Carousell />
+      {/* <Carousell /> */}
 
     </div>
   )

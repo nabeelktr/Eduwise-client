@@ -1,7 +1,7 @@
 import { error } from "console";
 import { apiSlice } from "../api/apiSlice";
 import { userLoggedIn, userLoggedOut, userRegistration } from "./authSlice";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 
 type RegistrationResponse = {
     message: string;
@@ -25,6 +25,7 @@ export const authApi = apiSlice.injectEndpoints({
         async onQueryStarted(arg, {queryFulfilled, dispatch}){
             try{
                 const result = await queryFulfilled;
+                console.log(result);
                 dispatch(
                     userRegistration({
                         token: result.data.data.token,
@@ -108,11 +109,13 @@ export const authApi = apiSlice.injectEndpoints({
             method: "GET",
             credentials: "include" as const
         }),  
-        async onQueryStarted(arg, {queryFulfilled, dispatch}){
+        async onQueryStarted(arg, {dispatch}){
             try{
+                const user = useSession()
                 dispatch(
                     userLoggedOut()
                 );
+                user && await signOut()
             }catch(e: any){
                 console.log(e?.error?.data);
             }

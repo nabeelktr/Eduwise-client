@@ -23,13 +23,12 @@ const Profile: FC<Props> = ({user}) => {
 
 
     const logoutHandler = async() => {
-        await signOut();
-        setLogout(true);
+       await signOut();
+       setLogout(true);
     }
 
     if(typeof window !== "undefined"){
         window.addEventListener("scroll", () => {
-          console.log(window.scrollY );
           if(window.scrollY > 85){
             setScroll(true)
           }else{

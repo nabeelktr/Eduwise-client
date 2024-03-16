@@ -7,6 +7,8 @@ import { FcGoogle } from 'react-icons/fc';
 import {styles} from '../styles/style'
 import { useRegisterMutation } from '../../redux/features/auth/authApi';
 import { toast } from 'sonner';
+import { useDispatch } from 'react-redux';
+import { UserData } from '../../redux/features/auth/authSlice';
 
 type Props = {
     setRoute: (route: string) => void;   
@@ -38,6 +40,7 @@ const SignUp: React.FC<Props> = ({setRoute}) => {
     const [show, setshow] = useState(false);
     const [register, { data, error, isSuccess}] = useRegisterMutation();
     const promise = () => new Promise((resolve) => setTimeout(resolve, 2000));
+    const dispatch = useDispatch()
 
     useEffect(() => {
       if(isSuccess){
@@ -68,6 +71,13 @@ const SignUp: React.FC<Props> = ({setRoute}) => {
             const data = {
                 name,email,password
             };
+            dispatch(
+                UserData({
+                    email,
+                    password,
+                    name
+                })
+            )
             await register(data)
         }
     });
@@ -186,3 +196,4 @@ const SignUp: React.FC<Props> = ({setRoute}) => {
 }
 
 export default SignUp
+

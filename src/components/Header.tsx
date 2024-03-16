@@ -10,8 +10,8 @@ import SignUp from '../components/Signup'
 import Verification from '../components/Verification'
 import { useSelector } from 'react-redux';
 import Image from 'next/image';
-import { useSession, signIn, signOut } from 'next-auth/react';
-import { useLogOutQuery, useSocialAuthMutation } from '../../redux/features/auth/authApi';
+import { useSession } from 'next-auth/react';
+import { useSocialAuthMutation } from '../../redux/features/auth/authApi';
 import { toast } from 'sonner';
 
 
@@ -37,31 +37,31 @@ const Header:FC<Props> = ({activeItem, setOpen, route, open, setRoute}) => {
       name: data.user?.name,
       avatar: data.user?.image,
     })
-    toast.success("Login Successful")
   }
   }
+  useEffect(() => {
+    if(isSuccess){
+      toast.success("Login Successful")
+    }
+  },[isSuccess,error])
+
   useEffect(()=> {
     if(!user){
       if(data){
         socialauth()
       }
     }
-    if(isSuccess && data === null){
-      toast.success("Login Successful")
-    }
-
   },[data, user])
 
-  if(typeof window !== "undefined"){
-    window.addEventListener("scroll", () => {
-      console.log(window.scrollY );
-      if(window.scrollY > 85){
-        setActive(true)
-      }else{
-        setActive(false)
-      }
-    })
-  }
+  // if(typeof window !== "undefined"){
+  //   window.addEventListener("scroll", () => {
+  //     if(window.scrollY > 85){
+  //       setActive(true)
+  //     }else{
+  //       setActive(false)
+  //     }
+  //   })
+  // }
 
   const handleClose = (e: any) => {
     if(e.target.id === "screen"){
@@ -88,6 +88,7 @@ const Header:FC<Props> = ({activeItem, setOpen, route, open, setRoute}) => {
               <NavItems 
               activeItem= {activeItem}
               isMobile = {false}
+              user = {user}
               />
 
               {/* for mobile */}
@@ -132,7 +133,7 @@ const Header:FC<Props> = ({activeItem, setOpen, route, open, setRoute}) => {
             id='screen'
             >
               <div className='w-[70%] fixed h-screen z-[99999999] bg-white dark:bg-slate-900 dark:bg-opacity-90 top-0 right-0'>
-                <NavItems activeItem={activeItem} isMobile={true} />
+                <NavItems activeItem={activeItem} isMobile={true} user={user}/>
                 <HiOutlineUser
                 size={23}
                 className='cursor-pointer dark:text-white text-black ml-6 mt-4'
