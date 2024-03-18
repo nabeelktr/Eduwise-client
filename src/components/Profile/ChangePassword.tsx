@@ -1,6 +1,6 @@
 import { styles } from "@/styles/style";
 import React, { useEffect, useState } from "react";
-import { useUpdateAvatarMutation, useUpdatePasswordMutation } from "../../redux/features/user/userApi";
+import { useUpdateAvatarMutation, useUpdatePasswordMutation } from "../../../redux/features/user/userApi";
 import { toast } from "sonner";
 import { useFormik } from "formik";
 import * as Yup from "yup";

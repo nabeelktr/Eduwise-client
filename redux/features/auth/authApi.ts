@@ -1,4 +1,3 @@
-import { error } from "console";
 import { apiSlice } from "../api/apiSlice";
 import { userLoggedIn, userLoggedOut, userRegistration } from "./authSlice";
 import { signOut, useSession } from "next-auth/react";
