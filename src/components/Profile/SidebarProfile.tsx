@@ -6,6 +6,7 @@ import { SiCoursera } from "react-icons/si";
 import { AiOutlineLogout } from "react-icons/ai";
 import { MdOutlineAdminPanelSettings } from "react-icons/md";
 import Link from "next/link";
+import { HiAcademicCap } from "react-icons/hi";
 
 type Props = {
   user: any;
@@ -50,42 +51,55 @@ const SidebarProfile: FC<Props> = ({
         }`}
         onClick={() => setActive(2)}
       >
-        <RiLockPasswordLine size={20} className="dark:text-white text-black"  />
+        <RiLockPasswordLine size={20} className="dark:text-white text-black" />
         <h5 className="pl-6 800px:block hidden font-Poppins dark:text-white text-black text-sm font-thin">
           Change Password
         </h5>
       </div>
-        {
-            (user.role === "user" || user.role === "instructor") && (
-                <div
-                className={`w-full h-16 border-b flex items-center px-4 py-4 cursor-pointer hover:bg-blue-gray-50 ${
-                  active === 3
-                    ? "dark:bg-gray-600 border-b shadow-sm bg-gray-200 "
-                    : "bg-transparent"
-                }`}
-                onClick={() => setActive(3)}
-              >
-                <SiCoursera size={20} className="dark:text-white text-black"  />
-                <h5 className="pl-6 800px:block hidden font-Poppins dark:text-white text-black text-sm font-thin">
-                  Enrolled Courses
-                </h5>
-              </div>
-            ) 
-        }
-     
+      {(user.role === "user" || user.role === "instructor") && (
+        <div
+          className={`w-full h-16 border-b flex items-center px-4 py-4 cursor-pointer hover:bg-blue-gray-50 ${
+            active === 3
+              ? "dark:bg-gray-600 border-b shadow-sm bg-gray-200 "
+              : "bg-transparent"
+          }`}
+          onClick={() => setActive(3)}
+        >
+          <SiCoursera size={20} className="dark:text-white text-black" />
+          <h5 className="pl-6 800px:block hidden font-Poppins dark:text-white text-black text-sm font-thin">
+            Enrolled Courses
+          </h5>
+        </div>
+      )}
 
-      {
-        user.role === "admin" &&
-      (
-      <Link
-        className={`w-full h-16 border-b flex items-center px-4 py-4 cursor-pointer hover:bg-blue-gray-50 bg-transparent`}
-        href={"/admin"}
-      >
-        <MdOutlineAdminPanelSettings size={20} className="dark:text-white text-black"  />
-        <h5 className="pl-6 800px:block hidden font-Poppins dark:text-white text-black text-sm font-thin">
-          Admin Dashboard
-        </h5>
-      </Link>
+      {user.role === "admin" && (
+        <Link
+          className={`w-full h-16 border-b flex items-center px-4 py-4 cursor-pointer hover:bg-blue-gray-50 bg-transparent`}
+          href={"/admin"}
+        >
+          <MdOutlineAdminPanelSettings
+            size={20}
+            className="dark:text-white text-black"
+          />
+          <h5 className="pl-6 800px:block hidden font-Poppins dark:text-white text-black text-sm font-thin">
+            Admin Dashboard
+          </h5>
+        </Link>
+      )}
+
+      {user.role === "instructor" && (
+        <Link
+          className={`w-full h-16 border-b flex items-center px-4 py-4 cursor-pointer hover:bg-blue-gray-50 bg-transparent`}
+          href={"/instructor"}
+        >
+          <HiAcademicCap
+            size={20}
+            className="dark:text-white text-black"
+          />
+          <h5 className="pl-6 800px:block hidden font-Poppins dark:text-white text-black text-sm font-thin">
+            Instructor Dashboard
+          </h5>
+        </Link>
       )}
 
       <div

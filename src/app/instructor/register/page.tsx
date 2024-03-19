@@ -11,6 +11,9 @@ import { RiCloseCircleFill } from "react-icons/ri";
 import * as Yup from "yup";
 import { toast } from "sonner";
 import { useInstructorRegisterMutation } from "../../../../redux/features/instructor/instructoraApi";
+import { useRouter } from "next/navigation";
+import Protected from "../../../hooks/useProtected";
+
 
 const name = Yup.string()
   .max(30)
@@ -54,7 +57,7 @@ const InstructorRegister: React.FC<Props> = (props) => {
   const [files, setFiles] = useState<FileWithPreview[]>([]);
   const [rejected, setRejected] = useState<FileRejection[]>([]);
   const formRef = useRef<HTMLButtonElement>(null);
-
+  const router = useRouter()
   const [open, setOpen] = useState(false);
   const [activeItem, setActiveItem] = useState(3);
   const [route, setRoute] = useState("Login");
@@ -63,6 +66,7 @@ const InstructorRegister: React.FC<Props> = (props) => {
   useEffect(() => {
     if (isSuccess) {
       toast.success("Registration successful");
+      router.push("/instructor")
     }
     if (error) {
       if ("data" in error) {
@@ -143,7 +147,7 @@ const InstructorRegister: React.FC<Props> = (props) => {
   const { errors, touched, values, handleChange, handleSubmit } = formik;
   return (
     <div>
-
+      <Protected>
       <Header
         open={open}
         setOpen={setOpen}
@@ -396,6 +400,7 @@ const InstructorRegister: React.FC<Props> = (props) => {
           </div>
         </div>
       </section>
+      </Protected>
     </div>
   );
 };

@@ -110,12 +110,36 @@ export const authApi = apiSlice.injectEndpoints({
         }),  
         async onQueryStarted(arg, {dispatch}){
             try{
-                const user = useSession()
+                await signOut()
                 dispatch(
                     userLoggedOut()
                 );
-                user && await signOut()
+                await signOut()
+
             }catch(e: any){
+                console.log(e?.error?.data);
+            }
+        }
+    }),
+
+    loggout: builder.mutation({
+        query: () => ({
+            url: "user/logout",
+            method: "GET",
+            credentials: "include" as const
+        }),  
+        async onQueryStarted(arg, {queryFulfilled, dispatch}){
+            try{
+                const result = await queryFulfilled;
+                dispatch(
+                    userLoggedOut()
+                    )
+                    await signOut()
+            }catch(e: any){
+                await signOut()
+                dispatch(
+                    userLoggedOut()
+                )
                 console.log(e?.error?.data);
             }
         }
@@ -124,4 +148,4 @@ export const authApi = apiSlice.injectEndpoints({
     })
 })
 
-export const {useRegisterMutation, useActivationMutation, useLoginMutation, useSocialAuthMutation, useLogOutQuery} = authApi;
+export const {useRegisterMutation, useActivationMutation, useLoginMutation, useSocialAuthMutation, useLogOutQuery, useLoggoutMutation} = authApi;

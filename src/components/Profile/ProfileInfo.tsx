@@ -19,8 +19,7 @@ const ProfileInfo: FC<Props> = ({ avatar, user }) => {
   const [name, setName] = useState(user && user.name);
   const imageRef = useRef<HTMLInputElement>(null);
   const [updateAvatar, { isSuccess, error }] = useUpdateAvatarMutation();
-  const [editprofile, { isSuccess: profileSuccess, error: profileError }] =
-    useEditProfileMutation();
+  const [editprofile, { isSuccess: profileSuccess, error: profileError }] = useEditProfileMutation();
   const [loadUser, setLoadUser] = useState(false);
   const {} = useLoadUserQuery(undefined, { skip: loadUser ? false : true });
 

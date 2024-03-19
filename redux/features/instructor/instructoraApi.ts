@@ -14,10 +14,11 @@ export const instructorApi = apiSlice.injectEndpoints({
             async onQueryStarted(arg, {queryFulfilled, dispatch}){
                 try{
                     const result = await queryFulfilled;
+                    console.log(result);
                     dispatch(
                         userLoggedIn({
                             accessToken: result.data?.accessToken,
-                            user: result.data.user,
+                            user: result.data,
                         })
                     )
                 }catch(e: any){
