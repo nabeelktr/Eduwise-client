@@ -32,7 +32,10 @@ const CreateCourse = (props: Props) => {
   const [courseData, setCourseData] = useState();
   return (
     <div className="w-full flex min-h-screen">
-      <div className="w-[80%] ">{active === 0 && <CourseInformation active={active} setActive={setActive}  courseInfo={courseInfo} setCourseInfo={setCourseInfo} />}</div>
+      <div className="w-[80%] ">
+        <h5 className="mt-12 text-xl uppercase font-bold tracking-wide">Create Course</h5>
+        {active === 0 && <CourseInformation active={active} setActive={setActive}  courseInfo={courseInfo} setCourseInfo={setCourseInfo} />}
+        </div>
       <div className="w-[20%] mt-[100px] h-screen fixed z-[-1] top-18 right-0 800px:mr-0 -mr-10">
         <CourseOptions active={active} setActive={setActive} />
       </div>

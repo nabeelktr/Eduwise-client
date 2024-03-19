@@ -12,10 +12,45 @@ const CourseInformation:React.FC<Props> = ({ active, setActive, courseInfo, setC
   const [dragging, setDragging] = useState(false);
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    setActive(active);
+    setActive(active + 1);
   };
+
+  const handleFileChange = (e:any) => {
+    const file = e.target.files?.[0]
+    if(file){
+      const reader = new FileReader();
+      reader.onload = (e:any) => {
+        if(reader.readyState){
+          setCourseInfo({...courseInfo, thumbnail: reader.result})
+        }
+      }
+      reader.readAsDataURL(file)
+    }
+    console.log("file",courseInfo.thumbnail);
+  }
+
+  const handleDragOver = (e:any) => {
+    e.preventEventDefault()
+    setDragging(true)
+  } 
+  const handleDragLeave = (e:any) => {
+    e.preventEventDefault()
+    setDragging(false)
+  } 
+  const handleDrop = (e:any) => {
+    e.preventEventDefault()
+    setDragging(true)
+    const file = e.dataTransfer.files?.[0]
+    if(file){
+      const reader = new FileReader()
+      reader.onload = () => {
+        setCourseInfo({...courseInfo, thumbnail: reader.result})
+      }
+      reader.readAsDataURL(file)
+    }
+  } 
   return (
-    <div className="w- [80%] m-auto mt-24">
+    <div className=" m-auto mt-12">
       <form onSubmit={handleSubmit} className={`${styles.label}`}>
         <div>
           <label htmlFor="">Course Name</label>
@@ -104,6 +139,84 @@ const CourseInformation:React.FC<Props> = ({ active, setActive, courseInfo, setC
             />
           </div>
         </div>
+        <br />
+
+        <div className="w-full flex justify-between">
+          <div className="w-[45%]">
+            <label htmlFor="">Course Level</label>
+            <input
+              type="text"
+              name=""
+              required
+              value={courseInfo.level}
+              onChange={(e: any) =>
+                setCourseInfo({ ...courseInfo, level: e.target.value })
+              }
+              id="level"
+              placeholder="Beginner/intermediate/Expert"
+              className={`${styles.input} `}
+            />
+          </div>
+          <div className="w-[45%]">
+            <label htmlFor="">Demo Url</label>
+            <input
+              type="text"
+              name="demoUrl"
+              required
+              value={courseInfo.demoUrl}
+              onChange={(e: any) =>
+                setCourseInfo({
+                  ...courseInfo,
+                  demoUrl: e.target.demoUrl,
+                })
+              }
+              id="demoUrl"
+              placeholder="url.."
+              className={`${styles.input} `}
+            />
+          </div>
+        </div>
+        <br />
+
+        <div className="w-full">
+          <input
+            type="file"
+            accept="image/*"
+            id="file"
+            className="hidden"
+            onChange={handleFileChange}
+          />
+          <label
+            htmlFor="file"
+            className={`cursor-pointer w-full min-h-[10vh] dark:border-white border-[#00000026] p-3 border-dashed border-2 rounded-sm flex items-center justify-center ${
+              dragging ? "Obg-blue-500" : "bg-transparent"
+            }`}
+            onDragOver={handleDragOver}
+            onDragLeave={handleDragLeave}
+            onDrop={handleDrop}
+          >
+            {
+              courseInfo.thumbnail ? (
+                <img src={courseInfo.thumbnail} alt='' className='object-cover' width={700} height={400}/>
+              )
+              :(
+                <span className='text-black dark:text-white'>
+                  Drag and drop your thumbnail here or click to browse. <span className='text-sm'>( The file size should be less than 2MB )</span>
+                </span>
+              )
+            }
+          </label>
+        </div>
+
+        <div className='w-full flex items-center justify-end'>
+            <input 
+              type='submit'
+              value="Next"
+              className="w-full 800px:w-[180px] h-[40px] bg-gradient-to-tr from-indigo-200 to-indigo-400 text-center text-[#fff] rounded mt-8 cursor-pointer"
+            />
+        </div>
+        <br/>
+        <br/>
       </form>
     </div>
   );

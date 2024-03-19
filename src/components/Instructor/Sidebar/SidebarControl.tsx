@@ -18,7 +18,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ children }) => {
   const [expanded, setExpanded] = useState(false);
 
   return (
-    <aside className={`h-screen bg-[#2d2f31] ${expanded ? "w-72" : "w-16"}`}>
+    <aside className={`h-screen bg-[#2d2f31] fixed left-0 top-0 ${expanded ? "w-72" : "w-16"}`}>
       <nav className="h-full flex flex-col  border-r shadow-sm ">
         <div className="p-4 pb-2 flex justify-between items-center mb-4 mt-2 ">
           <div className="flex">
