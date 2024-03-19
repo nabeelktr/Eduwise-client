@@ -39,7 +39,7 @@ const CourseInformation:React.FC<Props> = ({ active, setActive, courseInfo, setC
   } 
   const handleDrop = (e:any) => {
     e.preventEventDefault()
-    setDragging(true)
+    setDragging(false)
     const file = e.dataTransfer.files?.[0]
     if(file){
       const reader = new FileReader()
@@ -167,7 +167,7 @@ const CourseInformation:React.FC<Props> = ({ active, setActive, courseInfo, setC
               onChange={(e: any) =>
                 setCourseInfo({
                   ...courseInfo,
-                  demoUrl: e.target.demoUrl,
+                  demoUrl: e.target.value,
                 })
               }
               id="demoUrl"
@@ -185,6 +185,7 @@ const CourseInformation:React.FC<Props> = ({ active, setActive, courseInfo, setC
             id="file"
             className="hidden"
             onChange={handleFileChange}
+            
           />
           <label
             htmlFor="file"
