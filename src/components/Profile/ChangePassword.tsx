@@ -1,6 +1,9 @@
 import { styles } from "@/styles/style";
 import React, { useEffect, useState } from "react";
-import { useUpdateAvatarMutation, useUpdatePasswordMutation } from "../../../redux/features/user/userApi";
+import {
+  useUpdateAvatarMutation,
+  useUpdatePasswordMutation,
+} from "../../../redux/features/user/userApi";
 import { toast } from "sonner";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -29,28 +32,27 @@ const schema = Yup.object().shape({
 
 type Props = {};
 
-
 const ChangePassword = (props: Props) => {
   const [updatePassword, { isSuccess, error }] = useUpdatePasswordMutation();
 
-    useEffect(() => {
-        if(isSuccess){
-            toast.success("Password update successfully")
-        }
-        if(error){
-            if("data" in error){
-                const errorData = error as any;
-                toast.error(errorData.data.message);
-            }
-        }
-    },[isSuccess, error])
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success("Password update successfully");
+    }
+    if (error) {
+      if ("data" in error) {
+        const errorData = error as any;
+        toast.error(errorData.data.message);
+      }
+    }
+  }, [isSuccess, error]);
 
   const formik = useFormik({
     initialValues: { oldPassword: "", newPassword: "", confirmPassword: "" },
     validationSchema: schema,
-    onSubmit: async ({ newPassword, oldPassword }, {resetForm}) => {
-        await updatePassword({oldPassword, newPassword})
-        resetForm()
+    onSubmit: async ({ newPassword, oldPassword }, { resetForm }) => {
+      await updatePassword({ oldPassword, newPassword });
+      resetForm();
     },
   });
   const { errors, touched, values, handleChange, handleSubmit } = formik;
@@ -123,6 +125,13 @@ const ChangePassword = (props: Props) => {
                 {errors.confirmPassword}
               </span>
             )}
+             <p className="text-xs mt-1 text-gray-600 ml-2">
+              - Uppercase letters (A-Z)
+            </p>
+            <p className="text-xs text-gray-600 ml-2">
+              - Lowercase letters (a-z)
+            </p>
+            <p className="text-xs text-gray-600 ml-2">- Numbers (0-9)</p>
             <input
               type="submit"
               className={`w-[95%] h-[40px] border border-[#37a39a] text-center rounded-[3px] mt-8 cursor-pointer text-black dark:text-[#fff]`}
