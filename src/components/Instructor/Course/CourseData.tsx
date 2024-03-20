@@ -95,7 +95,7 @@ const CourseData: React.FC<Props> = ({
         />
       </div>
 
-      <div className='w-full flex items-center justify-between'>
+      <div className='w-full flex items-center justify-between gap-2'>
             <div className="w-full 800px:w-[180px] h-[40px] bg-gradient-to-tr from-indigo-200 to-indigo-400 text-center text-[#fff] rounded cursor-pointer  pt-2"
             onClick={() => prevButton()}
             >

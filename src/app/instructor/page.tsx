@@ -10,7 +10,7 @@ type Props = {}
 const InstructorPage = (props: Props) => {
   const [active, setActive] = useState('Create Course')
   return (
-    <div className='flex mx-auto '>
+    <div className='flex mx-auto z-[9999]'>
       <Sidebar>
         <SidebarItem icon={<HiOutlineComputerDesktop size={25} />} text={'Create Course'}  setActive={setActive} active={active === "Create Course" ? true : false}/>
         <SidebarItem icon={<HiOutlineWrench size={25} />} text={'Edit Course'} setActive={setActive} active={active === "Edit Course" ? true : false}/>
