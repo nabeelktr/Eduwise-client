@@ -52,7 +52,7 @@ const CoursePreview: React.FC<Props> = ({
         </div>
         <div className="flex items-center">
           <div
-            className={`${styles.button} w-[180px] my-3 font-Poppins !bg-[crimson] cursor-not-allowed`}
+            className={`${styles.button} text-white !w-[180px] my-3 font-Poppins !bg-[crimson] cursor-not-allowed`}
           >
             Buy Now &#x20b9; {courseData?.price}
           </div>
@@ -63,11 +63,11 @@ const CoursePreview: React.FC<Props> = ({
             type="text"
             name=""
             id=""
-            placeholder=""
+            placeholder="coupon code"
             className={`${styles.input} 1500px:!w-[50%] 1100px:!w-[60%] ml-3 !mt-0`}
           />
           <div
-            className={`${styles.button} !bg-gradient-to-tr from-indigo-200 to-indigo-400 !w-[120px] my-3 ml-4 font-Poppins cursor-pointer `}
+            className={`${styles.button} !bg-gradient-to-tr from-indigo-200 to-indigo-400 !w-[120px] my-3 ml-4 font-Poppins cursor-pointer text-white !text-[14px]`}
           >
             Apply
           </div>
@@ -75,7 +75,7 @@ const CoursePreview: React.FC<Props> = ({
         <p className="pb-1">* Source code included</p>
         <p className="pb-1">* Full life time access</p>
         <p className="pb-1">* Certificates of Completion</p>
-        <p className="pb-3 800px:pb-1">* Premium Support</p>
+        <p className="pb-3 800px:pb-6">* Premium Support</p>
       </div>
       <div className="w-full">
         <div className="w-full 800px:pr-5">

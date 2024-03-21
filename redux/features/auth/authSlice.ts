@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { useRouter } from "next/navigation";
 
 const initialState = {
   token: "",

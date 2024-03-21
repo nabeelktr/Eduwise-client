@@ -17,6 +17,7 @@ const CourseInformation:React.FC<Props> = ({ active, setActive, courseInfo, setC
 
   const handleFileChange = (e:any) => {
     const file = e.target.files?.[0]
+    courseInfo.thumbnailFile = e.target.files?.[0]
     if(file){
       const reader = new FileReader();
       reader.onload = (e:any) => {
@@ -26,7 +27,7 @@ const CourseInformation:React.FC<Props> = ({ active, setActive, courseInfo, setC
       }
       reader.readAsDataURL(file)
     }
-    console.log("file",courseInfo.thumbnail);
+    ;
   }
 
   const handleDragOver = (e:any) => {

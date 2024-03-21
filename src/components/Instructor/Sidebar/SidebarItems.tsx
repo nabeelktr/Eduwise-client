@@ -1,6 +1,5 @@
 import { useContext, ReactNode } from "react";
-import { SidebarContext } from "./SidebarControl"; 
-
+import { SidebarContext } from "./SidebarControl";
 
 interface SidebarItemProps {
   icon: ReactNode;
@@ -10,7 +9,13 @@ interface SidebarItemProps {
   setActive: (active: string) => void;
 }
 
-export function SidebarItem({ icon, text, active = false, alert = false, setActive}: SidebarItemProps) {
+export function SidebarItem({
+  icon,
+  text,
+  active = false,
+  alert = false,
+  setActive,
+}: SidebarItemProps) {
   const { expanded } = useContext(SidebarContext);
 
   return (

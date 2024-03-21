@@ -1,6 +1,8 @@
 import React, { createContext, useState, ReactNode } from "react";
-import { MoreVertical } from "lucide-react";
+import { ArrowLeftFromLine, Home, MoreVertical } from "lucide-react";
 import { HiAcademicCap } from "react-icons/hi2";
+import { useRouter } from "next/navigation";
+import { useSelector } from "react-redux";
 
 interface SidebarContextProps {
   expanded: boolean;
@@ -14,8 +16,10 @@ interface SidebarProps {
   children: ReactNode;
 }
 
-export const Sidebar: React.FC<SidebarProps> = ({ children }) => {
+const SidebarControl: React.FC<SidebarProps> = ({ children }) => {
   const [expanded, setExpanded] = useState(false);
+  const router = useRouter()
+  const {user} = useSelector((state: any) => state.auth)
 
   return (
     <aside className={`h-screen bg-[#2d2f31] fixed left-0 top-0 ${expanded ? "w-72" : "w-16"}`}>
@@ -41,11 +45,12 @@ export const Sidebar: React.FC<SidebarProps> = ({ children }) => {
 
         <SidebarContext.Provider value={{ expanded }}>
           <ul className="flex-1 px-1">{children}</ul>
+          <ul className="py-4 m-1 pl-4 hover:bg-gray-600 rounded-sm" onClick={() => router.push("/")} ><ArrowLeftFromLine  size={25}/></ul>
         </SidebarContext.Provider>
 
         <div className="border-t flex p-3">
           <img
-            src="https://ui-avatars.com/api/?background=c7d2fe&color=3730a3&bold=true"
+            src={user.avatar ? user.avatar : "https://ui-avatars.com/api/?background=c7d2fe&color=3730a3&bold=true"}
             alt=""
             className="w-10 h-10 rounded-md"
           />
@@ -56,8 +61,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ children }) => {
           `}
           >
             <div className="leading-4">
-              <h4 className="font-semibold">John Doe</h4>
-              <span className="text-xs text-gray-600">johndoe@gmail.com</span>
+              <h4 className="font-semibold">{user.name}</h4>
+              <span className="text-xs text-gray-600">{user.email}</span>
             </div>
             <MoreVertical size={20} />
           </div>
@@ -66,3 +71,5 @@ export const Sidebar: React.FC<SidebarProps> = ({ children }) => {
     </aside>
   );
 };
+
+export default SidebarControl
