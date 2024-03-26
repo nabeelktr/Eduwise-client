@@ -3,19 +3,23 @@ import CoursePlayer from "../../../utils/CoursePlayer";
 import { styles } from "@/styles/style";
 import Ratings from "../../../utils/Ratings";
 import { IoMdCheckmark } from "react-icons/io";
+import VideoPlayer from "../../../utils/VideoPlayer";
 
 type Props = {
   active: number;
   setActive: (active: number) => void;
   courseData: any;
   handleCourseCreate: any;
+  isEdit: boolean;
 };
+
 
 const CoursePreview: React.FC<Props> = ({
   active,
   setActive,
   courseData,
   handleCourseCreate,
+  isEdit,
 }) => {
   const prevButton = () => {
     setActive(active - 1);
@@ -28,12 +32,13 @@ const CoursePreview: React.FC<Props> = ({
   const discountPrice = discount.toFixed(0);
   return (
     <div className="m-auto py-5 mb-5 font-Poppins ">
-      <div className="w-full relative z-[-1]">
+      <div className="w-full relative">
         <div className="w-full mt-10">
-          <CoursePlayer
+          {/* <CoursePlayer
             videoUrl={courseData?.demoUrl}
             title={courseData?.title}
-          />
+          /> */}
+          <VideoPlayer videoUrl={courseData?.demoUrl} subtitleUrl={courseData?.subtitleUrl}/>
         </div>
         <div className="flex items-center">
           <h1 className="pt-5 text-[25px]">
@@ -52,9 +57,9 @@ const CoursePreview: React.FC<Props> = ({
         </div>
         <div className="flex items-center">
           <div
-            className={`${styles.button} text-white !w-[180px] my-3 font-Poppins !bg-[crimson] cursor-not-allowed`}
+            className={`${styles.button} text-white !w-[220px] my-3 font-Poppins !bg-[crimson] cursor-not-allowed !tracking-tight`}
           >
-            Buy Now &#x20b9; {courseData?.price}
+            Buy Now&nbsp; &#x20b9; {courseData?.price}
           </div>
         </div>
 
@@ -138,9 +143,9 @@ const CoursePreview: React.FC<Props> = ({
           className="1100px:mr-16  w-full 800px:w-[180px] h-[40px] bg-gradient-to-tr from-indigo-200 to-indigo-400 text-center text-[#fff] rounded pt-2 cursor-pointer"
           onClick={() => handleCourseCreate()}
         >
-          Create
+          {isEdit ? "Update" : "Create"}
         </div>
-        </div>
+      </div>
     </div>
   );
 };

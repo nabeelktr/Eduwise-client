@@ -19,10 +19,6 @@ export const navItemsData = [
         name: "Become a Instructor",
         url: "/instructor/register"
     },
-    {
-        name: "FAQ",
-        url: "/faq"
-    }
 ];
 
 type Props = {
@@ -40,30 +36,30 @@ const NavItems: React.FC<Props> = ({activeItem, isMobile, user}) => {
                 navItemsData && navItemsData.map((i, index) => (
                     i.name === "Become a Instructor" && user && user.role === "user" ? 
                     <Link href={`${i.url}`} key={index} passHref>
-                        <span
+                        <div
                         className={`
                             ${activeItem === index 
-                            ? "dark:text-[#37a39a] text-[crimson]"
+                            ? "dark:text-[#37a39a] font-[500]"
                             : "dark:text-white text-black"
-                            }  text-[16px] px-4 font-Poppins font-[400]`
+                            }  text-[14px] font-Poppins font-[400] uppercase tracking-wider hover:font-[500] `
                         }
                         >
                             {i.name}
-                        </span>
+                        </div>
                     </Link>
                     :
                     i.name !== "Become a Instructor" && 
                     <Link href={`${i.url}`} key={index} passHref>
-                        <span
+                        <div
                         className={`
                             ${activeItem === index 
-                            ? "dark:text-[#37a39a] text-[crimson]"
+                            ? "dark:text-[#37a39a]  font-[500]"
                             : "dark:text-white text-black"
-                            }  text-[16px] px-4 font-Poppins font-[400]`
+                            }  text-[14px] font-Poppins font-[400] uppercase tracking-wider hover:font-[500] text-center w-28`
                         }
                         >
-                            {i.name}
-                        </span>
+                            <span>{i.name}</span>
+                        </div>
                     </Link>
                 ))
             }

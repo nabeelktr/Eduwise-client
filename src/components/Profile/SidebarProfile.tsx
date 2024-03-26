@@ -90,7 +90,7 @@ const SidebarProfile: FC<Props> = ({
       {user.role === "instructor" && (
         <Link
           className={`w-full h-16 border-b flex items-center px-4 py-4 cursor-pointer hover:bg-blue-gray-50 bg-transparent`}
-          href={"/instructor"}
+          href={"/instructor/create-course"}
         >
           <HiAcademicCap
             size={20}

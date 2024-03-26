@@ -70,25 +70,25 @@ const Header:FC<Props> = ({activeItem, setOpen, route, open, setRoute}) => {
   }
 
   return (
-    <div className='w-full relative shadow-sm'>
+    <div className='w-full relative shadow-sm px-[6.60%]'>
       <div className={`${
         active
-         ? "dark:bg-opacity-50 dark:bg-gradient-to-b dark:from-gray-900 dark:to-black fixed top-0 left-0 w-full h-[80px] z-[80] border-b dark:border-[#ffffff1c] shadow-xl transition duration-500" 
-         : "w-full border-b dark:border-[#ffffff1c] h-[80px] z-[80] dark:shadow"}`} >
-      <div className='w-[95%] 800px:w-[92%] m-auto py-2 h-full'>
-        <div className='w-full h-[80px] flex items-center justify-between p-3'>
+         ? "dark:bg-opacity-50 dark:bg-gradient-to-b dark:from-gray-900 dark:to-black fixed top-0 left-0 w-full h-[90px] z-[80] border-b dark:border-[#ffffff1c] shadow-xl transition duration-500" 
+         : "w-full border-b dark:border-[#ffffff1c] h-[90px] z-[80] dark:shadow"}`} >
+      <div className='m-auto py-2 h-full'>
+        <div className='w-full h-[100px] flex items-center justify-between'>
            <div>
             <Link href="/"
-            className={`text-[25px] font-Poppins font-[500] text-black dark:text-white`}
+            className={`text-[30px] font-BebasNeue font-[900] text-black dark:text-white `}
             >
-              EduWise
+              <img src='https://firebasestorage.googleapis.com/v0/b/ecommerce-image-store-1d566.appspot.com/o/profile%2Fedduwise.png?alt=media&token=bacb54dc-afc0-4a72-937d-b2046d7695e1'  height={150} width={130}/>
             </Link>
            </div>
            <div className="flex items-center">
               <NavItems 
-              activeItem= {activeItem}
-              isMobile = {false}
-              user = {user}
+                activeItem= {activeItem}
+                isMobile = {false}
+                user = {user}
               />
 
               {/* for mobile */}
@@ -106,16 +106,16 @@ const Header:FC<Props> = ({activeItem, setOpen, route, open, setRoute}) => {
                   <Image 
                   src={user?.avatar ? user.avatar : "/assets/user.png" }
                   alt='usericon'
-                  width={30}
-                  height={30}
-                  className='rounded-full cursor-pointer'
-                  style={{border: activeItem === 5 ? "2px solid crimson" : "none"}}
+                  width={40}
+                  height={40}
+                  className='rounded-full cursor-pointer ml-5'
+                  style={{border: activeItem === 5 ? "2px solid black" : "none"}}
                   />
                   </Link>
                 ):(
                   <HiOutlineUser
-                  size={23}
-                  className='hidden 800px:block cursor-pointer dark:text-white text-black'
+                  size={20}
+                  className='hidden 800px:block cursor-pointer dark:text-white text-black mr-3 ml-5'
                   onClick={() => setOpen(true)}
                   />
                 )
@@ -135,7 +135,7 @@ const Header:FC<Props> = ({activeItem, setOpen, route, open, setRoute}) => {
               <div className='w-[70%] fixed h-screen z-[99999999] bg-white dark:bg-slate-900 dark:bg-opacity-90 top-0 right-0'>
                 <NavItems activeItem={activeItem} isMobile={true} user={user}/>
                 <HiOutlineUser
-                size={23}
+                size={20}
                 className='cursor-pointer dark:text-white text-black ml-6 mt-4'
                 onClick={() => setOpen(true)}
                 />

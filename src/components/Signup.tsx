@@ -97,8 +97,8 @@ const SignUp: React.FC<Props> = ({ setRoute }) => {
   const { errors, touched, values, handleChange, handleSubmit } = formik;
   return (
     <div className="w-full">
-      <h1 className={`${styles.title} text-xl`}>Sign up</h1>
-      <form onSubmit={handleSubmit}>
+      <h1 className={`${styles.title} text-2xl  tracking-wider mb-6 mt-5 uppercase`}>Sign up</h1>
+      <form onSubmit={handleSubmit} className="px-8">
         <div className="mb-3">
           <label className={`${styles.label} `}>Name</label>
           <input
@@ -169,13 +169,13 @@ const SignUp: React.FC<Props> = ({ setRoute }) => {
             {errors.password}
           </span>
         )}
-        <p className="text-xs mt-1 text-gray-600 ml-2">
+        <p className="text-xs mt-1 text-gray-600">
           - Uppercase letters (A-Z)
         </p>
-        <p className="text-xs text-gray-600 ml-2">- Lowercase letters (a-z)</p>
-        <p className="text-xs text-gray-600 ml-2">- Numbers (0-9)</p>
+        <p className="text-xs text-gray-600 ">- Lowercase letters (a-z)</p>
+        <p className="text-xs text-gray-600 ">- Numbers (0-9)</p>
 
-        <div className="w-full mt-5">
+        <div className="w-full mt-10">
           <input
             type="submit"
             value="Sign Up"
@@ -196,7 +196,7 @@ const SignUp: React.FC<Props> = ({ setRoute }) => {
         <h5 className="text-center pt-4 font-Poppins text-[14px]">
           Already have an account?{" "}
           <span
-            className="text-[#2190ff] pl-1 cursor-pointer"
+            className="text-[#2190ff] pl-1 cursor-pointer "
             onClick={() => setRoute("Login")}
           >
             Sign in

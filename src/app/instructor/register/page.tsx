@@ -65,7 +65,7 @@ const InstructorRegister: React.FC<Props> = (props) => {
   useEffect(() => {
     if (isSuccess) {
       toast.success("Registration successful");
-      router.push("/instructor");
+      router.push("/instructor/create-course");
     }
     if (error) {
       if ("data" in error) {

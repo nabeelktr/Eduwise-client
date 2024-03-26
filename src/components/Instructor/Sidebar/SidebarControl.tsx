@@ -21,9 +21,10 @@ const SidebarControl: React.FC<SidebarProps> = ({ children }) => {
   const router = useRouter()
   const {user} = useSelector((state: any) => state.auth)
 
+
   return (
-    <aside className={`h-screen bg-[#2d2f31] fixed left-0 top-0 ${expanded ? "w-72" : "w-16"}`}>
-      <nav className="h-full flex flex-col  border-r shadow-sm ">
+    <aside className={`h-screen bg-[#2d2f31] fixed left-0 top-0 font-Poppins !z-9999999 ${expanded ? "min-w-[16.6%]" : "min-w-[3.70%]"}`}>
+      <nav className="h-full flex flex-col  border-r border-gray-800 shadow-sm ">
         <div className="p-4 pb-2 flex justify-between items-center mb-4 mt-2 ">
           <div className="flex">
             <HiAcademicCap
@@ -45,10 +46,9 @@ const SidebarControl: React.FC<SidebarProps> = ({ children }) => {
 
         <SidebarContext.Provider value={{ expanded }}>
           <ul className="flex-1 px-1">{children}</ul>
-          <ul className="py-4 m-1 pl-4 hover:bg-gray-600 rounded-sm" onClick={() => router.push("/")} ><ArrowLeftFromLine  size={25}/></ul>
         </SidebarContext.Provider>
 
-        <div className="border-t flex p-3">
+        <div className="border-t flex p-3 cursor-pointer" onClick={() => router.push("/profile")}>
           <img
             src={user.avatar ? user.avatar : "https://ui-avatars.com/api/?background=c7d2fe&color=3730a3&bold=true"}
             alt=""
@@ -61,7 +61,7 @@ const SidebarControl: React.FC<SidebarProps> = ({ children }) => {
           `}
           >
             <div className="leading-4">
-              <h4 className="font-semibold">{user.name}</h4>
+              <h4 className="font-semibold text-white text-[14px]">{user.name}</h4>
               <span className="text-xs text-gray-600">{user.email}</span>
             </div>
             <MoreVertical size={20} />

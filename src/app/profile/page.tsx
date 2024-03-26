@@ -13,7 +13,6 @@ const page: FC<Props> = (props) => {
     const [activeItem, setActiveItem] = useState(5)
     const [route, setRoute] = useState("Login")
     const {user} = useSelector((state: any) => state.auth)
-    console.log(user);
     return (
         <div>
             <Protected>

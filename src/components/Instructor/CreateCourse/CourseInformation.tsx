@@ -1,55 +1,59 @@
-import { styles } from '@/styles/style';
-import React, { useState } from 'react'
+import { styles } from "@/styles/style";
+import React, { useState } from "react";
 
 type Props = {
-  active:number;
-  setActive: (active:number) => void;
+  active: number;
+  setActive: (active: number) => void;
   courseInfo: any;
   setCourseInfo: (courseInfo: any) => void;
-}
+};
 
-const CourseInformation:React.FC<Props> = ({ active, setActive, courseInfo, setCourseInfo }) => {
+const CourseInformation: React.FC<Props> = ({
+  active,
+  setActive,
+  courseInfo,
+  setCourseInfo,
+}) => {
   const [dragging, setDragging] = useState(false);
   const handleSubmit = (e: any) => {
     e.preventDefault();
     setActive(active + 1);
   };
 
-  const handleFileChange = (e:any) => {
-    const file = e.target.files?.[0]
-    courseInfo.thumbnailFile = e.target.files?.[0]
-    if(file){
+  const handleFileChange = (e: any) => {
+    const file = e.target.files?.[0];
+    courseInfo.thumbnailFile = e.target.files?.[0];
+    if (file) {
       const reader = new FileReader();
-      reader.onload = (e:any) => {
-        if(reader.readyState){
-          setCourseInfo({...courseInfo, thumbnail: reader.result})
+      reader.onload = (e: any) => {
+        if (reader.readyState) {
+          setCourseInfo({ ...courseInfo, thumbnail: reader.result });
         }
-      }
-      reader.readAsDataURL(file)
+      };
+      reader.readAsDataURL(file);
     }
-    ;
-  }
+  };
 
-  const handleDragOver = (e:any) => {
-    e.preventEventDefault()
-    setDragging(true)
-  } 
-  const handleDragLeave = (e:any) => {
-    e.preventEventDefault()
-    setDragging(false)
-  } 
-  const handleDrop = (e:any) => {
-    e.preventEventDefault()
-    setDragging(false)
-    const file = e.dataTransfer.files?.[0]
-    if(file){
-      const reader = new FileReader()
+  const handleDragOver = (e: any) => {
+    e.preventEventDefault();
+    setDragging(true);
+  };
+  const handleDragLeave = (e: any) => {
+    e.preventEventDefault();
+    setDragging(false);
+  };
+  const handleDrop = (e: any) => {
+    e.preventEventDefault();
+    setDragging(false);
+    const file = e.dataTransfer.files?.[0];
+    if (file) {
+      const reader = new FileReader();
       reader.onload = () => {
-        setCourseInfo({...courseInfo, thumbnail: reader.result})
-      }
-      reader.readAsDataURL(file)
+        setCourseInfo({ ...courseInfo, thumbnail: reader.result });
+      };
+      reader.readAsDataURL(file);
     }
-  } 
+  };
   return (
     <div className=" m-auto mt-12">
       <form onSubmit={handleSubmit} className={`${styles.label}`}>
@@ -122,22 +126,41 @@ const CourseInformation:React.FC<Props> = ({ active, setActive, courseInfo, setC
             </div>
           </div>
           <br />
-          <div>
-            <label className={`${styles.label}`} htmlFor="email">
-              Course Tags{" "}
-            </label>
-            <input
-              type="text"
-              required
-              name=""
-              value={courseInfo.tags}
-              onChange={(e: any) =>
-                setCourseInfo({ ...courseInfo, tags: e.target.value })
-              }
-              id="tags"
-              placeholder="MERN, Next 13, Socket io, tailwind css, LMS"
-              className={`${styles.input}`}
-            />
+          <div className="w-full flex justify-between">
+            <div className="w-[45%]">
+              <label className={`${styles.label}`} htmlFor="email">
+                Course Tags{" "}
+              </label>
+              <input
+                type="text"
+                required
+                name=""
+                value={courseInfo.tags}
+                onChange={(e: any) =>
+                  setCourseInfo({ ...courseInfo, tags: e.target.value })
+                }
+                id="tags"
+                placeholder="MERN, Next 13, Socket io, tailwind css, LMS"
+                className={`${styles.input}`}
+              />
+            </div>
+            <div className="w-[45%]">
+              <label className={`${styles.label}`} htmlFor="email">
+                Subtitle Url{" "}
+              </label>
+              <input
+                type="text"
+                required
+                name=""
+                value={courseInfo.subtitleUrl}
+                onChange={(e: any) =>
+                  setCourseInfo({ ...courseInfo, subtitleUrl: e.target.value })
+                }
+                id="subtitle"
+                placeholder="Subtitle Url.."
+                className={`${styles.input}`}
+              />
+            </div>
           </div>
         </div>
         <br />
@@ -186,7 +209,6 @@ const CourseInformation:React.FC<Props> = ({ active, setActive, courseInfo, setC
             id="file"
             className="hidden"
             onChange={handleFileChange}
-            
           />
           <label
             htmlFor="file"
@@ -197,31 +219,37 @@ const CourseInformation:React.FC<Props> = ({ active, setActive, courseInfo, setC
             onDragLeave={handleDragLeave}
             onDrop={handleDrop}
           >
-            {
-              courseInfo.thumbnail ? (
-                <img src={courseInfo.thumbnail} alt='' className='object-cover' width={700} height={400}/>
-              )
-              :(
-                <span className='text-black dark:text-white'>
-                  Drag and drop your thumbnail here or click to browse. <span className='text-sm'>( The file size should be less than 2MB )</span>
+            {courseInfo.thumbnail ? (
+              <img
+                src={courseInfo.thumbnail}
+                alt=""
+                className="object-cover"
+                width={700}
+                height={400}
+              />
+            ) : (
+              <span className="text-black dark:text-white">
+                Drag and drop your thumbnail here or click to browse.{" "}
+                <span className="text-sm">
+                  ( The file size should be less than 2MB )
                 </span>
-              )
-            }
+              </span>
+            )}
           </label>
         </div>
 
-        <div className='w-full flex items-center justify-end'>
-            <input 
-              type='submit'
-              value="Next"
-              className="w-full 800px:w-[180px] h-[40px] bg-gradient-to-tr from-indigo-200 to-indigo-400 text-center text-[#fff] rounded mt-8 cursor-pointer"
-            />
+        <div className="w-full flex items-center justify-end">
+          <input
+            type="submit"
+            value="Next"
+            className="w-full 800px:w-[180px] h-[40px] bg-gradient-to-tr from-indigo-200 to-indigo-400 text-center text-[#fff] rounded mt-8 cursor-pointer"
+          />
         </div>
-        <br/>
-        <br/>
+        <br />
+        <br />
       </form>
     </div>
   );
-}
+};
 
-export default CourseInformation
+export default CourseInformation;

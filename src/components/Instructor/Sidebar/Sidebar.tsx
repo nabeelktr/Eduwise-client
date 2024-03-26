@@ -7,31 +7,30 @@ import { FileVideo2, MonitorPlay } from "lucide-react";
 
 
 type Props = {
-  active: string;
-  setActive: (active: string) => void;
+  active: number;
 };
 
-const Sidebar: React.FC<Props> = ({ active, setActive }) => {
+const Sidebar: React.FC<Props> = ({ active }) => {
   return (
     <>
       <SidebarControl>
         <SidebarItem
           icon={<FileVideo2 size={25} />}
           text={"Create Course"}
-          setActive={setActive}
-          active={active === "Create Course" ? true : false}
+          routerPath="/instructor/create-course"
+          active={active === 0 ? true : false}
         />
         <SidebarItem
           icon={<MonitorPlay size={25} />}
           text={"All Courses"}
-          setActive={setActive}
-          active={active === "All Courses" ? true : false}
+          routerPath="/instructor/courses"
+          active={active === 1 ? true : false}
         />
         <SidebarItem
           icon={<HiOutlineWrench size={25} />}
           text={"Edit Course"}
-          setActive={setActive}
-          active={active === "Edit Course" ? true : false}
+          routerPath="/instructor/courses"
+          active={active === 2 ? true : false}
         />
 
       </SidebarControl>

@@ -4,11 +4,11 @@ import { useSelector } from 'react-redux';
 
 interface ProtectedProps{
     children : React.ReactNode,
-    user:any
 }
 
 
-export default function InstructorProtected({children, user}: ProtectedProps){
+export default function InstructorProtected({children}: ProtectedProps){
+    const {user} = useSelector((state: any) => state.auth)
     const isInstructor = user?.role === "instructor"
     console.log(isInstructor, user?.role);
 

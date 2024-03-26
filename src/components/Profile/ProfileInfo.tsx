@@ -31,7 +31,7 @@ const ProfileInfo: FC<Props> = ({ avatar, user }) => {
     const formData = new FormData();
     formData.append("avatar", e.target.files[0]);
 
-    updateAvatar(formData);
+    await updateAvatar(formData);
   };
 
   useEffect(() => {
@@ -56,7 +56,7 @@ const ProfileInfo: FC<Props> = ({ avatar, user }) => {
   };
   return (
     <>
-      <div className="w-full flex justify-center">
+      <div className="w-full flex justify-center px-[100px]">
         <div className="relative">
           <Image
             src={user?.avatar || avatar ? user.avatar || avatar : avatarIcon}

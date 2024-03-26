@@ -53,10 +53,10 @@ const Login: React.FC<Props> = ({setRoute, setOpen}) => {
     const {errors, touched, values, handleChange, handleSubmit} =formik;
   return (
     <div className='w-full '>
-        <h1 className={`${styles.title} text-xl`}>
-            Login
+        <h1 className={`${styles.title} text-2xl  tracking-wider mb-6 mt-5 uppercase`}>
+            Log In
         </h1>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className='px-8'>
 
             <label className={`${styles.label} `}>
                 Email
@@ -111,12 +111,13 @@ const Login: React.FC<Props> = ({setRoute, setOpen}) => {
                 <span className='text-red-500 pt-1 text-sm block'>{errors.password}</span>
             )}
 
-            <div className='w-full mt-5'>
+            <div className='w-full mt-10'>
                 <input 
                 type='submit'
                 value="Login"
                 className={`${styles.button} text-white`}
                 />
+                
             </div>
             <br/>
 

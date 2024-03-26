@@ -1,12 +1,13 @@
 import { useContext, ReactNode } from "react";
 import { SidebarContext } from "./SidebarControl";
+import { useRouter } from "next/navigation";
 
 interface SidebarItemProps {
   icon: ReactNode;
   text: string;
   active?: boolean;
   alert?: boolean;
-  setActive: (active: string) => void;
+  routerPath: string;
 }
 
 export function SidebarItem({
@@ -14,10 +15,10 @@ export function SidebarItem({
   text,
   active = false,
   alert = false,
-  setActive,
+  routerPath,
 }: SidebarItemProps) {
   const { expanded } = useContext(SidebarContext);
-
+  const router = useRouter()
   return (
     <li
       className={`
@@ -31,7 +32,7 @@ export function SidebarItem({
               : "hover:bg-gray-600 text-gray-600"
           }
       `}
-      onClick={() => setActive(text)}
+      onClick={() => router.push(routerPath)}
     >
       {icon}
       <span
