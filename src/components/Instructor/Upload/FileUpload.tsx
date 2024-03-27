@@ -4,12 +4,13 @@ import axios, { AxiosResponse } from "axios";
 import { RiVideoAddFill } from "react-icons/ri";
 import { styles } from "@/styles/style";
 import { Check } from "lucide-react";
+import { toast } from "sonner";
 
 type Props = {
-    fetchData: any;
-}
+  fetchData: any;
+};
 
-const FileUpload: React.FC<Props> = ({fetchData}) => {
+const FileUpload: React.FC<Props> = ({ fetchData }) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -20,11 +21,34 @@ const FileUpload: React.FC<Props> = ({fetchData}) => {
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files.length > 0) {
-      setSelectedFile(event.target.files[0]);
+      const file = event.target.files[0];
+      const MAX_FILE_SIZE_MB = 500;
+      const MAX_VIDEO_LENGTH_MINUTES = 30;
+
+      if (file.type !== "video/mp4") {
+        toast.warning("Please select an MP4 video file.");
+        return;
+      }
+
+      if (file.size > MAX_FILE_SIZE_MB * 1024 * 1024) {
+        toast.warning(
+          `Selected file exceeds the maximum size limit of ${MAX_FILE_SIZE_MB}MB.`
+        );
+        return;
+      }
+
+      const video = document.createElement("video");
+      video.preload = "metadata";
+      video.onloadedmetadata = () => {
+        if (video.duration > MAX_VIDEO_LENGTH_MINUTES * 60) {
+          toast.warning(
+            `Selected video exceeds the maximum duration limit of ${MAX_VIDEO_LENGTH_MINUTES} minutes.`
+          );
+        } else{return}
+      };
+      setSelectedFile(event.target.files && event.target.files[0]);
     }
   };
-
-
 
   const clearFileInput = () => {
     if (inputRef.current) {
@@ -59,7 +83,7 @@ const FileUpload: React.FC<Props> = ({fetchData}) => {
             );
             setProgress(percentCompleted);
           },
-          withCredentials: true
+          withCredentials: true,
         }
       );
       fetchData();
@@ -77,6 +101,7 @@ const FileUpload: React.FC<Props> = ({fetchData}) => {
         onChange={handleFileChange}
         className="hidden"
         id="videoinput"
+        accept=".mp4"
       />
 
       {!selectedFile && (
@@ -121,7 +146,10 @@ const FileUpload: React.FC<Props> = ({fetchData}) => {
             </svg>
             <span className="text-sm font-medium text-gray-600 ">
               Drop files to Attach, or
-              <span className="text-blue-600 underline"> browse</span>
+              <span className="text-blue-600 underline">
+                &nbsp; browse 
+              </span>
+              &nbsp;( MP4 format, up to 500MB, max 30 minutes )
             </span>
           </span>
         </label>
@@ -148,7 +176,10 @@ const FileUpload: React.FC<Props> = ({fetchData}) => {
             </div>
 
             {uploadStatus === "select" ? (
-              <button className="absolute m-2 bg-gray-100 border border-gray-300 rounded-full p-2 right-1 hover:bg-gray-400" onClick={clearFileInput}>
+              <button
+                className="absolute m-2 bg-gray-100 border border-gray-300 rounded-full p-2 right-1 hover:bg-gray-400"
+                onClick={clearFileInput}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="w-4 h-4"

@@ -144,7 +144,7 @@ const CreateCourse = (props: Props) => {
   };
 
   return (
-    <div className="w-full flex min-h-screen">
+    <div className="w-full flex min-h-screen 800px:ml-16">
       <div className="w-[80%] ">
         <h5 className="mt-12 text-xl uppercase font-bold tracking-wide">
           Create Course
@@ -188,7 +188,7 @@ const CreateCourse = (props: Props) => {
         )}
 
       </div>
-      <div className="w-[20%] mt-[100px] h-screen fixed z-[-1] top-18 right-0 800px:mr-0 -mr-10">
+      <div className="w-[20%] mt-[100px] h-screen fixed z-[-1] top-18 right-0 800px:mr-24 -mr-10">
         <CourseOptions active={active} setActive={setActive} />
       </div>
     </div>

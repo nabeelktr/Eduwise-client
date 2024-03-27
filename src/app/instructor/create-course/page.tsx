@@ -19,7 +19,7 @@ const CreateCoursePage = (props: Props) => {
     />
   <div className="flex mx-auto z-[9999]">
 
-      <div className="mx-auto 800px:w-[85%] px-[100px] 800px:pl-5 mr-0 800px:mr-16 ">
+      <div className="mx-auto 800px:w-[80%] 800px:px-[100px] pl-10 ml-10  mr-0 800px:mr-16 ">
         <CreateCourse />
       </div>
     <Sidebar active={0}  />

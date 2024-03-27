@@ -22,11 +22,13 @@ interface CourseData {
   thumbnail: File;
   level: string;
   demoUrl: string;
+  subtitleUrl: string;
   totalVideos: string;
   benefits: { title: string }[];
   prerequisites: { title: string }[];
   courseContentData: {
     videoUrl: string;
+    subtitleUrl: string;
     title: string;
     description: string;
     videoSection: string;
@@ -64,6 +66,7 @@ const EditCourse: React.FC<Props> = ({ id }) => {
     tags: "",
     level: "",
     demoUrl: "",
+    subtitleUrl: "",
     thumbnail: "",
     thumbnailFile: "",
   });
@@ -72,6 +75,7 @@ const EditCourse: React.FC<Props> = ({ id }) => {
   const [courseContentData, setCourseContentData] = useState([
     {
       videoUrl: "",
+      subtitleUrl: "",
       title: "",
       description: "",
       videoSection: "Untitled Section",
@@ -90,6 +94,7 @@ const EditCourse: React.FC<Props> = ({ id }) => {
         tags: editCourseData.tags,
         level: editCourseData.level,
         demoUrl: editCourseData.demoUrl,
+        subtitleUrl: editCourseData.subtitleUrl,
         thumbnail: editCourseData?.thumbnail,
         thumbnailFile: "",
       });
@@ -110,6 +115,7 @@ const EditCourse: React.FC<Props> = ({ id }) => {
     const formattedCourseContentData = courseContentData.map(
       (courseContent) => ({
         videoUrl: courseContent.videoUrl,
+        subtitleUrl: courseContent.subtitleUrl,
         title: courseContent.title,
         description: courseContent.description,
         videoSection: courseContent.videoSection,
@@ -130,6 +136,7 @@ const EditCourse: React.FC<Props> = ({ id }) => {
       thumbnail: courseInfo.thumbnailFile,
       level: courseInfo.level,
       demoUrl: courseInfo.demoUrl,
+      subtitleUrl: courseInfo.subtitleUrl,
       totalVideos: courseContentData.length,
       benefits: formattedBenefits,
       prerequisites: formattedprerequisites,
@@ -149,6 +156,7 @@ const EditCourse: React.FC<Props> = ({ id }) => {
     formData.append("tags", data.tags);
     formData.append("level", data.level);
     formData.append("demoUrl", data.demoUrl);
+    formData.append("subtitleUrl", data.subtitleUrl);
     formData.append("totalVideos", data.totalVideos);
     formData.append("benefits", JSON.stringify(data.benefits));
     formData.append("prerequisites", JSON.stringify(data.prerequisites));
@@ -162,12 +170,6 @@ const EditCourse: React.FC<Props> = ({ id }) => {
     await updateCourse(formData)
   };
 
-
-  // if(isLoading){
-  //   return (
-  //     <div className="min-h-screen justify-center items-center">loading</div>
-  //   )
-  // }
   return (
     <div className="w-full flex min-h-screen">
       <div className="w-[80%] ">

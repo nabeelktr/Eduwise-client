@@ -3,7 +3,7 @@
 import Header from "../../../components/Header";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useFormik } from "formik";
-import { styles } from "../../../styles/style";
+import { styles, subjects, years } from "../../../styles/style";
 import { FileRejection, useDropzone } from "react-dropzone";
 import { HiArrowUpTray } from "react-icons/hi2";
 import { TextGenerateEffect } from "../../../components/ui/TextGenerate";
@@ -13,6 +13,7 @@ import { toast } from "sonner";
 import { useInstructorRegisterMutation } from "../../../../redux/features/instructor/instructoraApi";
 import { useRouter } from "next/navigation";
 import Protected from "../../../hooks/useProtected";
+import SubLoader from "@/components/ui/Loader/SubLoader";
 
 const name = Yup.string()
   .max(30)
@@ -60,7 +61,7 @@ const InstructorRegister: React.FC<Props> = (props) => {
   const [open, setOpen] = useState(false);
   const [activeItem, setActiveItem] = useState(3);
   const [route, setRoute] = useState("Login");
-  const [register, { isSuccess, error }] = useInstructorRegisterMutation();
+  const [register, { isSuccess, error, isLoading }] = useInstructorRegisterMutation();
 
   useEffect(() => {
     if (isSuccess) {
@@ -170,13 +171,11 @@ const InstructorRegister: React.FC<Props> = (props) => {
                 <h1 className="text-2xl font-semibold tracking-wider text-gray-800 dark:text-white font-Poppins uppercase">
                   Become a Instructor
                 </h1>
-                {/* <span className="mt-4 text-gray-600 dark:text-gray-600 text-sm "> */}
-                {/* The way that you teach — what you bring to it — is up to you. */}
+
                 <TextGenerateEffect
                   words="The way that you teach — what you bring to it — is up to you."
                   className="something"
                 />
-                {/* </span> */}
                 <form className="mt-10" onSubmit={handleSubmit}>
                   <h1 className="text-[18px] mb-2 text-gray-900  uppercase">
                     Education Details:
@@ -232,16 +231,23 @@ const InstructorRegister: React.FC<Props> = (props) => {
                       <label className={`${styles.label} text-sm uppercase`}>
                         Major / Subject
                       </label>
-                      <input
-                        type="text"
+                      <select
                         name="subject"
                         value={values.subject}
                         onChange={handleChange}
-                        placeholder="Subject"
                         className={`${
                           errors.subject && touched.subject && "border-red-500"
-                        } ${styles.input} text-sm mt-0`}
-                      />
+                        } ${
+                          styles.input
+                        } text-sm mt-0 cursor-pointer`}
+                      >
+                        <option value="">Select a Subject</option>
+                        {subjects.map((subject) => (
+                          <option key={subject} value={subject}>
+                            {subject}
+                          </option>
+                        ))}
+                      </select>
                       {errors.subject && touched.subject && (
                         <span className="text-red-500 pt-1 block text-sm">
                           {errors.subject}
@@ -250,20 +256,25 @@ const InstructorRegister: React.FC<Props> = (props) => {
                     </div>
                     <div>
                       <label className={`${styles.label} text-sm uppercase`}>
-                        Year of completion{" "}
+                        Year of completion
                       </label>
-                      <input
-                        type="number"
+                      <select
                         name="yearOfCompletion"
                         value={values.yearOfCompletion}
                         onChange={handleChange}
-                        placeholder="Year of completion"
                         className={`${
                           errors.yearOfCompletion &&
                           touched.yearOfCompletion &&
                           "border-red-500"
-                        } ${styles.input} text-sm mt-0`}
-                      />
+                        } ${styles.input} text-sm mt-0 cursor-pointer`}
+                      >
+                        <option value="">Select Year</option>
+                        {years.map((year) => (
+                          <option key={year} value={year}>
+                            {year}
+                          </option>
+                        ))}
+                      </select>
                       {errors.yearOfCompletion && touched.yearOfCompletion && (
                         <span className="text-red-500 pt-1 block text-sm">
                           {errors.yearOfCompletion}
@@ -389,10 +400,17 @@ const InstructorRegister: React.FC<Props> = (props) => {
                 ))}
                 <div className="ml-4 mt-8">
                   <button
-                    className={`${styles.button} bg-gray-900 text-white tracking-wider font-thin dark:bg-gray-800`}
+                    className={`${styles.button} ${isLoading ? "!py-4" : "!py-2" } bg-gray-900 text-white tracking-wider !font-thin dark:bg-gray-800 `}
                     onClick={() => formRef.current?.click()}
                   >
-                    Submit{" "}
+                   { 
+                   isLoading ?
+                   <span > <SubLoader /></span>
+                   :
+                   <>
+                   Submit{" "}
+                   </>
+                   }
                   </button>
                 </div>
               </div>

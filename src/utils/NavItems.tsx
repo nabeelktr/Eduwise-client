@@ -41,10 +41,10 @@ const NavItems: React.FC<Props> = ({activeItem, isMobile, user}) => {
                             ${activeItem === index 
                             ? "dark:text-[#37a39a] font-[500]"
                             : "dark:text-white text-black"
-                            }  text-[14px] font-Poppins font-[400] uppercase tracking-wider hover:font-[500] `
+                            }  text-[14px] font-Poppins font-[400] uppercase tracking-wider hover:font-[500] text-center w-44 mx-4`
                         }
                         >
-                            {i.name}
+                            <span>{i.name}</span>
                         </div>
                     </Link>
                     :
@@ -55,7 +55,7 @@ const NavItems: React.FC<Props> = ({activeItem, isMobile, user}) => {
                             ${activeItem === index 
                             ? "dark:text-[#37a39a]  font-[500]"
                             : "dark:text-white text-black"
-                            }  text-[14px] font-Poppins font-[400] uppercase tracking-wider hover:font-[500] text-center w-28`
+                            }  text-[14px] font-Poppins font-[400] uppercase tracking-wider hover:font-[500] text-center w-24`
                         }
                         >
                             <span>{i.name}</span>

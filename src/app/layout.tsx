@@ -55,7 +55,7 @@ const Custom : FC<{children: React.ReactNode}> = ({children}) => {
     <>
     {
     isLoading ? 
-    <BeatLoader />
+      <Loader />
     : 
     <>
     {children}

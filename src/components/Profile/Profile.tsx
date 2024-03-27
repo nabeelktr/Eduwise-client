@@ -1,9 +1,8 @@
 import React, { FC, useState } from "react";
 import SidebarProfile from "./SidebarProfile";
-import { signOut } from "next-auth/react";
 import ProfileInfo from "./ProfileInfo";
-import { useLogOutQuery } from "../../../redux/features/auth/authApi";
 import ChangePassword from "./ChangePassword";
+import { useLogOutMutation } from "../../../redux/features/auth/authApi";
 
 type Props = {
   user: any;
@@ -13,14 +12,10 @@ const Profile: FC<Props> = ({ user }) => {
   const [scroll, setScroll] = useState(false);
   const [avatar, setAvatar] = useState(null);
   const [active, setActive] = useState(1);
-  const [logout, setLogout] = useState(false);
-  const {} = useLogOutQuery(undefined, {
-    skip: !logout ? true : false,
-  });
+  const [logoutUser, {isLoading}] = useLogOutMutation();
 
   const logoutHandler = async () => {
-    await signOut();
-    setLogout(true);
+    await logoutUser({succes: true})
   };
 
   if (typeof window !== "undefined") {

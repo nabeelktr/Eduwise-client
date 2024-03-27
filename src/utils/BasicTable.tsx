@@ -51,7 +51,7 @@ const BasicTable: React.FC<BasicTableProps> = ({ datas, columns, type }) => {
                 <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                   <svg
                     aria-hidden="true"
-                    className="w-5 h-5 text-gray-500 dark:text-gray-400"
+                    className="w-5 h-5 text-gray-700 dark:text-gray-400"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                     xmlns="http://www.w3.org/2000/svg"
@@ -76,7 +76,7 @@ const BasicTable: React.FC<BasicTableProps> = ({ datas, columns, type }) => {
             
           </div>
           <div className="overflow-x-auto">
-            <table className="min-w-full divide-y text-left text-gray-500 dark:text-gray-400">
+            <table className="min-w-full divide-y text-left text-gray-700 dark:text-gray-400">
               <thead className="text-xs md:text-sm text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 tracking-wider">
                 {table.getHeaderGroups().map((headergroup : any) => (
                   <tr key={headergroup.id} >
