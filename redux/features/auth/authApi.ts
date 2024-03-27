@@ -1,6 +1,6 @@
 import { apiSlice } from "../api/apiSlice";
 import { userLoggedIn, userLoggedOut, userRegistration } from "./authSlice";
-import { signOut, useSession } from "next-auth/react";
+import { signOut } from "next-auth/react";
 
 type RegistrationResponse = {
     message: string;
@@ -111,7 +111,6 @@ export const authApi = apiSlice.injectEndpoints({
         }),  
         async onQueryStarted(arg, { dispatch }) {
             try {
-                // await signOut();
                 dispatch(userLoggedOut());
             } catch (error: any) {
                 console.error("Error during logout:", error);

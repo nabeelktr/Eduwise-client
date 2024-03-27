@@ -54,7 +54,7 @@ const EditCourse: React.FC<Props> = ({ id }) => {
     }
     if(error && "data" in error){  
         const errorMessage = error as any
-        toast.error(errorMessage.data.message)
+        toast.error(errorMessage.data.message.details)
     }
   },[isSuccess, error])
   const [active, setActive] = useState(0);

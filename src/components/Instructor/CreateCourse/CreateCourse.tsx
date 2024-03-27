@@ -8,6 +8,7 @@ import CoursePreview from "./CoursePreview";
 import { useCreateCourseMutation } from "../../../../redux/features/courses/coursesApi";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { CoursePage } from "../../../constants/enums";
 
 type Props = {};
 
@@ -46,11 +47,11 @@ const CreateCourse = (props: Props) => {
     }
     if (error && "data" in error) {
       const errorMessage = error as any;
-      toast.error(errorMessage.data.message);
+      toast.error(errorMessage.data.message.details);
     }
   }, [isSuccess, error, isLoading]);
 
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useState(CoursePage.courseInformation);
   const [courseInfo, setCourseInfo] = useState({
     name: "",
     description: "",
@@ -150,7 +151,7 @@ const CreateCourse = (props: Props) => {
           Create Course
         </h5>
 
-        {active === 0 && (
+        {active === CoursePage.courseInformation && (
           <CourseInformation
             active={active}
             setActive={setActive}
@@ -158,7 +159,7 @@ const CreateCourse = (props: Props) => {
             setCourseInfo={setCourseInfo}
           />
         )}
-        {active === 1 && (
+        {active === CoursePage.courseData && (
           <CourseData
             active={active}
             setActive={setActive}
@@ -168,7 +169,7 @@ const CreateCourse = (props: Props) => {
             setPrerequisities={setPrerequisites}
           />
         )}
-        {active === 2 && (
+        {active === CoursePage.courseContent && (
           <CourseContent
             active={active}
             setActive={setActive}
@@ -177,7 +178,7 @@ const CreateCourse = (props: Props) => {
             handleSubmit={handleSubmit}
           />
         )}
-        {active === 3 && (
+        {active === CoursePage.coursePreview && (
           <CoursePreview
             active={active}
             setActive={setActive}

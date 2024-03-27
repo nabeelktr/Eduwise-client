@@ -167,19 +167,22 @@ const CourseInformation: React.FC<Props> = ({
 
         <div className="w-full flex justify-between">
           <div className="w-[45%]">
-            <label htmlFor="">Course Level</label>
-            <input
-              type="text"
-              name=""
+            <label htmlFor="level">Course Level</label>
+            <select
+              name="level"
               required
               value={courseInfo.level}
-              onChange={(e: any) =>
+              onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
                 setCourseInfo({ ...courseInfo, level: e.target.value })
               }
               id="level"
-              placeholder="Beginner/intermediate/Expert"
               className={`${styles.input} `}
-            />
+            >
+              <option value="">Select Course Level</option>
+              <option value="Beginner">Beginner</option>
+              <option value="Intermediate">Intermediate</option>
+              <option value="Advanced">Advanced</option>
+            </select>
           </div>
           <div className="w-[45%]">
             <label htmlFor="">Demo Url</label>

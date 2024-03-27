@@ -156,8 +156,8 @@ const UploadMedia = (props: Props) => {
         <CopyModal
           open={open}
           setOpen={setOpen}
-          subtitleUrl={editData.videoUrl}
-          videoUrl={editData.subtitleUrl}
+          subtitleUrl={editData.subtitleUrl}
+          videoUrl={editData.videoUrl}
         />
       )}
       {deleteModal && (

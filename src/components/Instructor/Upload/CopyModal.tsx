@@ -12,7 +12,7 @@ type Props = {
     subtitleUrl: string;
   };
 
-const CopyModal:React.FC<Props> = ({ open, setOpen, videoUrl, subtitleUrl }) => {
+const CopyModal:React.FC<Props> = ({ open, setOpen, subtitleUrl,videoUrl }) => {
 
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
@@ -31,7 +31,7 @@ const CopyModal:React.FC<Props> = ({ open, setOpen, videoUrl, subtitleUrl }) => 
       disableAutoFocus
     >
       <div className="absolute text-sm font-Poppins top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg p-8 shadow-md">
-        <h1 className=" font-semibold text-gray-800 mb-6">
+        <h1 className=" font-semibold text-gray-800 mb-6 ">
           Copy Video and Subtitle URLs
         </h1>
         <div className="mb-4">
@@ -44,7 +44,7 @@ const CopyModal:React.FC<Props> = ({ open, setOpen, videoUrl, subtitleUrl }) => 
           />
           <button
             onClick={() => copyToClipboard(videoUrl)}
-            className="bg-gray-200 text-gray-800 rounded-md px-2 py-1 text-sm hover:bg-gray-300 focus:outline-none focus:bg-gray-300 transition duration-300 ease-in-out"
+            className="bg-gray-200 text-gray-800 rounded-md px-2 py-1 !text-[0.8rem] hover:bg-gray-300 focus:outline-none focus:bg-gray-300 transition duration-300 ease-in-out"
           >
             <ClipboardDocumentIcon className="h-5 w-5 mr-1 inline" /> Copy Video URL
           </button>
@@ -59,7 +59,7 @@ const CopyModal:React.FC<Props> = ({ open, setOpen, videoUrl, subtitleUrl }) => 
           />
           <button
             onClick={() => copyToClipboard(subtitleUrl)}
-            className="bg-gray-200 text-gray-800 rounded-md px-2 py-1 text-sm hover:bg-gray-300 focus:outline-none focus:bg-gray-300 transition duration-300 ease-in-out"
+            className="bg-gray-200 text-gray-800 rounded-md px-2 py-1 !text-[0.8rem] hover:bg-gray-300 focus:outline-none focus:bg-gray-300 transition duration-300 ease-in-out"
           >
             <ClipboardDocumentIcon className="h-5 w-5 mr-1 inline" /> Copy Subtitle URL
           </button>

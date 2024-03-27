@@ -7,10 +7,7 @@ import { Options } from "plyr";
 
 const videoOptions = null;
 const videoSource = null;
-// const hlsSource =
-//   "https://eduwise.s3.ap-south-1.amazonaws.com/media/hls/28a8ca85ad459e616d1cd724bce75307f598da06e5a5b4cb42f3b52210f74f75/28a8ca85ad459e616d1cd724bce75307f598da06e5a5b4cb42f3b52210f74f75_master.m3u8";
-// const subtitleTrackUrl =
-//   "https://eduwise.s3.ap-south-1.amazonaws.com/media/vtt/28a8ca85ad459e616d1cd724bce75307f598da06e5a5b4cb42f3b52210f74f75.wav.vtt";
+
 
 const useHls = (src: string, options: Options | null) => {
   const hls = React.useRef<Hls>(new Hls());
@@ -59,7 +56,6 @@ const CustomPlyrInstance = React.forwardRef<
     ...useHls(hlsSource, options),
     source,
   }) as React.MutableRefObject<HTMLVideoElement>;
-  console.log(subtitleUrl);
   return (
     <video  crossOrigin="anonymous" ref={raptorRef} className="plyr-react plyr">
       <track

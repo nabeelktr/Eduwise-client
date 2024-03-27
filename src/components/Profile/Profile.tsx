@@ -3,6 +3,8 @@ import SidebarProfile from "./SidebarProfile";
 import ProfileInfo from "./ProfileInfo";
 import ChangePassword from "./ChangePassword";
 import { useLogOutMutation } from "../../../redux/features/auth/authApi";
+import { signOut, useSession } from "next-auth/react";
+import { ProfileSidebar } from "@/constants/enums";
 
 type Props = {
   user: any;
@@ -11,10 +13,12 @@ type Props = {
 const Profile: FC<Props> = ({ user }) => {
   const [scroll, setScroll] = useState(false);
   const [avatar, setAvatar] = useState(null);
-  const [active, setActive] = useState(1);
+  const [active, setActive] = useState(ProfileSidebar.profileInfo);
   const [logoutUser, {isLoading}] = useLogOutMutation();
+  const { data: session} = useSession();
 
   const logoutHandler = async () => {
+    session && await signOut();
     await logoutUser({succes: true})
   };
 
@@ -42,12 +46,12 @@ const Profile: FC<Props> = ({ user }) => {
           logoutHandler={logoutHandler}
         />
       </div>
-      {active === 1 && (
+      {active === ProfileSidebar.profileInfo && (
         <div className="w-full h-full bg-transparent mt-[80px]">
           <ProfileInfo avatar={avatar} user={user} />
         </div>
       )}
-      {active === 2 && (
+      {active === ProfileSidebar.changePassword && (
         <div className="w-full h-full bg-transparent mt-[80px]">
           <ChangePassword />
         </div>
