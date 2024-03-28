@@ -27,6 +27,9 @@ const Page: FC<Props> = (props) => {
       <Banner setOpen={setOpen} />
 
       <Categories />
+      <div className="h-[200px]">
+
+      </div>
     </div>
   );
 };
