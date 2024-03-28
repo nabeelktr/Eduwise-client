@@ -28,13 +28,13 @@ const OtpField: React.FC<OtpFieldProps> = ({
       shouldAutoFocus={true}
       inputStyle={{
         width: "3.4rem",
-        marginRight: "1rem",
+        marginRight: "1.8rem",
       }}
       renderInput={(props) => (
         <input
           {...props}
           type="number"
-          className={`w-[55pxpx] h-[55px] bg-transparent border-[3px] rounded-[10px] flex items-center text-black dark:text-white justify-center text-[16px] font-Poppins outline-none text-center ${
+          className={`w-[55px] h-[55px] bg-transparent border-[2px] rounded-[8px] flex items-center text-black dark:text-white justify-center text-[16px] font-Poppins outline-none text-center ${
             invalidError
               ? "shake border-red-500"
               : "dark:border-white border-[#0000004a]"

@@ -1,32 +1,34 @@
-"use client"
-import React,{FC, useState} from 'react';
-import Header from '../components/Header'
-import Carousell from '../components/ui/Carousel/Carousel';
-import Heading from '../utils/Heading';
+"use client";
+import React, { FC, useState } from "react";
+import Header from "../components/Header";
+import Heading from "../utils/Heading";
+import Banner from "../components/Home/Banner";
+import Categories from "@/components/Home/Categories";
 interface Props {}
 
 const Page: FC<Props> = (props) => {
-  const [open, setOpen] = useState(false)
-  const [activeItem, setActiveItem] = useState(0)
-  const [route, setRoute] = useState("Login")
-  return(
+  const [open, setOpen] = useState(false);
+  const [activeItem, setActiveItem] = useState(0);
+  const [route, setRoute] = useState("Login");
+  return (
     <div>
-      <Heading 
-      description='Eduwise is a platform for students to learn and get help from teachers'
-      keywords='Programming,MERN,Redux,Next,Microservice'
-      title='Eduwise'
+      <Heading
+        description="Eduwise is a platform for students to learn and get help from teachers"
+        keywords="Programming,MERN,Redux,Next,Microservice"
+        title="Eduwise"
       />
-      <Header 
-      open={open}
-      setOpen={setOpen}
-      activeItem={activeItem}
-      setRoute={setRoute}
-      route={route}
+      <Header
+        open={open}
+        setOpen={setOpen}
+        activeItem={activeItem}
+        setRoute={setRoute}
+        route={route}
       />
-      {/* <Carousell /> */}
+      <Banner setOpen={setOpen} />
 
+      <Categories />
     </div>
-  )
-}
+  );
+};
 
 export default Page;

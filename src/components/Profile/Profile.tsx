@@ -32,7 +32,7 @@ const Profile: FC<Props> = ({ user }) => {
     });
   }
   return (
-    <div className="w-[85%] flex mx-auto  ">
+    <div className=" flex mx-auto 800px:px-[12%]  ">
       <div
         className={`w-[60px] 800px:w-[310px] h-[450px] dark:bg-gray-800  bg-gray-50 bg-opacity-90 border dark:border-gray-500 rounded-[5px] shadow-sm mt-[80px] mb-[80px] sticky ${
           scroll ? "top-[120px" : "top-[30px]"
@@ -47,12 +47,12 @@ const Profile: FC<Props> = ({ user }) => {
         />
       </div>
       {active === ProfileSidebar.profileInfo && (
-        <div className="w-full h-full bg-transparent mt-[80px]">
+        <div className="w-full h-full bg-transparent px-8  mt-[80px]">
           <ProfileInfo avatar={avatar} user={user} />
         </div>
       )}
       {active === ProfileSidebar.changePassword && (
-        <div className="w-full h-full bg-transparent mt-[80px]">
+        <div className="w-full h-full bg-transparent mt-[80px] px-8">
           <ChangePassword />
         </div>
       )}

@@ -3,15 +3,15 @@ import React from 'react'
 
 export const navItemsData = [
     {
-        name: "Home",
+        name: "Home +",
         url: "/"
     },
     {
-        name: "Courses",
+        name: "Course +",
         url: "/courses"
     },
     {
-        name: "About",
+        name: "About +",
         url: "/about"
     },
     {
@@ -38,9 +38,9 @@ const NavItems: React.FC<Props> = ({activeItem, isMobile, user}) => {
                         <div
                         className={`
                             ${activeItem === index 
-                            ? "dark:text-[#37a39a] font-[500]"
+                            ? "dark:text-[#37a39a] font-[550]"
                             : "dark:text-white text-black"
-                            }  text-[14px] font-Poppins font-[400] uppercase tracking-wider hover:font-[500] text-center w-44 mx-4`
+                            }  text-[14px] font-Poppins font-[400]  tracking-wide hover:font-[600] text-center w-44`
                         }
                         >
                             <span>{i.name}</span>
@@ -52,9 +52,9 @@ const NavItems: React.FC<Props> = ({activeItem, isMobile, user}) => {
                         <div
                         className={`
                             ${activeItem === index 
-                            ? "dark:text-[#37a39a]  font-[500]"
+                            ? "dark:text-[#37a39a]  font-[550]"
                             : "dark:text-white text-black"
-                            }  text-[14px] font-Poppins font-[400] uppercase tracking-wider hover:font-[500] text-center w-24`
+                            }  text-[14px] font-Poppins font-[400]  tracking-wide hover:font-[600] text-center w-24`
                         }
                         >
                             <span>{i.name}</span>
@@ -82,7 +82,7 @@ const NavItems: React.FC<Props> = ({activeItem, isMobile, user}) => {
                                 <span
                                 className={`
                                 ${activeItem === index 
-                                ? "dark:text-[#37a39a] text-[crimson]"
+                                ? "dark:text-[#37a39a] text-[#FDC021]"
                                 : "dark:text-white text-black"}
                                 block py-5 text-[16px] px-6 font-Poppins font-[400]`
                                 }

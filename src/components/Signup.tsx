@@ -179,7 +179,7 @@ const SignUp: React.FC<Props> = ({ setRoute }) => {
           <input
             type="submit"
             value="Sign Up"
-            className={`${styles.button} text-white`}
+            className={`${styles.button} text-white font-thin`}
           />
         </div>
         <br />

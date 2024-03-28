@@ -91,24 +91,24 @@ const Verification: React.FC<Props> = ({ setRoute }) => {
   };
 
   return (
-    <div>
+    <div className="px-12">
       <h1 className={`${styles.title} text-xl`}>Verify Your Account</h1>
       <br />
       <div className="w-full flex items-center justify-center mt-2 ">
-        <div className="w-[80px] h-[80px] rounded-full bg-slate-500 flex items-center justify-center">
-          <VscWorkspaceTrusted size={40} />
+        <div className="w-[50px] h-[30px]  bg-slate-500 flex items-center justify-center">
+          <VscWorkspaceTrusted size={200} />
         </div>
       </div>
       <br />
       <br />
-      <div className=" m-auto flex items-center justify-around p-4">
+      <div className=" m-auto flex items-center justify-around pb-4 ">
         <OtpField
           numDigits={4}
           onChange={OtpHandler}
           invalidError={invalidError}
         />
       </div>
-      <span className="flex justify-between">
+      <span className="flex justify-between  m-0">
         <span className="text-xs">This OTP will expire in 5 minutes</span>
         <button
           type="button"
@@ -128,7 +128,7 @@ const Verification: React.FC<Props> = ({ setRoute }) => {
       <br />
       <div className="w-full flex justify-center">
         <button
-          className={`${styles.button} text-white`}
+          className={`${styles.button} text-white font-thin`}
           onClick={VerificationHandler}
         >
           Verify OTP

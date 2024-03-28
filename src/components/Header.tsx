@@ -70,18 +70,18 @@ const Header:FC<Props> = ({activeItem, setOpen, route, open, setRoute}) => {
   }
 
   return (
-    <div className='w-full relative shadow-sm px-[6.60%]'>
+    <div className='w-full relative shadow-sm px-[12%] z-[9999] '>
       <div className={`${
         active
-         ? "dark:bg-opacity-50 dark:bg-gradient-to-b dark:from-gray-900 dark:to-black fixed top-0 left-0 w-full h-[90px] z-[80] border-b dark:border-[#ffffff1c] shadow-xl transition duration-500" 
-         : "w-full border-b dark:border-[#ffffff1c] h-[90px] z-[80] dark:shadow"}`} >
-      <div className='m-auto py-2 h-full'>
-        <div className='w-full h-[100px] flex items-center justify-between'>
-           <div>
+         ? "dark:bg-opacity-50 dark:bg-gradient-to-b dark:from-gray-900 dark:to-black fixed top-0 left-0 w-full h-[90px] z-[80] dark:border-[#ffffff1c] shadow-xl transition duration-500" 
+         : "w-full dark:border-[#ffffff1c] h-[65px] 800px:h-[90px] z-[80] dark:shadow"}`} >
+      <div className='m-auto 800px:py-2 h-full '>
+        <div className='w-full h-[100px] flex items-center justify-between '>
+           <div >
             <Link href="/"
-            className={`text-[30px] font-BebasNeue font-[900] text-black dark:text-white `}
+            className={`text-[70px] font-BebasNeue font-[900] text-black dark:text-white  `}
             >
-              <img src='https://firebasestorage.googleapis.com/v0/b/ecommerce-image-store-1d566.appspot.com/o/profile%2Fedduwise.png?alt=media&token=bacb54dc-afc0-4a72-937d-b2046d7695e1'  height={150} width={130}/>
+              <img src='/assets/eduwise.png' className=' h-8 800px:h-10'/>
             </Link>
            </div>
            <div className="flex items-center">
@@ -128,7 +128,7 @@ const Header:FC<Props> = ({activeItem, setOpen, route, open, setRoute}) => {
       {/* sidebar for mobile */}
         {
           openSidebar && (
-            <div className='fixed w-full h-screen top-0 left-0 z-[99999] dark:bg-[unset] bg-[#00000024]'
+            <div className='fixed w-full h-screen top-0 left-0 z-[99999] dark:bg-[unset] bg-[#00000024] '
             onClick={handleClose}
             id='screen'
             >
