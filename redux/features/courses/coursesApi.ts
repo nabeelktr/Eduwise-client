@@ -3,10 +3,10 @@ import { apiSlice } from "../api/apiSlice";
 export const coursesApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     createCourse: builder.mutation({
-      query: ( formData ) => ({
+      query: (formData) => ({
         url: "courses/create-course",
         method: "POST",
-        body:  formData ,
+        body: formData,
         credentials: "include" as const,
       }),
     }),
@@ -33,15 +33,37 @@ export const coursesApi = apiSlice.injectEndpoints({
     }),
 
     updateCourse: builder.mutation({
-      query: ( formData ) => ({
+      query: (formData) => ({
         url: "courses/update-course",
         method: "POST",
-        body:  formData ,
+        body: formData,
         credentials: "include" as const,
       }),
     }),
 
+    getTrendingCourses: builder.mutation({
+      query: () => ({
+        url: "courses/get-trending-courses",
+        method: "GET",
+        credentials: "include" as const,
+      }),
+    }),
+
+    getCourseDetails: builder.query({
+      query: (id) => ({
+        url: `courses/get-course-wop/${id}`,
+        method: "GET",
+        credentials: "include" as const,
+      }),
+    }),
   }),
 });
 
-export const { useCreateCourseMutation, useGetCoursesQuery , useDeleteCourseMutation, useUpdateCourseMutation } = coursesApi;
+export const {
+  useCreateCourseMutation,
+  useGetCoursesQuery,
+  useDeleteCourseMutation,
+  useUpdateCourseMutation,
+  useGetTrendingCoursesMutation,
+  useGetCourseDetailsQuery
+} = coursesApi;
