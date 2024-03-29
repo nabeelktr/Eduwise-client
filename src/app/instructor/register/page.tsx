@@ -400,7 +400,7 @@ const InstructorRegister: React.FC<Props> = (props) => {
                 ))}
                 <div className="ml-4 mt-8">
                   <button
-                    className={`${styles.button} ${isLoading ? "!py-4" : "!py-2" } bg-gray-900 text-white tracking-wider !font-thin dark:bg-gray-800 `}
+                    className={`${styles.button} min-h-[2.7rem]  bg-gray-900 text-white tracking-wider !font-thin dark:bg-gray-800 `}
                     onClick={() => formRef.current?.click()}
                   >
                    { 

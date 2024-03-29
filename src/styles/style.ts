@@ -6,7 +6,7 @@ export const styles = {
   input:
     "w-full text-sm text-black dark:text-white bg-transparent border border-gray-400 bg-gray-200 rounded h-[40px] px-2 outline-none  font-Poppins ",
   button:
-    "flex flex-row justify-center py-2 px-6 rounded cursor-pointer bg-gray-900 min-h-[40px] w-full text-[15px] font-Poppins font-semibold uppercase tracking-widest font-[200]",
+    "flex flex-row justify-center py-3 px-6 rounded cursor-pointer bg-gray-900 w-full 800px:text-sm text-xs font-Poppins font-semibold uppercase tracking-widest font-[200]",
 };
 
 export const subjects = [
@@ -34,7 +34,7 @@ export const subjects = [
 
 const currentYear = new Date().getFullYear();
 const startYear = currentYear - 40;
-const endYear = currentYear;
+const endYear = currentYear + 1;
 
 export const years = Array.from(
   { length: endYear - startYear },

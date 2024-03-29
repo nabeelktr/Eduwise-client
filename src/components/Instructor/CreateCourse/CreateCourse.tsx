@@ -185,6 +185,7 @@ const CreateCourse = (props: Props) => {
             courseData={courseData}
             handleCourseCreate={handleCourseCreate}
             isEdit={false}
+            isLoading={isLoading}
           />
         )}
 

@@ -115,7 +115,7 @@ const Login: React.FC<Props> = ({setRoute, setOpen}) => {
                 <input 
                 type='submit'
                 value="Login"
-                className={`${styles.button} text-white font-thin`}
+                className={`${styles.button} text-white font-thin py-3 `}
                 />
                 
             </div>
