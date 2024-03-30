@@ -140,17 +140,21 @@ const CourseContent: React.FC<Props> = ({
                     <div className="flex w-full items-center">
                       <input
                         type="text"
-                        className={`text-[16px] ${
+                        className={`text-[16px] px-2${
                           item.videoSection === "Untitled Section"
                             ? "w-[170px]"
-                            : "w-min"
+                            : "w-[60%]"
                         } font-Poppins cursor-pointer dark:text-white text-black bg-transparent outline-none `}
                         value={item.videoSection}
                         onChange={(e) => {
-                          const updatedData = [...courseContentData];
-                          updatedData[index].videoSection = e.target.value;
-                          setCourseContentData(updatedData);
+                          const updatedData = [...courseContentData]; 
+                          updatedData[index] = {
+                            ...updatedData[index], 
+                            videoSection: e.target.value, 
+                          };
+                          setCourseContentData(updatedData); 
                         }}
+                        
                       />
                       <PencilIcon
                         className="cursor-pointer dark:text-white text-black"

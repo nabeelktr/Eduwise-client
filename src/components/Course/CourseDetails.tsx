@@ -1,9 +1,12 @@
+import { styles } from "@/styles/style";
 import Ratings from "@/utils/Ratings";
 import VideoPlayer from "@/utils/VideoPlayer";
-import { CheckCircleIcon, CheckIcon } from "@heroicons/react/24/outline";
+import { CheckIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
 import { format } from "path";
 import React from "react";
 import { useSelector } from "react-redux";
+import CourseContentList from "../../components/Course/CourseContentList";
 
 type Props = {
   data: any;
@@ -22,14 +25,14 @@ const CourseDetails: React.FC<Props> = ({ data }) => {
     console.log("object");
   };
   return (
-    <div>
+    <div className="bg-gray-50">
       <div className="px-[12%] m-auto py-8">
         <div className="w-full flex flex-col-reverse 800px:flex-row">
           <div className="w-full 800px:w-[65%] 800px:pr-5">
-            <h1 className="text-[25px] font-Poppins font-[600] text-black dark:text-white">
+            <h1 className="text-[24px] font-Poppins font-[600] text-black dark:text-white">
               {data.name}
             </h1>
-            <div className="flex items-center gap-3 pt-3">
+            <div className="flex items-center gap-2 pt-1 text-sm mb-1">
               <div className="flex items-center">
                 <Ratings rating={data.ratings} />
                 <h5 className="text-black dark:text-white">
@@ -41,38 +44,42 @@ const CourseDetails: React.FC<Props> = ({ data }) => {
               </h5>
             </div>
             <br />
-            <h1 className="text-[25px] font-Poppins font-[600] text-black dark:text-white">
-              what will you learn from this course?
+            <h1 className="text-xl font-Poppins font-[500] text-black dark:text-white pb-2">
+              What will you learn from this course?
             </h1>
             {data.benefits?.map((item: any, index: number) => (
-              <div className="w-full flex 800px:items-center py-2" key={index}>
+              <div className="w-full flex 800px:items-center py-1" key={index}>
                 <div className="w-[15px] mr-1">
                   <CheckIcon className="h-5 w-5 text-black dark:text-white" />
                 </div>
-                <p className="pl-2 text-black dark:text-white">{item.title}</p>
+                <p className="pl-2 text-black dark:text-white text-sm">
+                  {item.title}
+                </p>
               </div>
             ))}
             <br />
-            <h1 className="text-[25px] font-Poppins font-[600] text-black dark:text-white">
-              what are the prerequisites for starting this course?
+            <h1 className="text-[25px] font-Poppins font-[500] text-black dark:text-white text-xl pb-2">
+              What are the prerequisites for starting this course?
             </h1>
             {data.prerequisites?.map((item: any, index: number) => (
-              <div className="w-full flex 800px:items-center py-2" key={index}>
+              <div className="w-full flex 800px:items-center py-1" key={index}>
                 <div className="w-[15px] mr-1">
                   <CheckIcon className="h-5 w-5 text-black dark:text-white" />
                 </div>
-                <p className="pl-2 text-black dark:text-white">{item.title}</p>
+                <p className="pl-2 text-black dark:text-white text-sm">
+                  {item.title}
+                </p>
               </div>
             ))}
             <br />
 
-            <h1 className="text-[25px] font-Poppins font-[600] text-black dark:text-white">
+            <h1 className="text-xl font-Poppins font-[500] text-black dark:text-white">
               Course Overview
             </h1>
-            {/*  Course content list */}
+            <CourseContentList data={data?.courseContentData} isDemo={true} />
             <br />
-            <div className=" text-sm 800px:w-[60%]">
-              <h1 className="text-xl font-Poppins font-[600] pb-2">
+            <div className=" text-sm 800px:w-[80%]">
+              <h1 className="text-xl font-Poppins font-[500] pb-2">
                 Course Details
               </h1>
               {data?.description}
@@ -83,7 +90,7 @@ const CourseDetails: React.FC<Props> = ({ data }) => {
               <div className="800px:flex items-center">
                 <Ratings rating={data?.ratings} />
                 <div className="mb-2 800px:mb-[unset]" />
-                <h5 className="text-[25px] font-Poppins text-black dark:text-white">
+                <h5 className="text-md font-Poppins text-black dark:text-white">
                   {Number.isInteger(data?.ratings)
                     ? data?.ratings.toFixed(1)
                     : data?.ratings.toFixed(2)}{" "}
@@ -142,10 +149,31 @@ const CourseDetails: React.FC<Props> = ({ data }) => {
                   &#x20b9; {data?.estimatedPrice}
                 </h5>
                 <h4 className="pl-2 pt-5 text-[20px] font-semibold">
-                  <span className="text-green-500">{discountPercentage}% </span>off
+                  <span className="text-green-500">{discountPercentage}% </span>
+                  off
                 </h4>
               </div>
-              
+              <div className="flex items-center">
+                {isPurchased ? (
+                  <Link
+                    className={`${styles.button}`}
+                    href={`/course-access/${data._id}`}
+                  >
+                    Enter to Course
+                  </Link>
+                ) : (
+                  <div
+                    className={`${styles.button} 800px:!text-sm !text-xs text-white font-thin !w-[30%] mt-2 mb-4 !py-2`}
+                    onClick={handleOrder}
+                  >
+                    Buy Now
+                  </div>
+                )}
+              </div>
+              <p className="pb-1 text-sm">* Source code included</p>
+              <p className="pb-1 text-sm ">* Full life time access</p>
+              <p className="pb-1 text-sm">* Certificates of Completion</p>
+              <p className="pb-3 800px:pb-6 text-sm">* Premium Support</p>
             </div>
           </div>
         </div>
