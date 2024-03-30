@@ -66,22 +66,25 @@ const Carousell = (props: Props) => {
         {trendingCourses && trendingCourses.map((course: any , index: number) => (
           <div
             key={index}
-            className="relative flex flex-col mt-4 text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-64 max-h-72 800px:min-h-72 cursor-pointer"
+            className="relative flex flex-col mt-4 text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-52 800px:w-64 800px:max-h-72 max-h-52 800px:min-h-72 min-h-52 cursor-pointer"
             onClick={() => router.push(`course/${course._id}`)}
           >
-            <div className="relative min-h-40 mx-2 -mt-4 overflow-hidden text-white shadow-lg bg-clip-border rounded-xl bg-blue-gray-500 shadow-blue-gray-500/40">
+            <div className="relative min-h-28 800px:min-h-40 mx-2 -mt-4 overflow-hidden text-white shadow-lg bg-clip-border rounded-xl bg-blue-gray-500 shadow-blue-gray-500/40">
               <img
                 src={course.thumbnail}
                 alt="card-image"
-                className="transition-transform transform hover:scale-105 min-h-40"
+                className="transition-transform transform hover:scale-105 800px:min-h-40 min-h-32"
               />
             </div>
             <div className="p-4">
               <h5 className="block mb-1 text-xs 800px:text-lg antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
                 {course.name}
               </h5>
-              <p className="block text-xs antialiased font-light leading-relaxed text-inherit overflow-hidden line-clamp-3 ">
+              <p className="text-xs hidden 800px:block antialiased font-light leading-relaxed text-inherit overflow-hidden ">
                 {course.description.length > 100 ? course.description.substring(0,100) + '...' : course.description}
+              </p>
+              <p className="block 800px:hidden text-xs antialiased font-light leading-relaxed text-inherit overflow-hidden ">
+                {course.description.length > 100 ? course.description.substring(0,50) + '...' : course.description}
               </p>
             </div>
           </div>
@@ -96,7 +99,7 @@ const CustomButtonGroup = ({ next, previous, goToSlide, ...rest }: any) => {
     carouselState: { currentSlide },
   } = rest;
   return (
-    <div className="carousel-button-group -ml-28 800px:-ml-40 -mt-14 gap-3">
+    <div className="carousel-button-group -ml-20 800px:-ml-40 -mt-14 800px:gap-3">
       <button className="carousel-button" onClick={previous}>
         <ArrowLeftCircleIcon className="800px:h-12 h-8 800px:w-12" />
       </button>
