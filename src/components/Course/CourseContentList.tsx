@@ -116,7 +116,7 @@ const CourseContentList: FC<Props> = (props) => {
                         {item.videoLength > 60
                           ? contentLength.toFixed(2)
                           : item.videoLength? item.videoLength : "30" }{" "}
-                        {item.videoLength >= 60 ? "hours" : "minutes"}
+                        {item.videoLength >= 60 ?"hours":"minutes"}
                       </h5>
                       </div>
                       </div>
