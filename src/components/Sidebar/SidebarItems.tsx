@@ -1,6 +1,8 @@
 import { useContext, ReactNode } from "react";
-import { SidebarContext } from "./SidebarControl";
+
 import { useRouter } from "next/navigation";
+import { SidebarContext } from "./SidebarControl";
+
 
 interface SidebarItemProps {
   icon: ReactNode;
@@ -25,9 +27,9 @@ export function SidebarItem({
             font-Poppins text-sm
           relative flex items-center px-4 my-1 text-white
           font-light rounded-sm cursor-pointer
-          transition-colors group ml-1
+          transition-colors group max-h-[70px]
           ${
-            expanded ? "py-4" : "py-2"
+            expanded ? "py-4" : "py-4"
           }
           ${
             active
@@ -43,7 +45,7 @@ export function SidebarItem({
       {icon}
       <span
         className={`overflow-hidden transition-all ${
-          expanded ? "w-52 ml-2" : "w-0"
+          expanded ? "w-52 ml-4" : "w-0"
         }`}
       >
         {text}
@@ -59,8 +61,8 @@ export function SidebarItem({
       {!expanded && (
         <div
           className={`
-            absolute left-full rounded-lg px-2 py-1 ml-6
-            bg-indigo-100 text-indigo-800 text-sm
+            absolute left-full rounded-lg p-2 !text-xs ml-6
+            bg-indigo-100 text-indigo-800
             invisible opacity-20 -translate-x-3 transition-all
             group-hover:visible group-hover:opacity-100 group-hover:translate-x-0 
         `}

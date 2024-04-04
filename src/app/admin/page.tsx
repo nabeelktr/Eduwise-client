@@ -19,7 +19,7 @@ const page = (props: Props) => {
         <div className="mx-auto pl-14 mt-20 w-[85%]">
           <DashboardHero />
         </div>
-        <Sidebar active={1} />
+        <Sidebar active={0} />
       </div>
 
     </div>

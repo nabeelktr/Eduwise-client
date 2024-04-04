@@ -1,8 +1,13 @@
 "use client";
-import React from "react";
-import SidebarControl from "../../Sidebar/SidebarControl";
+import React, { useContext } from "react";
+import SidebarControl, { SidebarContext } from "../../Sidebar/SidebarControl";
 import { SidebarItem } from "../../Sidebar/SidebarItems";
-import { CloudArrowDownIcon, ComputerDesktopIcon, DocumentPlusIcon, WrenchScrewdriverIcon } from "@heroicons/react/24/outline";
+import {
+  AcademicCapIcon,
+  HomeIcon,
+  TvIcon,
+  UserGroupIcon,
+} from "@heroicons/react/24/outline";
 import { EISidebar } from "../../../constants/enums";
 
 
@@ -11,34 +16,37 @@ type Props = {
 };
 
 const Sidebar: React.FC<Props> = ({ active }) => {
+
   return (
     <>
       <SidebarControl>
         <SidebarItem
-          icon={<DocumentPlusIcon className="w-6" />}
-          text={"Create Course"}
-          routerPath="/instructor/create-course"
-          active={active === EISidebar.createCourse ? true : false}
+          icon={<TvIcon className="w-6" />}
+          text={"Dashboard"}
+          routerPath="/admin"
+          active={active === 0 ? true : false}
         />
         <SidebarItem
-          icon={<ComputerDesktopIcon className="w-6" />}
-          text={"All Courses"}
-          routerPath="/instructor/courses"
-          active={active === EISidebar.allCourse ? true : false}
+          icon={<UserGroupIcon className="w-6" />}
+          text={"Users"}
+          routerPath="/admin/users"
+          active={active === 1 ? true : false}
         />
         <SidebarItem
-          icon={<WrenchScrewdriverIcon className="w-6" />}
-          text={"Edit Course"}
-          routerPath="/instructor/courses"
-          active={active === EISidebar.editCourse ? true : false}
+          icon={<AcademicCapIcon className="w-6" />}
+          text={"Instructors"}
+          routerPath="/admin/instructors"
+          active={active === 2 ? true : false}
         />
+
         <SidebarItem
-          icon={<CloudArrowDownIcon className="w-7" />}
-          text={"Upload Media"}
-          routerPath="/instructor/upload-media"
-          active={active === EISidebar.uploadMedia ? true : false}
+          icon={<HomeIcon className="w-6" />}
+          text={"Home"}
+          routerPath="/"
+          active={active === 3 ? true : false}
         />
       </SidebarControl>
+
     </>
   );
 };

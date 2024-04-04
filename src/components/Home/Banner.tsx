@@ -36,7 +36,7 @@ const Banner:React.FC<Props> = ({setOpen}) => {
        {!user && <Badge text="Get Started" arrow/>}
         </span>
       </div>
-      <img src="/assets/grow bb.png" className="bg-cover w-full h-full" />
+      <img src="/assets/grow bb.png" className="bg-cover w-full min-h-full" />
     </div>
   );
 };
