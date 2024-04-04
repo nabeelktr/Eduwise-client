@@ -23,9 +23,12 @@ export function SidebarItem({
     <li
       className={`
             font-Poppins text-sm
-          relative flex items-center py-2 px-3 my-1 text-white
+          relative flex items-center px-4 my-1 text-white
           font-light rounded-sm cursor-pointer
           transition-colors group ml-1
+          ${
+            expanded ? "py-4" : "py-2"
+          }
           ${
             active
               ? "bg-gradient-to-tr from-indigo-200 to-indigo-300 text-indigo-800"
@@ -40,7 +43,7 @@ export function SidebarItem({
       {icon}
       <span
         className={`overflow-hidden transition-all ${
-          expanded ? "w-52 ml-3" : "w-0"
+          expanded ? "w-52 ml-2" : "w-0"
         }`}
       >
         {text}

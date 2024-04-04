@@ -23,7 +23,7 @@ const SidebarControl: React.FC<SidebarProps> = ({ children }) => {
 
 
   return (
-    <aside className={`h-screen bg-[#2d2f31] fixed left-0 top-0 font-Poppins !z-9999999 ${expanded ? "min-w-[16.6%]" : "min-w-[3.70%]"}`}>
+    <aside className={`h-screen bg-[#1e1f20] fixed left-0 top-0 font-Poppins !z-9999999 ${expanded ? "min-w-[16.6%]" : "min-w-[3.70%]"}`}>
       <nav className="h-full flex flex-col  border-r border-gray-800 shadow-sm " onClick={() => setExpanded(!expanded)}>
         <div className="p-4 pb-2 flex justify-between items-center mb-8 mt-6 ">
           <div className="flex">
