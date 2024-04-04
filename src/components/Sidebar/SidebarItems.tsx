@@ -32,7 +32,10 @@ export function SidebarItem({
               : "hover:bg-gray-600 text-gray-600"
           }
       `}
-      onClick={() => router.push(routerPath)}
+      onClick={(e) => {
+        e.stopPropagation()
+        router.push(routerPath)
+      }}
     >
       {icon}
       <span

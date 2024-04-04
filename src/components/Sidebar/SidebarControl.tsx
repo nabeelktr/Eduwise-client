@@ -1,5 +1,5 @@
 import React, { createContext, useState, ReactNode } from "react";
-import { ArrowLeftFromLine, Home, MoreVertical } from "lucide-react";
+import { MoreVertical } from "lucide-react";
 import { HiAcademicCap } from "react-icons/hi2";
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
@@ -24,8 +24,8 @@ const SidebarControl: React.FC<SidebarProps> = ({ children }) => {
 
   return (
     <aside className={`h-screen bg-[#2d2f31] fixed left-0 top-0 font-Poppins !z-9999999 ${expanded ? "min-w-[16.6%]" : "min-w-[3.70%]"}`}>
-      <nav className="h-full flex flex-col  border-r border-gray-800 shadow-sm ">
-        <div className="p-4 pb-2 flex justify-between items-center mb-4 mt-2 ">
+      <nav className="h-full flex flex-col  border-r border-gray-800 shadow-sm " onClick={() => setExpanded(!expanded)}>
+        <div className="p-4 pb-2 flex justify-between items-center mb-8 mt-6 ">
           <div className="flex">
             <HiAcademicCap
               size={35}
