@@ -2,7 +2,7 @@
 import Sidebar from "../../../components/Admin/Sidebar/Sidebar";
 import DashboardHero from "../../../components/Admin/DashboardHero";
 import Heading from "../../../utils/Heading";
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import {
   useDeleteUserMutation,
   useGetUsersQuery,
@@ -11,14 +11,14 @@ import { Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import BasicTable from "../../../utils/BasicTable";
 import CustomDeleteModal from "@/components/ui/CustomDeleteModal";
+import { useGetUsersCourseQuery } from "../../../../redux/features/courses/coursesApi";
 
 type Props = {};
 
 const page = (props: Props) => {
   const [open, setOpen] = useState(false);
   const [userId, setUserId] = useState("");
-
-  const { isLoading, data, refetch } = useGetUsersQuery(
+  const { isLoading, data, refetch } = useGetUsersCourseQuery(
     {},
     { refetchOnMountOrArgChange: true }
   );
@@ -32,11 +32,18 @@ const page = (props: Props) => {
     },
     {
       header: "Email",
-      accessorKey: "ratings",
+      accessorKey: "email",
     },
     {
       header: "Purchased Courses",
-      accessorKey: "purchased",
+      accessorKey: "courses",
+      cell: (info: any) => (
+        <>
+          {info?.row?.original.courses
+            ? info?.row?.original.courses.length
+            : ""}
+        </>
+      ),
     },
     {
       header: "Joined At",
@@ -92,11 +99,11 @@ const page = (props: Props) => {
         keywords="Programming, MERN, Redux"
       />
       <div className="flex mx-auto z-[9999]">
-        <div className="mx-auto pl-14 mt-20 w-[85%]">
+        <div className="mx-auto pl-14 mt-20 w-[85%] ">
           <DashboardHero />
           {data && (
             <div
-              className={`bg-white dark:bg-gray-800 relative shadow-md sm:rounded-sm overflow-hidden mx-28 p-4`}
+              className={`bg-white dark:bg-gray-800 relative shadow-md sm:rounded-sm overflow-hidden mx-28 p-4 mt-8`}
             >
               <BasicTable datas={data} columns={columns} type="category" />
             </div>

@@ -50,10 +50,23 @@ export const coursesApi = apiSlice.injectEndpoints({
     }),
 
     getCourseDetails: builder.query({
-      query: (id) => ({
+      query: (id:any) => ({
         url: `courses/get-course-wop/${id}`,
         method: "GET",
         credentials: "include" as const,
+      }),
+    }),
+
+    getUsersCourse: builder.query({
+      query: () => ({
+        url: "admin/get-users",
+        method: "GET",
+        credentials: "include" as const,
+        headers: {
+          "Cache-Control": "no-cache, no-store, must-revalidate",
+          Pragma: "no-cache",
+          Expires: "0",
+        },
       }),
     }),
   }),
@@ -65,5 +78,6 @@ export const {
   useDeleteCourseMutation,
   useUpdateCourseMutation,
   useGetTrendingCoursesMutation,
-  useGetCourseDetailsQuery
+  useGetCourseDetailsQuery,
+  useGetUsersCourseQuery
 } = coursesApi;
