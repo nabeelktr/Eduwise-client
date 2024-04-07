@@ -26,7 +26,19 @@ export const adminApi = apiSlice.injectEndpoints({
       }),
     }),
 
+    getFAQ: builder.query({
+      query: () => ({
+        url: "admin/get-FAQ",
+        method: "GET",
+        credentials: "include" as const,
+      }),
+    }),
   }),
 });
 
-export const { useGetUsersQuery, useDeleteUserMutation, useGetInstructorsQuery } = adminApi;
+export const {
+  useGetUsersQuery,
+  useDeleteUserMutation,
+  useGetInstructorsQuery,
+  useGetFAQQuery,
+} = adminApi;

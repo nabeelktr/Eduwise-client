@@ -5,18 +5,17 @@ import { SidebarItem } from "../../Sidebar/SidebarItems";
 import {
   AcademicCapIcon,
   HomeIcon,
+  PencilSquareIcon,
   TvIcon,
   UserGroupIcon,
 } from "@heroicons/react/24/outline";
 import { EISidebar } from "../../../constants/enums";
-
 
 type Props = {
   active: number;
 };
 
 const Sidebar: React.FC<Props> = ({ active }) => {
-
   return (
     <>
       <SidebarControl>
@@ -40,13 +39,20 @@ const Sidebar: React.FC<Props> = ({ active }) => {
         />
 
         <SidebarItem
+          icon={<PencilSquareIcon className="w-6" />}
+          text={"FAQ"}
+          routerPath="/admin/faq"
+          active={active === 4 ? true : false}
+        />
+
+        <SidebarItem
           icon={<HomeIcon className="w-6" />}
           text={"Home"}
           routerPath="/"
           active={active === 3 ? true : false}
         />
+        
       </SidebarControl>
-
     </>
   );
 };
