@@ -7,11 +7,6 @@ export const adminApi = apiSlice.injectEndpoints({
         url: "admin/get-users",
         method: "GET",
         credentials: "include" as const,
-        headers: {
-          "Cache-Control": "no-cache, no-store, must-revalidate",
-          Pragma: "no-cache",
-          Expires: "0",
-        },
       }),
     }),
 
@@ -28,11 +23,6 @@ export const adminApi = apiSlice.injectEndpoints({
         url: "admin/get-instructors",
         method: "GET",
         credentials: "include" as const,
-        headers: {
-          "Cache-Control": "no-cache, no-store, must-revalidate",
-          Pragma: "no-cache",
-          Expires: "0",
-        },
       }),
     }),
 

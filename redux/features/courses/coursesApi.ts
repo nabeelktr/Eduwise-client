@@ -62,11 +62,6 @@ export const coursesApi = apiSlice.injectEndpoints({
         url: "admin/get-users",
         method: "GET",
         credentials: "include" as const,
-        headers: {
-          "Cache-Control": "no-cache, no-store, must-revalidate",
-          Pragma: "no-cache",
-          Expires: "0",
-        },
       }),
     }),
   }),

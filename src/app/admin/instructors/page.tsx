@@ -11,6 +11,7 @@ import { Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import BasicTable from "../../../utils/BasicTable";
 import CustomDeleteModal from "@/components/ui/CustomDeleteModal";
+import AdminProtected from "../../../hooks/adminProtected";
 
 type Props = {};
 
@@ -83,34 +84,36 @@ const page = (props: Props) => {
     await deleteUser(id);
   };
   return (
-    <div className="min-h-screen bg-gray-200">
-      <Heading
-        title="Eduwise - Admin | Instructors"
-        description="Platform for students to learn and get help from teachers"
-        keywords="Programming, MERN, Redux"
-      />
-      <div className="flex mx-auto z-[9999]">
-        <div className="mx-auto pl-14 mt-20 w-[85%] ">
-          <DashboardHero />
-          {data && (
-            <div
-              className={`bg-white dark:bg-gray-800 relative shadow-md sm:rounded-sm overflow-hidden mx-28 p-4 mt-8`}
-            >
-              <BasicTable datas={data} columns={columns} type="category" />
-            </div>
-          )}
-        </div>
-        <Sidebar active={2} />
-      </div>
-      {open && (
-        <CustomDeleteModal
-          open={open}
-          setOpen={setOpen}
-          handleFunction={handleDelete}
-          text="Are you sure you want to delete this instructor?"
+    <AdminProtected>
+      <div className="min-h-screen bg-gray-200">
+        <Heading
+          title="Eduwise - Admin | Instructors"
+          description="Platform for students to learn and get help from teachers"
+          keywords="Programming, MERN, Redux"
         />
-      )}
-    </div>
+        <div className="flex mx-auto z-[9999]">
+          <div className="mx-auto pl-14 mt-20 w-[85%] ">
+            <DashboardHero />
+            {data && (
+              <div
+                className={`bg-white dark:bg-gray-800 relative shadow-md sm:rounded-sm overflow-hidden mx-28 p-4 mt-8`}
+              >
+                <BasicTable datas={data} columns={columns} type="category" />
+              </div>
+            )}
+          </div>
+          <Sidebar active={2} />
+        </div>
+        {open && (
+          <CustomDeleteModal
+            open={open}
+            setOpen={setOpen}
+            handleFunction={handleDelete}
+            text="Are you sure you want to delete this instructor?"
+          />
+        )}
+      </div>
+    </AdminProtected>
   );
 };
 

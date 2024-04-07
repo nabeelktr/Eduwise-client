@@ -2,16 +2,15 @@
 import Sidebar from "../../../components/Admin/Sidebar/Sidebar";
 import DashboardHero from "../../../components/Admin/DashboardHero";
 import Heading from "../../../utils/Heading";
-import React, { use, useEffect, useState } from "react";
-import {
-  useDeleteUserMutation,
-  useGetUsersQuery,
-} from "../../../../redux/features/admin/adminApi";
+import React, { useEffect, useState } from "react";
+import { useDeleteUserMutation } from "../../../../redux/features/admin/adminApi";
 import { Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import BasicTable from "../../../utils/BasicTable";
-import CustomDeleteModal from "@/components/ui/CustomDeleteModal";
+import CustomDeleteModal from "../../../components/ui/CustomDeleteModal";
 import { useGetUsersCourseQuery } from "../../../../redux/features/courses/coursesApi";
+import SubLoader from "../../../components/ui/Loader/SubLoader";
+import AdminProtected from "../../../hooks/adminProtected";
 
 type Props = {};
 
@@ -59,18 +58,24 @@ const page = (props: Props) => {
 
     {
       header: "Delete",
-      cell: (info: any) => (
-        <>
-          <Trash2
-            size={20}
-            onClick={() => {
-              setOpen(true);
-              setUserId(info.row.original._id);
-            }}
-            className="cursor-pointer"
-          />
-        </>
-      ),
+      cell: (info: any) =>
+        isLoading ? (
+          <span>
+            {" "}
+            <SubLoader />
+          </span>
+        ) : (
+          <>
+            <Trash2
+              size={20}
+              onClick={() => {
+                setOpen(true);
+                setUserId(info.row.original._id);
+              }}
+              className="cursor-pointer"
+            />
+          </>
+        ),
     },
   ];
 
@@ -92,34 +97,36 @@ const page = (props: Props) => {
     await deleteUser(id);
   };
   return (
-    <div className="min-h-screen bg-gray-200">
-      <Heading
-        title="Eduwise - Admin - Users"
-        description="Platform for students to learn and get help from teachers"
-        keywords="Programming, MERN, Redux"
-      />
-      <div className="flex mx-auto z-[9999]">
-        <div className="mx-auto pl-14 mt-20 w-[85%] ">
-          <DashboardHero />
-          {data && (
-            <div
-              className={`bg-white dark:bg-gray-800 relative shadow-md sm:rounded-sm overflow-hidden mx-28 p-4 mt-8`}
-            >
-              <BasicTable datas={data} columns={columns} type="category" />
-            </div>
-          )}
-        </div>
-        <Sidebar active={1} />
-      </div>
-      {open && (
-        <CustomDeleteModal
-          open={open}
-          setOpen={setOpen}
-          handleFunction={handleDelete}
-          text="Are you sure you want to delete this user?"
+    <AdminProtected>
+      <div className="min-h-screen bg-gray-200">
+        <Heading
+          title="Eduwise - Admin - Users"
+          description="Platform for students to learn and get help from teachers"
+          keywords="Programming, MERN, Redux"
         />
-      )}
-    </div>
+        <div className="flex mx-auto z-[9999]">
+          <div className="mx-auto pl-14 mt-20 w-[85%] ">
+            <DashboardHero />
+            {data && (
+              <div
+                className={`bg-white dark:bg-gray-800 relative shadow-md sm:rounded-sm overflow-hidden mx-28 p-4 mt-8`}
+              >
+                <BasicTable datas={data} columns={columns} type="category" />
+              </div>
+            )}
+          </div>
+          <Sidebar active={1} />
+        </div>
+        {open && (
+          <CustomDeleteModal
+            open={open}
+            setOpen={setOpen}
+            handleFunction={handleDelete}
+            text="Are you sure you want to delete this user?"
+          />
+        )}
+      </div>
+    </AdminProtected>
   );
 };
 
