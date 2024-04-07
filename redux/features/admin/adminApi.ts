@@ -22,7 +22,21 @@ export const adminApi = apiSlice.injectEndpoints({
         credentials: "include" as const,
       }),
     }),
+
+    getInstructors: builder.query({
+      query: () => ({
+        url: "admin/get-instructors",
+        method: "GET",
+        credentials: "include" as const,
+        headers: {
+          "Cache-Control": "no-cache, no-store, must-revalidate",
+          Pragma: "no-cache",
+          Expires: "0",
+        },
+      }),
+    }),
+
   }),
 });
 
-export const { useGetUsersQuery, useDeleteUserMutation } = adminApi;
+export const { useGetUsersQuery, useDeleteUserMutation, useGetInstructorsQuery } = adminApi;
