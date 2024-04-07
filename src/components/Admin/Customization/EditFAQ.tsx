@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useAddFAQMutation, useGetFAQQuery } from "../../../../redux/features/admin/adminApi";
+import {
+  useAddFAQMutation,
+  useGetFAQQuery,
+} from "../../../../redux/features/admin/adminApi";
 import { styles } from "@/styles/style";
 import { HiMinus, HiPlus } from "react-icons/hi";
 import { AiOutlineDelete } from "react-icons/ai";
@@ -16,7 +19,8 @@ const EditFAQ = (props: Props) => {
 
   const [questions, setQuestions] = useState<any[]>([]);
 
-  const [addFAQ, {isLoading: addFAQLoading, error, isSuccess}] = useAddFAQMutation()
+  const [addFAQ, { isLoading: addFAQLoading, error, isSuccess }] =
+    useAddFAQMutation();
 
   useEffect(() => {
     if (data) {
@@ -24,45 +28,56 @@ const EditFAQ = (props: Props) => {
     }
   }, [data]);
 
-  const toggleQuestion = (id:any) => {
-    setQuestions((prevQuestion) => prevQuestion.map((q) => q._id === id ? {...q, active: !q.active} : q))
-  }
+  const toggleQuestion = (id: any) => {
+    setQuestions((prevQuestion) =>
+      prevQuestion.map((q) => (q._id === id ? { ...q, active: !q.active } : q))
+    );
+  };
 
-  const handleQuestionChange = (id: any, value:string) => {
-    setQuestions((prevQuestion) => prevQuestion.map((q) => (q._id === id ? { ...q, question: value} : q)))
-  }
+  const handleQuestionChange = (id: any, value: string) => {
+    setQuestions((prevQuestion) =>
+      prevQuestion.map((q) => (q._id === id ? { ...q, question: value } : q))
+    );
+  };
 
-  const handleAnswerChange = (id: any, value:string) => {
-    setQuestions((prevQuestion) => prevQuestion.map((q) => (q._id === id ? { ...q, answer: value} : q)))
-  }
+  const handleAnswerChange = (id: any, value: string) => {
+    setQuestions((prevQuestion) =>
+      prevQuestion.map((q) => (q._id === id ? { ...q, answer: value } : q))
+    );
+  };
 
   const newFaqHandler = () => {
     setQuestions([
       ...questions,
       {
+        _id: new Date().getTime().toString(),
         question: "",
         answer: "",
-      }
-    ])
-  }
+      },
+    ]);
+  };
 
   const isAnyQuestionEmpty = (questions: any[]) => {
-    return questions.some((q) => q.question === "" || q.answer === "")
-  }
+    return questions.some((q) => q.question === "" || q.answer === "");
+  };
 
-  const areQuestionsUnchanged = (originalQuestions: any[], newQuestions: any[]) => {
-    return JSON.stringify(originalQuestions) === JSON.stringify(newQuestions)
-  }
+  const areQuestionsUnchanged = (
+    originalQuestions: any[],
+    newQuestions: any[]
+  ) => {
+    return JSON.stringify(originalQuestions) === JSON.stringify(newQuestions);
+  };
 
   const handleEdit = async () => {
-    await addFAQ(questions);
-  }
+    const newData = questions.map(({ _id, active, ...rest }:any) => rest);
+    await addFAQ(newData);
+  };
 
   useEffect(() => {
-    if(isSuccess){
-      toast.success("FAQ updated successfully")
+    if (isSuccess) {
+      toast.success("FAQ updated successfully");
     }
-  }, [isSuccess])
+  }, [isSuccess]);
 
   return (
     <div className="w-[90%] 800px:w-[80%] m-auto mt-[120px]">

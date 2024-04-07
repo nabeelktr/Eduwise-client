@@ -38,6 +38,7 @@ export const adminApi = apiSlice.injectEndpoints({
       query: (questions) => ({
         url: "admin/add-faq",
         method: "POST",
+        body: questions,
         credentials: "include" as const,
       })
     })
