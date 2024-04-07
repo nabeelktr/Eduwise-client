@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useGetFAQQuery } from "../../../../redux/features/admin/adminApi";
+import { useAddFAQMutation, useGetFAQQuery } from "../../../../redux/features/admin/adminApi";
 import { styles } from "@/styles/style";
 import { HiMinus, HiPlus } from "react-icons/hi";
 import { AiOutlineDelete } from "react-icons/ai";
 import { IoMdAddCircleOutline } from "react-icons/io";
+import { toast } from "sonner";
 
 type Props = {};
 
@@ -14,6 +15,8 @@ const EditFAQ = (props: Props) => {
   );
 
   const [questions, setQuestions] = useState<any[]>([]);
+
+  const [addFAQ, {isLoading: addFAQLoading, error, isSuccess}] = useAddFAQMutation()
 
   useEffect(() => {
     if (data) {
@@ -51,9 +54,15 @@ const EditFAQ = (props: Props) => {
     return JSON.stringify(originalQuestions) === JSON.stringify(newQuestions)
   }
 
-  const handleEdit = () => {
-    console.log("object");
+  const handleEdit = async () => {
+    await addFAQ(questions);
   }
+
+  useEffect(() => {
+    if(isSuccess){
+      toast.success("FAQ updated successfully")
+    }
+  }, [isSuccess])
 
   return (
     <div className="w-[90%] 800px:w-[80%] m-auto mt-[120px]">

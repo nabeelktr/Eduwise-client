@@ -33,6 +33,14 @@ export const adminApi = apiSlice.injectEndpoints({
         credentials: "include" as const,
       }),
     }),
+
+    addFAQ: builder.mutation({
+      query: (questions) => ({
+        url: "admin/add-faq",
+        method: "POST",
+        credentials: "include" as const,
+      })
+    })
   }),
 });
 
@@ -41,4 +49,5 @@ export const {
   useDeleteUserMutation,
   useGetInstructorsQuery,
   useGetFAQQuery,
+  useAddFAQMutation
 } = adminApi;
