@@ -34,6 +34,14 @@ export const adminApi = apiSlice.injectEndpoints({
       }),
     }),
 
+    getCategories: builder.query({
+      query: () => ({
+        url: "admin/get-categories",
+        method: "GET",
+        credentials: "include" as const,
+      }),
+    }),
+
     addFAQ: builder.mutation({
       query: (questions) => ({
         url: "admin/add-faq",
@@ -41,7 +49,17 @@ export const adminApi = apiSlice.injectEndpoints({
         body: questions,
         credentials: "include" as const,
       })
-    })
+    }),
+
+    addCategories: builder.mutation({
+      query: (categories) => ({
+        url: "admin/add-categories",
+        method: "POST",
+        body: categories,
+        credentials: "include" as const,
+      })
+    }),
+
   }),
 });
 
@@ -50,5 +68,7 @@ export const {
   useDeleteUserMutation,
   useGetInstructorsQuery,
   useGetFAQQuery,
-  useAddFAQMutation
+  useAddFAQMutation,
+  useGetCategoriesQuery,
+  useAddCategoriesMutation
 } = adminApi;
