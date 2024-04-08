@@ -25,7 +25,7 @@ const page = (props: Props) => {
             <EditFAQ />
 
           </div>
-          <Sidebar active={4} />
+          <Sidebar active={3} />
         </div>
         
       </div>

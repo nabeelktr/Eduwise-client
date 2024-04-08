@@ -56,7 +56,7 @@ const SidebarProfile: FC<Props> = ({
           Change Password
         </h5>
       </div>
-      {(user.role === "user" || user.role === "instructor") && (
+      {(user.role === "user" ) && (
         <div
           className={`w-full h-16 border-b flex items-center px-4 py-4 cursor-pointer hover:bg-blue-gray-50 ${
             active === 3

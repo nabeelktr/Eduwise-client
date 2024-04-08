@@ -5,6 +5,7 @@ import Heading from "../../../utils/Heading";
 import React from "react";
 import AdminProtected from "../../../hooks/adminProtected";
 import EditFAQ from "@/components/Admin/Customization/EditFAQ";
+import EditCategories from "@/components/Admin/Customization/EditCategories";
 
 type Props = {};
 
@@ -21,7 +22,7 @@ const page = (props: Props) => {
         <div className="flex mx-auto z-[9999]">
           <div className="mx-auto pl-14 mt-20 w-[85%] ">
             <DashboardHero />
-
+            <EditCategories />
 
 
           </div>

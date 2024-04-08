@@ -6,6 +6,7 @@ import {
   AcademicCapIcon,
   HomeIcon,
   PencilSquareIcon,
+  Squares2X2Icon,
   TvIcon,
   UserGroupIcon,
 } from "@heroicons/react/24/outline";
@@ -42,6 +43,13 @@ const Sidebar: React.FC<Props> = ({ active }) => {
           icon={<PencilSquareIcon className="w-6" />}
           text={"FAQ"}
           routerPath="/admin/faq"
+          active={active === 3 ? true : false}
+        />
+
+        <SidebarItem
+          icon={<Squares2X2Icon className="w-6" />}
+          text={"Categories"}
+          routerPath="/admin/categories"
           active={active === 4 ? true : false}
         />
 
@@ -49,9 +57,8 @@ const Sidebar: React.FC<Props> = ({ active }) => {
           icon={<HomeIcon className="w-6" />}
           text={"Home"}
           routerPath="/"
-          active={active === 3 ? true : false}
+          active={active === 5 ? true : false}
         />
-        
       </SidebarControl>
     </>
   );

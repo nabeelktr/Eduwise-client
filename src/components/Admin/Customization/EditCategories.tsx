@@ -6,6 +6,7 @@ import {
 import { styles } from "@/styles/style";
 import { IoMdAddCircleOutline } from "react-icons/io";
 import { toast } from "sonner";
+import { AiOutlineDelete } from "react-icons/ai";
 
 type Props = {};
 
@@ -51,7 +52,7 @@ const EditCategories = (props: Props) => {
   };
 
   const handleEdit = async () => {
-    const newData = categories.map(({ category }: any) => category);
+    const newData = categories.map((item: any) => ({ category: item.category }));
     await addCategories(newData);
   };
 
@@ -64,13 +65,13 @@ const EditCategories = (props: Props) => {
   return (
     <div className="w-[90%] 800px:w-[80%] m-auto mt-[120px]">
       <div className="mt-12 bg-white shadow-sm p-4 rounded-md">
-        <dl className="space-y-8">
+        <dl className="space-y-3">
           {categories.map((q: any) => (
             <div
               key={q._id}
-              className={`${"border-t"} border-gray-200 pt-6 bg-gray-50 p-2`}
+              className={`${"border-t"} border-gray-200  bg-gray-50 p-1 flex justify-between pr-2 `}
             >
-              <dt className="text-lg">
+              <dt className="text-lg w-[80%]">
                 <button className="flex items-start dark:text-white text-black justify-between w-full text-left focus:outline-none">
                   <input
                     className={`${styles.input} border-none`}
@@ -82,6 +83,16 @@ const EditCategories = (props: Props) => {
                   />
                 </button>
               </dt>
+              <span className="items-center justify-center pt-2">
+                    <AiOutlineDelete
+                      className="dark:text-white text-black text-sm cursor-pointer h-5 w-5"
+                      onClick={() => {
+                        setCategories((prev) =>
+                          prev.filter((item) => item._id !== q._id)
+                        );
+                      }}
+                    />
+                  </span>
             </div>
           ))}
         </dl>

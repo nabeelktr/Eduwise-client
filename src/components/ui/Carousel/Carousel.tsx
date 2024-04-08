@@ -67,10 +67,10 @@ const Carousell = (props: Props) => {
           ? trendingCourses.map((course: any, index: number) => (
               <div
                 key={index}
-                className="relative flex flex-col mt-4 text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-52 800px:w-64 800px:max-h-72 max-h-52 800px:min-h-72 min-h-52 cursor-pointer"
+                className="relative flex flex-col mt-4 text-gray-700 bg-white shadow-md bg-clip-border rounded-sm w-52 800px:w-64 800px:max-h-72 max-h-52 800px:min-h-72 min-h-52 cursor-pointer"
                 onClick={() => router.push(`course/${course._id}`)}
               >
-                <div className="relative min-h-28 800px:min-h-40 mx-2 -mt-4 overflow-hidden text-white shadow-lg bg-clip-border rounded-xl bg-blue-gray-500 shadow-blue-gray-500/40">
+                <div className="relative min-h-28 800px:min-h-40 mx-2 -mt-4 overflow-hidden text-white shadow-lg bg-clip-border rounded-sm bg-blue-gray-500 shadow-blue-gray-500/40">
                   <img
                     src={course?.thumbnail}
                     alt="card-image"
@@ -78,7 +78,7 @@ const Carousell = (props: Props) => {
                   />
                 </div>
                 <div className="p-4">
-                  <h5 className="block mb-1 text-xs 800px:text-lg antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
+                  <h5 className="block mb-1 text-xs 800px:text-sm antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
                     {course.name}
                   </h5>
                   <p className="text-xs hidden 800px:block antialiased font-light leading-relaxed text-inherit overflow-hidden ">
@@ -97,10 +97,10 @@ const Carousell = (props: Props) => {
           : [...Array(8)].map((item: string, index: number) => (
               <div
                 key={index}
-                className="relative flex flex-col mt-4 text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-52 800px:w-64 800px:max-h-72 max-h-52 800px:min-h-72 min-h-52 cursor-pointer"
+                className="relative flex flex-col mt-4 text-gray-700 bg-white shadow-md bg-clip-border rounded-sm w-52 800px:w-64 800px:max-h-72 max-h-52 800px:min-h-72 min-h-52 cursor-pointer"
               >
                 {/* Skeleton for image */}
-                <div className="animate-pulse relative min-h-28 800px:min-h-40 mx-2 -mt-4 overflow-hidden text-white shadow-lg bg-clip-border rounded-xl bg-blue-gray-500 shadow-blue-gray-500/40">
+                <div className="animate-pulse relative min-h-28 800px:min-h-40 mx-2 -mt-4 overflow-hidden text-white shadow-lg bg-clip-border rounded-sm bg-blue-gray-500 shadow-blue-gray-500/40">
                   <div className="bg-gray-300 h-full w-full"></div>
                 </div>
                 {/* Skeleton for title */}

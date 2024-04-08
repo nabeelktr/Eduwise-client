@@ -1,28 +1,31 @@
+"use client";
 import { styles } from "@/styles/style";
 import Ratings from "@/utils/Ratings";
 import VideoPlayer from "@/utils/VideoPlayer";
-import { CheckIcon } from "@heroicons/react/24/outline";
+import { CheckIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { format } from "path";
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import CourseContentList from "../../components/Course/CourseContentList";
+import { IoMdCloseCircleOutline } from "react-icons/io";
 
 type Props = {
   data: any;
 };
 
 const CourseDetails: React.FC<Props> = ({ data }) => {
+  const [open, setOpen] = useState(false);
   const { user } = useSelector((state: any) => state.auth);
   const discountPercentage = (
-    ((data?.estimatedPrice - data.price) / data?.estimatedPrice) *
+    ((data?.estimatedPrice - data?.price) / data?.estimatedPrice) *
     100
   ).toFixed(0);
   const isPurchased =
     user && user?.courses?.find((item: any) => item._id === data._id);
 
   const handleOrder = (e: any) => {
-    console.log("object");
+    setOpen(true);
   };
   return (
     <div className="bg-gray-50">
@@ -30,24 +33,24 @@ const CourseDetails: React.FC<Props> = ({ data }) => {
         <div className="w-full flex flex-col-reverse 800px:flex-row">
           <div className="w-full 800px:w-[65%] 800px:pr-5">
             <h1 className="text-[24px] font-Poppins font-[600] text-black dark:text-white">
-              {data.name}
+              {data?.name}
             </h1>
             <div className="flex items-center gap-2 pt-1 text-sm mb-1">
               <div className="flex items-center">
-                <Ratings rating={data.ratings} />
+                <Ratings rating={data?.ratings} />
                 <h5 className="text-black dark:text-white">
-                  {data.reviews?.length} Reviews
+                  {data?.reviews?.length} Reviews
                 </h5>
               </div>
               <h5 className="text-black dark:text-white">
-                {data.purchased} Students
+                {data?.purchased} Students
               </h5>
             </div>
             <br />
             <h1 className="text-xl font-Poppins font-[500] text-black dark:text-white pb-2">
               What will you learn from this course?
             </h1>
-            {data.benefits?.map((item: any, index: number) => (
+            {data?.benefits?.map((item: any, index: number) => (
               <div className="w-full flex 800px:items-center py-1" key={index}>
                 <div className="w-[15px] mr-1">
                   <CheckIcon className="h-5 w-5 text-black dark:text-white" />
@@ -61,7 +64,7 @@ const CourseDetails: React.FC<Props> = ({ data }) => {
             <h1 className="text-[25px] font-Poppins font-[500] text-black dark:text-white text-xl pb-2">
               What are the prerequisites for starting this course?
             </h1>
-            {data.prerequisites?.map((item: any, index: number) => (
+            {data?.prerequisites?.map((item: any, index: number) => (
               <div className="w-full flex 800px:items-center py-1" key={index}>
                 <div className="w-[15px] mr-1">
                   <CheckIcon className="h-5 w-5 text-black dark:text-white" />
@@ -157,7 +160,7 @@ const CourseDetails: React.FC<Props> = ({ data }) => {
                 {isPurchased ? (
                   <Link
                     className={`${styles.button}`}
-                    href={`/course-access/${data._id}`}
+                    href={`/course-access/${data?._id}`}
                   >
                     Enter to Course
                   </Link>
@@ -178,6 +181,19 @@ const CourseDetails: React.FC<Props> = ({ data }) => {
           </div>
         </div>
       </div>
+      <>
+      {
+        open && (
+          <div className="w-full h-screen bg-[#00000036] fixed top-0 left-0 z-50 flex items-center justify-center">
+            <div className="w-[500px] min-h-[500px] bg-white rounded-md shadow p-3">
+            <div className="w-full flex justify-end">
+              <XMarkIcon className="h-5 cursor-pointer" onClick={() => setOpen(false)} />
+            </div>
+            </div>
+          </div>
+        )
+      }
+      </>
     </div>
   );
 };
