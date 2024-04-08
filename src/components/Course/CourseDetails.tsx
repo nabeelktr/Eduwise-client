@@ -1,20 +1,23 @@
 "use client";
-import { styles } from "@/styles/style";
-import Ratings from "@/utils/Ratings";
-import VideoPlayer from "@/utils/VideoPlayer";
+import { styles } from "../../styles/style";
+import Ratings from "../../utils/Ratings";
+import VideoPlayer from "../../utils/VideoPlayer";
 import { CheckIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { format } from "path";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import CourseContentList from "../../components/Course/CourseContentList";
-import { IoMdCloseCircleOutline } from "react-icons/io";
+
+
 
 type Props = {
   data: any;
+  clientSecret: string;
+  stripePromise: any;
 };
 
-const CourseDetails: React.FC<Props> = ({ data }) => {
+const CourseDetails: React.FC<Props> = ({ data, stripePromise, clientSecret}) => {
   const [open, setOpen] = useState(false);
   const { user } = useSelector((state: any) => state.auth);
   const discountPercentage = (
@@ -22,7 +25,9 @@ const CourseDetails: React.FC<Props> = ({ data }) => {
     100
   ).toFixed(0);
   const isPurchased =
-    user && user?.courses?.find((item: any) => item._id === data._id);
+  user && user?.courses?.find((item: any) => item._id === data._id);
+  
+
 
   const handleOrder = (e: any) => {
     setOpen(true);
@@ -182,17 +187,18 @@ const CourseDetails: React.FC<Props> = ({ data }) => {
         </div>
       </div>
       <>
-      {
-        open && (
+        {open && (
           <div className="w-full h-screen bg-[#00000036] fixed top-0 left-0 z-50 flex items-center justify-center">
             <div className="w-[500px] min-h-[500px] bg-white rounded-md shadow p-3">
-            <div className="w-full flex justify-end">
-              <XMarkIcon className="h-5 cursor-pointer" onClick={() => setOpen(false)} />
-            </div>
+              <div className="w-full flex justify-end">
+                <XMarkIcon
+                  className="h-5 cursor-pointer"
+                  onClick={() => setOpen(false)}
+                />
+              </div>
             </div>
           </div>
-        )
-      }
+        )}
       </>
     </div>
   );
