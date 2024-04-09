@@ -8,8 +8,8 @@ import { format } from "path";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import CourseContentList from "../../components/Course/CourseContentList";
-
-
+import {Elements} from '@stripe/react-stripe-js'
+import CheckOutForm from '../payment/CheckOutForm'
 
 type Props = {
   data: any;
@@ -189,12 +189,21 @@ const CourseDetails: React.FC<Props> = ({ data, stripePromise, clientSecret}) =>
       <>
         {open && (
           <div className="w-full h-screen bg-[#00000036] fixed top-0 left-0 z-50 flex items-center justify-center">
-            <div className="w-[500px] min-h-[500px] bg-white rounded-md shadow p-3">
+            <div className="w-[400px] min-h-[400px] bg-white rounded-md shadow p-3">
               <div className="w-full flex justify-end">
                 <XMarkIcon
                   className="h-5 cursor-pointer"
                   onClick={() => setOpen(false)}
                 />
+              </div>
+              <div className="w-full px-2">
+                {
+                  stripePromise && clientSecret && (
+                    <Elements stripe={stripePromise} options={{clientSecret}} >
+                      <CheckOutForm  setOpen={setOpen} data={data} />
+                    </Elements>
+                  )
+                }
               </div>
             </div>
           </div>
