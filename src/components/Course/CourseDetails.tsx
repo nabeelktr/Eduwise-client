@@ -8,8 +8,8 @@ import { format } from "path";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import CourseContentList from "../../components/Course/CourseContentList";
-import {Elements} from '@stripe/react-stripe-js'
-import CheckOutForm from '../payment/CheckOutForm'
+import { Elements } from "@stripe/react-stripe-js";
+import CheckOutForm from "../payment/CheckOutForm";
 
 type Props = {
   data: any;
@@ -17,7 +17,11 @@ type Props = {
   stripePromise: any;
 };
 
-const CourseDetails: React.FC<Props> = ({ data, stripePromise, clientSecret}) => {
+const CourseDetails: React.FC<Props> = ({
+  data,
+  stripePromise,
+  clientSecret,
+}) => {
   const [open, setOpen] = useState(false);
   const { user } = useSelector((state: any) => state.auth);
   const discountPercentage = (
@@ -25,9 +29,7 @@ const CourseDetails: React.FC<Props> = ({ data, stripePromise, clientSecret}) =>
     100
   ).toFixed(0);
   const isPurchased =
-  user && user?.courses?.find((item: any) => item._id === data._id);
-  
-
+    user && user?.courses?.find((item: any) => item.courseId === data._id);
 
   const handleOrder = (e: any) => {
     setOpen(true);
@@ -164,8 +166,8 @@ const CourseDetails: React.FC<Props> = ({ data, stripePromise, clientSecret}) =>
               <div className="flex items-center">
                 {isPurchased ? (
                   <Link
-                    className={`${styles.button}`}
-                    href={`/course-access/${data?._id}`}
+                    className={`${styles.button} 800px:!text-sm !text-xs text-white font-thin !w-[60%] mt-2 mb-4 !py-2`}
+                    href={`/courses/course-access/${data?._id}`}
                   >
                     Enter to Course
                   </Link>
@@ -197,13 +199,11 @@ const CourseDetails: React.FC<Props> = ({ data, stripePromise, clientSecret}) =>
                 />
               </div>
               <div className="w-full px-2">
-                {
-                  stripePromise && clientSecret && (
-                    <Elements stripe={stripePromise} options={{clientSecret}} >
-                      <CheckOutForm  setOpen={setOpen} data={data} />
-                    </Elements>
-                  )
-                }
+                {stripePromise && clientSecret && (
+                  <Elements stripe={stripePromise} options={{ clientSecret }}>
+                    <CheckOutForm setOpen={setOpen} data={data} />
+                  </Elements>
+                )}
               </div>
             </div>
           </div>

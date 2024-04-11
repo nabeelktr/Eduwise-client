@@ -9,6 +9,7 @@ import { useCreateOrderMutation } from "../../../redux/features/order/orderApi";
 import { useLoadUserQuery } from "../../../redux/features/api/apiSlice";
 import { styles } from "../../styles/style";
 import { redirect } from "next/navigation";
+import { toast } from "sonner";
 
 type Props = {
   setOpen: any;
@@ -26,7 +27,6 @@ const CheckOutForm = ({ setOpen, data }: Props) => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    console.log("object", elements);
     if (!stripe || !elements) {
       return;
     }
@@ -39,18 +39,23 @@ const CheckOutForm = ({ setOpen, data }: Props) => {
       setMessage(error.message);
       setIsLoading(false);
     } else if (paymentIntent && paymentIntent.status === "succeeded") {
+      await createOrder({ courseId: data._id, payment_info: paymentIntent })
       setIsLoading(false);
-      console.log("order", { courseId: data._id, payment_info: paymentIntent });
     }
   };
 
   useEffect(() => {
     if(orderData){
         setLoadUser(true);
-        redirect(`/course-access/${data._id}`)
+        redirect(`/courses/course-access/${data._id}`)
     }
-    
-  },[])
+    if (error) {
+      if ("data" in error) {
+        const errorData = error as any;
+        toast.error(errorData.data.message.details);
+      }
+    }
+  },[orderData, error])
   return (
     <form id="payment-form" onSubmit={handleSubmit} className="text-xs">
       <LinkAuthenticationElement id="link-authentication-element" className="text-xs" />
