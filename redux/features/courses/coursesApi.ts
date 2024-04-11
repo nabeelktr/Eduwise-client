@@ -64,6 +64,14 @@ export const coursesApi = apiSlice.injectEndpoints({
         credentials: "include" as const,
       }),
     }),
+
+    getCourseContent: builder.query({
+      query: (id) => ({
+        url: `courses/get-course-content/${id}`,
+        method: "GET",
+        credentials: "include" as const,
+      })
+    })
   }),
 });
 
@@ -74,5 +82,6 @@ export const {
   useUpdateCourseMutation,
   useGetTrendingCoursesMutation,
   useGetCourseDetailsQuery,
-  useGetUsersCourseQuery
+  useGetUsersCourseQuery,
+  useGetCourseContentQuery
 } = coursesApi;

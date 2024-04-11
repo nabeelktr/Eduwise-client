@@ -6,10 +6,10 @@ import { CheckIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { format } from "path";
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
 import CourseContentList from "../../components/Course/CourseContentList";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckOutForm from "../payment/CheckOutForm";
+import { useLoadUserQuery } from "../../../redux/features/api/apiSlice";
 
 type Props = {
   data: any;
@@ -23,7 +23,8 @@ const CourseDetails: React.FC<Props> = ({
   clientSecret,
 }) => {
   const [open, setOpen] = useState(false);
-  const { user } = useSelector((state: any) => state.auth);
+  const { data: userData } = useLoadUserQuery(undefined,{})
+  const user = userData?.user;
   const discountPercentage = (
     ((data?.estimatedPrice - data?.price) / data?.estimatedPrice) *
     100
@@ -167,7 +168,7 @@ const CourseDetails: React.FC<Props> = ({
                 {isPurchased ? (
                   <Link
                     className={`${styles.button} 800px:!text-sm !text-xs text-white font-thin !w-[60%] mt-2 mb-4 !py-2`}
-                    href={`/courses/course-access/${data?._id}`}
+                    href={`/course-access/${data?._id}`}
                   >
                     Enter to Course
                   </Link>

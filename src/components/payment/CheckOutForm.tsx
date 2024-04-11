@@ -47,7 +47,7 @@ const CheckOutForm = ({ setOpen, data }: Props) => {
   useEffect(() => {
     if(orderData){
         setLoadUser(true);
-        redirect(`/courses/course-access/${data._id}`)
+        redirect(`/course-access/${data._id}`)
     }
     if (error) {
       if ("data" in error) {
