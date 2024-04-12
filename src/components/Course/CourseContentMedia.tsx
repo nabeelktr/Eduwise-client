@@ -1,13 +1,17 @@
 import { styles } from "@/styles/style";
 import VideoPlayer from "@/utils/VideoPlayer";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   AiFillStar,
   AiOutlineArrowLeft,
   AiOutlineArrowRight,
   AiOutlineStar,
 } from "react-icons/ai";
+import { toast } from "sonner";
+import { useAddNewQuestionMutation } from "../../../redux/features/courses/coursesApi";
+import { formatDate } from "@/utils/formatDate";
+import { MdMessage } from "react-icons/md";
 
 type Props = {
   data: any;
@@ -15,6 +19,7 @@ type Props = {
   activeVideo: number;
   setActiveVideo: (activeVideo: number) => void;
   user: any;
+  refetch: any;
 };
 
 const CourseContentMedia = ({
@@ -23,15 +28,59 @@ const CourseContentMedia = ({
   activeVideo,
   setActiveVideo,
   user,
+  refetch,
 }: Props) => {
   const [activeBar, setActiveBar] = useState(0);
   const [question, setQuestion] = useState("");
   const [rating, setRating] = useState(1);
   const [review, setReview] = useState("");
+  const [answer, setAnswer] = useState("");
+  const [answerId, setAnswerId] = useState("");
+  const [addQuestion, { isSuccess, error, isLoading: addQuestionLoading }] =
+    useAddNewQuestionMutation();
 
   const isReviewExists = data?.reviews?.find(
     (item: any) => item.user._id === user._id
   );
+
+  const handleQuestion = async () => {
+    if (question.length === 0) {
+      toast.error("Question can't be empty");
+    } else {
+      const questionList = {
+        user: {
+          name: user.name,
+          avatar: user.avatar,
+        },
+        question,
+        questionReplies: [],
+      };
+
+      addQuestion({
+        questionList,
+        courseId: id,
+        contentId: data[activeVideo]._id,
+      });
+    }
+  };
+
+  const handleAnswerSubmit = () => {
+    console.log("ff");
+  };
+
+  useEffect(() => {
+    if (isSuccess) {
+      setQuestion("");
+      refetch();
+      toast.success("Question added successfully");
+    }
+    if (error) {
+      if ("data" in error) {
+        const errorMessage = error as any;
+        toast.error(errorMessage.data.message);
+      }
+    }
+  }, [isSuccess, error]);
   return (
     <div className="w-[95%] 800px:w-[86%] py-4 m-auto">
       <VideoPlayerMemo
@@ -101,7 +150,7 @@ const CourseContentMedia = ({
                 </h2>{" "}
                 <a
                   className="inline-block text-[#4395c4] 800px:text-sm 800px:pl2"
-                   href={item.url}
+                  href={item.url}
                 >
                   {item.url}
                 </a>
@@ -132,15 +181,29 @@ const CourseContentMedia = ({
             </div>
             <div className="w-full flex justify-end">
               <div
-                className={`${styles.button} !w-[100px] !h-[30px] items-center !text-xs text-white font-thin mt-3`}
-                // onClick={isLoading ? null : handleCommentSubmit}
+                className={`${
+                  styles.button
+                } !w-[100px] !h-[30px] items-center !text-xs text-white font-thin mt-3
+                ${addQuestionLoading && "cursor-not-allowed"}
+                `}
+                onClick={addQuestionLoading ? () => {} : handleQuestion}
               >
                 Submit
               </div>
             </div>
             <br />
             <div className="w-full h-[1px] bg-[#ffffff3b] "></div>
-            <div>{/* question reply  */}</div>
+            <div>
+              <CommentReply
+                data={data}
+                activeVideo={activeVideo}
+                answer={answer}
+                setAnswer={setAnswer}
+                handleAnswerSubmit={handleAnswerSubmit}
+                user={user}
+                setAnswerId={setAnswerId}
+              />
+            </div>
           </>
         )}
         {activeBar === 3 && (
@@ -212,7 +275,95 @@ const CourseContentMedia = ({
 };
 
 const VideoPlayerMemo = React.memo(VideoPlayer, (prevProps, nextProps) => {
-    return prevProps.videoUrl === nextProps.videoUrl;
-  });
+  return prevProps.videoUrl === nextProps.videoUrl;
+});
+
+const CommentReply = ({
+  data,
+  activeVideo,
+  answer,
+  setAnswer,
+  handleAnswerSubmit,
+  user,
+  setAnswerId,
+}: any) => {
+  return (
+    <>
+      <div className="w-full my-3">
+        {data[activeVideo]?.questions?.map((item: any, index: number) => (
+          <CommentItem
+            key={index}
+            data={data}
+            activeVideo={activeVideo}
+            item={item}
+            index={index}
+            answer={answer}
+            setAnswer={setAnswer}
+            handleAnswerSubmit={handleAnswerSubmit}
+          />
+        ))}
+      </div>
+    </>
+  );
+};
+
+const CommentItem = ({
+  key,
+  data,
+  activeVideo,
+  item,
+  index,
+  answer,
+  setAnswer,
+  handleAnswerSubmit,
+}: any) => {
+    const [replyActive, setReplyActive] = useState(false)
+  return (
+    <>
+      <div className="my-4">
+        <div className="flex mb-2">
+          <Image
+            src={item.user?.avatar ? item.user.avatar : "/assets/user.png"}
+            alt="usericon"
+            width={30}
+            height={30}
+            className="rounded-full ml-5 w-[30px] h-[30px]"
+          />
+
+          {/* <div className="w-[50px] h-[50px]">
+            <div className="w-[50px] h-[50px] bg-gray-600 rounded-[50px] flex items-center justify-center cursor-pointer">
+              <h1 className="uppercase text-sm">
+                {item?.user?.name.slice(0, 2)}
+              </h1>
+            </div>
+          </div> */}
+
+          <div className="pl-3 ">
+            <div className="flex gap-1">
+              <h5 className="text-xs font-sans ">
+                {item?.user.name}
+              </h5>
+              <small className="text-xs text-gray-600">
+                {item.createdAt && formatDate(item?.createdAt)}
+              </small>
+            </div>
+            <p className="text-sm">{item?.question}</p>
+          </div>
+        </div>
+
+        <div className="w-full flex">
+          <span
+            className="800px:pl-16 cursor-pointer  mr-2 text-xs text-gray-700"
+            onClick={() => setReplyActive(!replyActive)}
+          >
+            {!replyActive ? item?.questionReplies.length !== 0 ?  "All Replies" : "Add Reply" : "Hide Replies"}
+          </span>
+          <MdMessage className="cursor-pointer text-gray-700 " />
+          <span className="pl-1 cursor-pointer text-xs  text-gray-700">{item?.questionReplies?.length}</span>
+        </div>
+      </div>
+    </>
+  );
+};
 
 export default CourseContentMedia;
