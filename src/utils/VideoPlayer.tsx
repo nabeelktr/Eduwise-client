@@ -29,7 +29,6 @@ const useHls = (src: string, options: Options | null) => {
         options: levels.map((level) => level.height),
         forced: true,
         onChange: (newQuality: number) => {
-          console.log("changes", newQuality);
           levels.forEach((level, levelIndex) => {
             if (level.height === newQuality) {
               hls.current.currentLevel = levelIndex;

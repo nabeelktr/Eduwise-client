@@ -89,8 +89,8 @@ const CourseDetails: React.FC<Props> = ({
             </h1>
             <CourseContentList data={data?.courseContentData} isDemo={true} />
             <br />
-            <div className=" text-sm 800px:w-[80%]">
-              <h1 className="text-xl font-Poppins font-[500] pb-2">
+            <div className=" text-sm 800px:w-[80%] whitespace-pre-line">
+              <h1 className="text-xl font-Poppins font-[500] pb-2 ">
                 Course Details
               </h1>
               {data?.description}
