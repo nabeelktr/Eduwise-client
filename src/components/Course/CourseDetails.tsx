@@ -4,12 +4,13 @@ import Ratings from "../../utils/Ratings";
 import VideoPlayer from "../../utils/VideoPlayer";
 import { CheckIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import { format } from "path";
 import React, { useState } from "react";
 import CourseContentList from "../../components/Course/CourseContentList";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckOutForm from "../payment/CheckOutForm";
 import { useLoadUserQuery } from "../../../redux/features/api/apiSlice";
+import { formatDate } from "@/utils/formatDate";
+import Image from "next/image";
 
 type Props = {
   data: any;
@@ -111,37 +112,27 @@ const CourseDetails: React.FC<Props> = ({
               <br />
               {(data?.reviews && [...data.reviews].reverse()).map(
                 (item: any, index: number) => (
-                  <div className="w-full pb-4" key={index}>
-                    <div className="flex">
-                      <div className="w-[50px] h-[50px]">
-                        <div className="w-[50px] h-[50px] bg-gray-600 rounded-[50px] flex items-center justify-center cursor-pointer">
-                          <h1 className="uppercase text-[10px] text-black dark:text-white">
-                            {item.user.name.slice(0, 2)}
-                          </h1>
-                        </div>
-                      </div>
-                      <div className="hidden 800px:block pl-2">
-                        <div className="flex items-center">
-                          <h5 className="text-[18px] pr-2 text-black dark:text-white">
-                            {item.user.name}
-                          </h5>
-                          <Ratings rating={item.rating} />
-                        </div>
-                        <p className="text-black dark:text-white">
-                          {item.comment}
-                        </p>
-                        <small className="text-[#000000d1] dark:text-[#ffffff83]">
-                          {format(item.createdAt)}
-                        </small>
-                      </div>
-                      <div className="pl-2 flex 800px:hidden items-center">
-                        <h5 className="text-[18px] pr-2 text-black dark:text-white">
-                          {item.user.name}
-                        </h5>
-                        <Ratings rating={item.rating} />
-                      </div>
-                    </div>
-                  </div>
+                  <div className="w-full flex  my-5  " key={index}>
+              <Image
+                src={
+                  item?.user?.avatar ? item.user.avatar : "/assets/user.png"
+                }
+                alt="usericon"
+                width={30}
+                height={30}
+                className="rounded-full ml-5 w-[30px] h-[30px]"
+              />
+              <div className="pl-3 ">
+                <div className="flex gap-1">
+                  <h5 className="text-xs font-sans ">{item?.user.name}</h5>{" "}
+                  <small className="text-xs text-gray-600">
+                    {item.createdAt && formatDate(item?.createdAt)}
+                  </small>
+                </div>
+                <Ratings rating={item.rating} />
+                <p className="text-sm">{item?.comment}</p>
+              </div>
+            </div>
                 )
               )}
             </div>

@@ -10,11 +10,15 @@ import {
 } from "react-icons/ai";
 import { toast } from "sonner";
 import {
+  coursesApi,
   useAddAnswerInQuestionMutation,
   useAddNewQuestionMutation,
+  useAddReviewMutation,
+  useGetCourseDetailsQuery,
 } from "../../../redux/features/courses/coursesApi";
 import { formatDate } from "@/utils/formatDate";
 import { MdMessage, MdVerifiedUser } from "react-icons/md";
+import Ratings from "@/utils/Ratings";
 
 type Props = {
   data: any;
@@ -49,9 +53,18 @@ const CourseContentMedia = ({
       isLoading: addAnswerLoading,
     },
   ] = useAddAnswerInQuestionMutation();
-
-  const isReviewExists = data?.reviews?.find(
-    (item: any) => item.user._id === user._id
+  const [
+    addReview,
+    {
+      isSuccess: reviewSuccess,
+      error: reviewError,
+      isLoading: reviewCreationLoading,
+    },
+  ] = useAddReviewMutation();
+  const {data:courseData, refetch: courseRefetch} = useGetCourseDetailsQuery(id, {refetchOnMountOrArgChange: true})
+  const course = courseData;
+  const isReviewExists = course?.reviews?.find(
+    (item: any) => item.user._id === user.id
   );
 
   const handleQuestion = async () => {
@@ -62,7 +75,7 @@ const CourseContentMedia = ({
         user: {
           name: user.name,
           avatar: user.avatar,
-          role: user.role
+          role: user.role,
         },
         question,
         questionReplies: [],
@@ -81,10 +94,10 @@ const CourseContentMedia = ({
       user: {
         name: user.name,
         avatar: user.avatar,
-        role: user.role
+        role: user.role,
       },
       answer,
-      createdAt: Date.now()
+      createdAt: Date.now(),
     };
     addAnswerInQuestion({
       answerList,
@@ -92,7 +105,24 @@ const CourseContentMedia = ({
       contentId: data[activeVideo]._id,
       questionId: questionId,
     });
+  };
 
+  const handleReviewSubmit = () => {
+    if (review.length === 0) {
+      toast.error("Review can't be empty");
+    } else {
+      const reviewList = {
+        user: {
+          name: user.name,
+          avatar: user.avatar,
+          role: user.role,
+        },
+        rating,
+        comment: review,
+        commentReplies: []
+      };
+      addReview({ reviewList, courseId: id });
+    }
   };
 
   useEffect(() => {
@@ -103,26 +133,50 @@ const CourseContentMedia = ({
     }
 
     if (answerSuccess) {
-      setQuestion("");
       refetch();
       toast.success("Answer added successfully");
       setAnswer("");
     }
 
-    if (error ) {
+    if (reviewSuccess) {
+      courseRefetch();
+      toast.success("Review added successfully");
+      setReview("");
+    }
+
+    if (error) {
       if ("data" in error) {
         const errorMessage = error as any;
-        toast.error(errorMessage.data.message);
+        console.log(errorMessage);
+        // toast.error(errorMessage.message);
       }
     }
 
-    if (answerError ) {
+    if (answerError) {
       if ("data" in answerError) {
         const errorMessage = error as any;
-        toast.error(errorMessage.data.message);
+        console.log(errorMessage);
+
+        // toast.error(errorMessage.data.message);
       }
     }
-  }, [isSuccess, error, answerSuccess, answerSuccess]);
+
+    if (reviewError) {
+      if ("data" in reviewError) {
+        const errorMessage = error as any;
+        console.log(errorMessage);
+
+        // toast.error(errorMessage.data.message);
+      }
+    }
+  }, [
+    isSuccess,
+    error,
+    answerSuccess,
+    answerSuccess,
+    reviewSuccess,
+    reviewError,
+  ]);
 
   return (
     <div className="w-[95%] 800px:w-[86%] py-4 m-auto">
@@ -302,8 +356,14 @@ const CourseContentMedia = ({
                   </div>
                   <div className="w-full flex justify-end">
                     <div
-                      className={`${styles.button} !w-[100px] !h-[30px] items-center !text-xs text-white font-thin mt-1`}
-                      // onClick={isLoading ? null : handleCommentSubmit}
+                      className={`${
+                        styles.button
+                      } !w-[100px] !h-[30px] items-center !text-xs text-white font-thin mt-1 ${
+                        reviewCreationLoading && "cursor-no-drop"
+                      }`}
+                      onClick={
+                        reviewCreationLoading ? () => {} : handleReviewSubmit
+                      }
                     >
                       Submit
                     </div>
@@ -311,8 +371,39 @@ const CourseContentMedia = ({
                 </>
               )}
             </>
+            <br />
+        <div className="w-full h-[1px] bg-[#ffffff3b]"></div>
+        <div className="w-full">
+          {(course?.reviews && [...course.reviews].reverse()).map(
+            (item: any, index: number) => (
+              <div className="w-full flex  my-5  " key={index}>
+              <Image
+                src={
+                  item?.user?.avatar ? item.user.avatar : "/assets/user.png"
+                }
+                alt="usericon"
+                width={30}
+                height={30}
+                className="rounded-full ml-5 w-[30px] h-[30px]"
+              />
+              <div className="pl-3 ">
+                <div className="flex gap-1">
+                  <h5 className="text-xs font-sans ">{item?.user.name}</h5>{" "}
+                  <small className="text-xs text-gray-600">
+                    {item.createdAt && formatDate(item?.createdAt)}
+                  </small>
+                </div>
+                <Ratings rating={item.rating} />
+                <p className="text-sm">{item?.comment}</p>
+              </div>
+            </div>
+            )
+          )}
+        </div>
           </div>
+          
         )}
+       
       </div>
     </div>
   );
@@ -377,14 +468,6 @@ const CommentItem = ({
             className="rounded-full ml-5 w-[30px] h-[30px]"
           />
 
-          {/* <div className="w-[50px] h-[50px]">
-            <div className="w-[50px] h-[50px] bg-gray-600 rounded-[50px] flex items-center justify-center cursor-pointer">
-              <h1 className="uppercase text-sm">
-                {item?.user?.name.slice(0, 2)}
-              </h1>
-            </div>
-          </div> */}
-
           <div className="pl-3 ">
             <div className="flex gap-1">
               <h5 className="text-xs font-sans ">{item?.user.name}</h5>
@@ -417,7 +500,7 @@ const CommentItem = ({
         </div>
         {replyActive && (
           <>
-            {item?.questionReplies.map((item: any, index:number) => (
+            {item?.questionReplies.map((item: any, index: number) => (
               <div className="w-full flex 800px:ml-16 my-5  " key={index}>
                 <Image
                   src={
@@ -430,7 +513,10 @@ const CommentItem = ({
                 />
                 <div className="pl-3 ">
                   <div className="flex gap-1">
-                    <h5 className="text-xs font-sans ">{item?.user.name}</h5> {item.user.role === "instructor" && <MdVerifiedUser className="text-[#369eff]"/>}
+                    <h5 className="text-xs font-sans ">{item?.user.name}</h5>{" "}
+                    {item.user.role === "instructor" && (
+                      <MdVerifiedUser className="text-[#369eff]" />
+                    )}
                     <small className="text-xs text-gray-600">
                       {item.createdAt && formatDate(item?.createdAt)}
                     </small>
@@ -446,7 +532,9 @@ const CommentItem = ({
                   placeholder="Enter your answer.."
                   value={answer}
                   onChange={(e: any) => setAnswer(e.target.value)}
-                  className={`placeholder:text-gray-600 block 800px:ml-12 outline-none bg-transparent border-b border-gray-700 p-[5px] w-[95%] ${answer === "" || addAnswerLoading && "cursor-no-drop"}`}
+                  className={`placeholder:text-gray-600 block 800px:ml-12 outline-none bg-transparent border-b border-gray-700 p-[5px] w-[95%] ${
+                    answer === "" || (addAnswerLoading && "cursor-no-drop")
+                  }`}
                 />
                 <button
                   type="submit"
