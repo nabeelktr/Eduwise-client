@@ -9,9 +9,12 @@ import {
   AiOutlineStar,
 } from "react-icons/ai";
 import { toast } from "sonner";
-import { useAddNewQuestionMutation } from "../../../redux/features/courses/coursesApi";
+import {
+  useAddAnswerInQuestionMutation,
+  useAddNewQuestionMutation,
+} from "../../../redux/features/courses/coursesApi";
 import { formatDate } from "@/utils/formatDate";
-import { MdMessage } from "react-icons/md";
+import { MdMessage, MdVerifiedUser } from "react-icons/md";
 
 type Props = {
   data: any;
@@ -35,9 +38,17 @@ const CourseContentMedia = ({
   const [rating, setRating] = useState(1);
   const [review, setReview] = useState("");
   const [answer, setAnswer] = useState("");
-  const [answerId, setAnswerId] = useState("");
+  const [questionId, setQuestionId] = useState("");
   const [addQuestion, { isSuccess, error, isLoading: addQuestionLoading }] =
     useAddNewQuestionMutation();
+  const [
+    addAnswerInQuestion,
+    {
+      isSuccess: answerSuccess,
+      error: answerError,
+      isLoading: addAnswerLoading,
+    },
+  ] = useAddAnswerInQuestionMutation();
 
   const isReviewExists = data?.reviews?.find(
     (item: any) => item.user._id === user._id
@@ -51,6 +62,7 @@ const CourseContentMedia = ({
         user: {
           name: user.name,
           avatar: user.avatar,
+          role: user.role
         },
         question,
         questionReplies: [],
@@ -65,7 +77,22 @@ const CourseContentMedia = ({
   };
 
   const handleAnswerSubmit = () => {
-    console.log("ff");
+    const answerList = {
+      user: {
+        name: user.name,
+        avatar: user.avatar,
+        role: user.role
+      },
+      answer,
+      createdAt: Date.now()
+    };
+    addAnswerInQuestion({
+      answerList,
+      courseId: id,
+      contentId: data[activeVideo]._id,
+      questionId: questionId,
+    });
+
   };
 
   useEffect(() => {
@@ -74,13 +101,29 @@ const CourseContentMedia = ({
       refetch();
       toast.success("Question added successfully");
     }
-    if (error) {
+
+    if (answerSuccess) {
+      setQuestion("");
+      refetch();
+      toast.success("Answer added successfully");
+      setAnswer("");
+    }
+
+    if (error ) {
       if ("data" in error) {
         const errorMessage = error as any;
         toast.error(errorMessage.data.message);
       }
     }
-  }, [isSuccess, error]);
+
+    if (answerError ) {
+      if ("data" in answerError) {
+        const errorMessage = error as any;
+        toast.error(errorMessage.data.message);
+      }
+    }
+  }, [isSuccess, error, answerSuccess, answerSuccess]);
+
   return (
     <div className="w-[95%] 800px:w-[86%] py-4 m-auto">
       <VideoPlayerMemo
@@ -201,7 +244,8 @@ const CourseContentMedia = ({
                 setAnswer={setAnswer}
                 handleAnswerSubmit={handleAnswerSubmit}
                 user={user}
-                setAnswerId={setAnswerId}
+                setQuestionId={setQuestionId}
+                addAnswerLoading={addAnswerLoading}
               />
             </div>
           </>
@@ -285,7 +329,8 @@ const CommentReply = ({
   setAnswer,
   handleAnswerSubmit,
   user,
-  setAnswerId,
+  setQuestionId,
+  addAnswerLoading,
 }: any) => {
   return (
     <>
@@ -299,7 +344,9 @@ const CommentReply = ({
             index={index}
             answer={answer}
             setAnswer={setAnswer}
+            setQuestionId={setQuestionId}
             handleAnswerSubmit={handleAnswerSubmit}
+            addAnswerLoading={addAnswerLoading}
           />
         ))}
       </div>
@@ -308,16 +355,16 @@ const CommentReply = ({
 };
 
 const CommentItem = ({
-  key,
-  data,
-  activeVideo,
+  setQuestionId,
   item,
   index,
   answer,
   setAnswer,
   handleAnswerSubmit,
+  addAnswerLoading,
 }: any) => {
-    const [replyActive, setReplyActive] = useState(false)
+  const [replyActive, setReplyActive] = useState(false);
+
   return (
     <>
       <div className="my-4">
@@ -340,9 +387,7 @@ const CommentItem = ({
 
           <div className="pl-3 ">
             <div className="flex gap-1">
-              <h5 className="text-xs font-sans ">
-                {item?.user.name}
-              </h5>
+              <h5 className="text-xs font-sans ">{item?.user.name}</h5>
               <small className="text-xs text-gray-600">
                 {item.createdAt && formatDate(item?.createdAt)}
               </small>
@@ -354,13 +399,67 @@ const CommentItem = ({
         <div className="w-full flex">
           <span
             className="800px:pl-16 cursor-pointer  mr-2 text-xs text-gray-700"
-            onClick={() => setReplyActive(!replyActive)}
+            onClick={() => {
+              setReplyActive(!replyActive);
+              setQuestionId(item._id);
+            }}
           >
-            {!replyActive ? item?.questionReplies.length !== 0 ?  "All Replies" : "Add Reply" : "Hide Replies"}
+            {!replyActive
+              ? item?.questionReplies.length !== 0
+                ? "All Replies"
+                : "Add Reply"
+              : "Hide Replies"}
           </span>
           <MdMessage className="cursor-pointer text-gray-700 " />
-          <span className="pl-1 cursor-pointer text-xs  text-gray-700">{item?.questionReplies?.length}</span>
+          <span className="pl-1 cursor-pointer text-xs  text-gray-700">
+            {item?.questionReplies?.length}
+          </span>
         </div>
+        {replyActive && (
+          <>
+            {item?.questionReplies.map((item: any, index:number) => (
+              <div className="w-full flex 800px:ml-16 my-5  " key={index}>
+                <Image
+                  src={
+                    item?.user?.avatar ? item.user.avatar : "/assets/user.png"
+                  }
+                  alt="usericon"
+                  width={30}
+                  height={30}
+                  className="rounded-full ml-5 w-[30px] h-[30px]"
+                />
+                <div className="pl-3 ">
+                  <div className="flex gap-1">
+                    <h5 className="text-xs font-sans ">{item?.user.name}</h5> {item.user.role === "instructor" && <MdVerifiedUser className="text-[#369eff]"/>}
+                    <small className="text-xs text-gray-600">
+                      {item.createdAt && formatDate(item?.createdAt)}
+                    </small>
+                  </div>
+                  <p className="text-sm">{item?.answer}</p>
+                </div>
+              </div>
+            ))}
+            <>
+              <div className="w-full px-2 flex relative text-sm mt-2 ">
+                <input
+                  type="text"
+                  placeholder="Enter your answer.."
+                  value={answer}
+                  onChange={(e: any) => setAnswer(e.target.value)}
+                  className={`placeholder:text-gray-600 block 800px:ml-12 outline-none bg-transparent border-b border-gray-700 p-[5px] w-[95%] ${answer === "" || addAnswerLoading && "cursor-no-drop"}`}
+                />
+                <button
+                  type="submit"
+                  className="absolute right-4 bottom-1 text-xs !font-thin uppercase"
+                  onClick={handleAnswerSubmit}
+                  disabled={answer === "" || addAnswerLoading}
+                >
+                  Submit
+                </button>
+              </div>
+            </>
+          </>
+        )}
       </div>
     </>
   );
