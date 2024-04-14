@@ -12,6 +12,7 @@ import {
 import CustomDeleteModal from "@/components/ui/CustomDeleteModal";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import DashboardHero from "@/components/Admin/DashboardHero";
 
 type Props = {};
 
@@ -55,8 +56,12 @@ const CoursesPage = (props: Props) => {
       header: "Edit",
       cell: (info: any) => (
         <>
-          <PencilIcon size={20} className="cursor-pointer" 
-           onClick={() => router.push(`/instructor/edit-course/${info.row.original._id}`)}
+          <PencilIcon
+            size={20}
+            className="cursor-pointer"
+            onClick={() =>
+              router.push(`/instructor/edit-course/${info.row.original._id}`)
+            }
           />
         </>
       ),
@@ -81,7 +86,7 @@ const CoursesPage = (props: Props) => {
   useEffect(() => {
     if (isSuccess) {
       toast.success("Course deleted Successfully");
-      refetch()
+      refetch();
     }
     if (error) {
       if ("data" in error) {
@@ -106,13 +111,19 @@ const CoursesPage = (props: Props) => {
       />
       <div className="flex mx-auto z-[9999]">
         <div className="mx-auto pl-14 mt-20 w-[85%]">
+          
+          <div className="z-[99]">
+           {data && <DashboardHero instructorId={data[0].instructorId}/>}
+            </div>
           {data && (
-            <div className={`bg-white dark:bg-gray-800 relative shadow-md sm:rounded-sm overflow-hidden mx-28 p-4`}>
+            <div
+            className={`bg-white dark:bg-gray-800  shadow-md sm:rounded-sm overflow-hidden mx-28 p-4 mt-10 z-[10]`}
+            >
               <BasicTable datas={data} columns={columns} type="category" />
             </div>
           )}
         </div>
-        <Sidebar active={1} />
+          <Sidebar active={1} />
       </div>
       {open && (
         <CustomDeleteModal

@@ -39,15 +39,16 @@ const CheckOutForm = ({ setOpen, data }: Props) => {
       setMessage(error.message);
       setIsLoading(false);
     } else if (paymentIntent && paymentIntent.status === "succeeded") {
-      await createOrder({ courseId: data._id, payment_info: paymentIntent })
+      await createOrder({ courseId: data._id, payment_info: paymentIntent });
       setIsLoading(false);
     }
   };
 
   useEffect(() => {
-    if(orderData){
-        setLoadUser(true);
-        redirect(`/course-access/${data._id}`)
+    if (orderData) {
+      setLoadUser(true);
+      setOpen(false)
+      redirect(`/course-access/${data._id}`);
     }
     if (error) {
       if ("data" in error) {
@@ -55,11 +56,14 @@ const CheckOutForm = ({ setOpen, data }: Props) => {
         toast.error(errorData.data.message.details);
       }
     }
-  },[orderData, error])
+  }, [orderData, error]);
   return (
     <form id="payment-form" onSubmit={handleSubmit} className="text-xs">
-      <LinkAuthenticationElement id="link-authentication-element" className="text-xs" />
-      <PaymentElement id="payment-element" className="text-xs"  />
+      <LinkAuthenticationElement
+        id="link-authentication-element"
+        className="text-xs"
+      />
+      <PaymentElement id="payment-element" className="text-xs" />
       <button
         disabled={isLoading || !stripe || !elements}
         id="submit"
@@ -73,7 +77,10 @@ const CheckOutForm = ({ setOpen, data }: Props) => {
         </span>
       </button>
       {message && (
-        <div id="payment-message" className="text-[red] font-Poppins pt-2 text-xs">
+        <div
+          id="payment-message"
+          className="text-[red] font-Poppins pt-2 text-xs"
+        >
           {message}
         </div>
       )}

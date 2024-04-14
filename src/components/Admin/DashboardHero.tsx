@@ -1,11 +1,13 @@
 import React from 'react'
 import DashboardHeader from './DashboardHeader'
-type Props = {}
+type Props = {
+  instructorId?:string
+}
 
-const DashboardHero = (props: Props) => {
+const DashboardHero = ({instructorId}: Props) => {
   return (
     <div>
-        <DashboardHeader />
+        <DashboardHeader instructorId={instructorId}/>
     </div>
   )
 }

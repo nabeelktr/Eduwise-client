@@ -17,7 +17,7 @@ type Props = {
 const CourseDetailsPage = ({ id }: Props) => {
   const [route, setRoute] = useState("Login");
   const [open, setOpen] = useState(false);
-  const { data, isLoading } = useGetCourseDetailsQuery(id);
+  const { data, isLoading, refetch } = useGetCourseDetailsQuery(id, {refetchOnMountOrArgChange: true});
   const { data: config } = useGetStripeKeyQuery({});
   const [createPaymentIntent, { data: paymentIntentData }] =
     useCreatePaymentIntentMutation();
@@ -34,6 +34,12 @@ const CourseDetailsPage = ({ id }: Props) => {
       createPaymentIntent(amount);
     }
   }, [config, data]);
+
+  useEffect(() => {
+    if(!open){
+      refetch()
+    }
+  },[setOpen])
 
   useEffect(() => {
     if (paymentIntentData) {

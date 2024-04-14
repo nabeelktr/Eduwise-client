@@ -1,5 +1,5 @@
-import { styles } from "@/styles/style";
-import VideoPlayer from "@/utils/VideoPlayer";
+import { styles } from "../../styles/style";
+import VideoPlayer from "../../utils/VideoPlayer";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import {
@@ -16,9 +16,12 @@ import {
   useAddReviewMutation,
   useGetCourseDetailsQuery,
 } from "../../../redux/features/courses/coursesApi";
-import { formatDate } from "@/utils/formatDate";
+import { formatDate } from "../../utils/formatDate";
 import { MdMessage, MdVerifiedUser } from "react-icons/md";
-import Ratings from "@/utils/Ratings";
+import Ratings from "../../utils/Ratings";
+import socketIO from "socket.io-client";
+const EndPoint = process.env.NEXT_PUBLIC_SOCKET_SERVER_URI || "";
+const socketId = socketIO(EndPoint, { transports: ["websocket"] });
 
 type Props = {
   data: any;
@@ -76,6 +79,8 @@ const CourseContentMedia = ({
           name: user.name,
           avatar: user.avatar,
           role: user.role,
+          instructorId: course.instructorId,
+          courseName: course.name
         },
         question,
         questionReplies: [],
@@ -130,6 +135,10 @@ const CourseContentMedia = ({
       setQuestion("");
       refetch();
       toast.success("Question added successfully");
+      socketId.emit("notification", {
+        title: "New Question",
+        instructorId: course.instructorId,
+      })
     }
 
     if (answerSuccess) {
