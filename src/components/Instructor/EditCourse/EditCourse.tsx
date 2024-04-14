@@ -5,7 +5,10 @@ import CourseOptions from "../CreateCourse/CourseOptions";
 import CourseData from "../CreateCourse/CourseData";
 import CourseContent from "../CreateCourse/CourseContent";
 import CoursePreview from "../CreateCourse/CoursePreview";
-import { useGetCoursesQuery, useUpdateCourseMutation } from "../../../../redux/features/courses/coursesApi";
+import {
+  useGetCoursesQuery,
+  useUpdateCourseMutation,
+} from "../../../../redux/features/courses/coursesApi";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
@@ -38,25 +41,27 @@ interface CourseData {
 }
 
 const EditCourse: React.FC<Props> = ({ id }) => {
-    const router = useRouter()
+  const router = useRouter();
   const {
     isLoading: getCourseLoading,
     data,
     refetch,
   } = useGetCoursesQuery({}, { refetchOnMountOrArgChange: true });
   const editCourseData = data && data.find((i: any) => i._id === id);
-  const [updateCourse, {isSuccess,error, isLoading}] = useUpdateCourseMutation()
+  console.log(editCourseData);
+  const [updateCourse, { isSuccess, error, isLoading }] =
+    useUpdateCourseMutation();
 
   useEffect(() => {
-    if(isSuccess){
-        toast.success("Course Updated Successfully")
-        router.push('/instructor/courses')
+    if (isSuccess) {
+      toast.success("Course Updated Successfully");
+      router.push("/instructor/courses");
     }
-    if(error && "data" in error){  
-        const errorMessage = error as any
-        toast.error(errorMessage.data.message.details)
+    if (error && "data" in error) {
+      const errorMessage = error as any;
+      toast.error(errorMessage.data.message.details);
     }
-  },[isSuccess, error])
+  }, [isSuccess, error]);
   const [active, setActive] = useState(0);
   const [courseInfo, setCourseInfo] = useState({
     name: "",
@@ -67,6 +72,7 @@ const EditCourse: React.FC<Props> = ({ id }) => {
     level: "",
     demoUrl: "",
     subtitleUrl: "",
+    category: "",
     thumbnail: "",
     thumbnailFile: "",
   });
@@ -95,6 +101,7 @@ const EditCourse: React.FC<Props> = ({ id }) => {
         level: editCourseData.level,
         demoUrl: editCourseData.demoUrl,
         subtitleUrl: editCourseData.subtitleUrl,
+        category: editCourseData?.category || "",
         thumbnail: editCourseData?.thumbnail,
         thumbnailFile: "",
       });
@@ -137,6 +144,7 @@ const EditCourse: React.FC<Props> = ({ id }) => {
       level: courseInfo.level,
       demoUrl: courseInfo.demoUrl,
       subtitleUrl: courseInfo.subtitleUrl,
+      category: courseInfo.category,
       totalVideos: courseContentData.length,
       benefits: formattedBenefits,
       prerequisites: formattedprerequisites,
@@ -157,6 +165,7 @@ const EditCourse: React.FC<Props> = ({ id }) => {
     formData.append("level", data.level);
     formData.append("demoUrl", data.demoUrl);
     formData.append("subtitleUrl", data.subtitleUrl);
+    formData.append("category", data.category);
     formData.append("totalVideos", data.totalVideos);
     formData.append("benefits", JSON.stringify(data.benefits));
     formData.append("prerequisites", JSON.stringify(data.prerequisites));
@@ -167,7 +176,7 @@ const EditCourse: React.FC<Props> = ({ id }) => {
     formData.append("thumbnail", data.thumbnail);
     formData.append("courseId", editCourseData._id);
     formData.append("thumbnailUrl", editCourseData.thumbnail);
-    await updateCourse(formData)
+    await updateCourse(formData);
   };
 
   return (

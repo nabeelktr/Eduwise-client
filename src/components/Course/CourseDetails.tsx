@@ -4,7 +4,7 @@ import Ratings from "../../utils/Ratings";
 import VideoPlayer from "../../utils/VideoPlayer";
 import { CheckIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CourseContentList from "../../components/Course/CourseContentList";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckOutForm from "../payment/CheckOutForm";
@@ -16,16 +16,25 @@ type Props = {
   data: any;
   clientSecret: string;
   stripePromise: any;
+  setRoute: any;
+  setOpen: (open: boolean) => void;
 };
 
 const CourseDetails: React.FC<Props> = ({
   data,
   stripePromise,
   clientSecret,
+  setRoute,
+  setOpen: openAuthModel,
 }) => {
   const [open, setOpen] = useState(false);
-  const { data: userData } = useLoadUserQuery(undefined,{})
-  const user = userData?.user;
+  const { data: userData, refetch } = useLoadUserQuery(undefined, {refetchOnMountOrArgChange: true});
+  const [user, setUser] = useState<any>();
+
+  useEffect(() => {
+    setUser(userData?.user);
+  }, [userData]);
+
   const discountPercentage = (
     ((data?.estimatedPrice - data?.price) / data?.estimatedPrice) *
     100
@@ -34,7 +43,13 @@ const CourseDetails: React.FC<Props> = ({
     user && user?.courses?.find((item: any) => item.courseId === data._id);
 
   const handleOrder = (e: any) => {
-    setOpen(true);
+    if (user) {
+      setOpen(true);
+    } else {
+      setRoute("Login");
+      openAuthModel(true);
+      refetch()
+    }
   };
   return (
     <div className="bg-gray-50">
@@ -113,33 +128,37 @@ const CourseDetails: React.FC<Props> = ({
               {(data?.reviews && [...data.reviews].reverse()).map(
                 (item: any, index: number) => (
                   <div className="w-full flex  my-5  " key={index}>
-              <Image
-                src={
-                  item?.user?.avatar ? item.user.avatar : "/assets/user.png"
-                }
-                alt="usericon"
-                width={30}
-                height={30}
-                className="rounded-full ml-5 w-[30px] h-[30px]"
-              />
-              <div className="pl-3 ">
-                <div className="flex gap-1">
-                  <h5 className="text-xs font-sans ">{item?.user.name}</h5>{" "}
-                  <small className="text-xs text-gray-600">
-                    {item.createdAt && formatDate(item?.createdAt)}
-                  </small>
-                </div>
-                <Ratings rating={item.rating} />
-                <p className="text-sm">{item?.comment}</p>
-              </div>
-            </div>
+                    <Image
+                      src={
+                        item?.user?.avatar
+                          ? item.user.avatar
+                          : "/assets/user.png"
+                      }
+                      alt="usericon"
+                      width={30}
+                      height={30}
+                      className="rounded-full ml-5 w-[30px] h-[30px]"
+                    />
+                    <div className="pl-3 ">
+                      <div className="flex gap-1">
+                        <h5 className="text-xs font-sans ">
+                          {item?.user.name}
+                        </h5>{" "}
+                        <small className="text-xs text-gray-600">
+                          {item.createdAt && formatDate(item?.createdAt)}
+                        </small>
+                      </div>
+                      <Ratings rating={item.rating} />
+                      <p className="text-sm">{item?.comment}</p>
+                    </div>
+                  </div>
                 )
               )}
             </div>
           </div>
           <div className="w-full 800px:w-[35%] relative">
             <div className="sticky top-[100px] left-0 z-50 w-full">
-              <VideoPlayer
+              <VideoPlayerMemo
                 videoUrl={data?.demoUrl}
                 subtitleUrl={data?.subtitleUrl}
               />
@@ -204,5 +223,9 @@ const CourseDetails: React.FC<Props> = ({
     </div>
   );
 };
+
+const VideoPlayerMemo = React.memo(VideoPlayer, (prevProps, nextProps) => {
+  return prevProps.videoUrl === nextProps.videoUrl;
+});
 
 export default CourseDetails;

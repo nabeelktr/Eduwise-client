@@ -24,7 +24,6 @@ export const authApi = apiSlice.injectEndpoints({
         async onQueryStarted(arg, {queryFulfilled, dispatch}){
             try{
                 const result = await queryFulfilled;
-                console.log(result);
                 dispatch(
                     userRegistration({
                         token: result.data.data.token,
@@ -60,7 +59,6 @@ export const authApi = apiSlice.injectEndpoints({
         async onQueryStarted(arg, {queryFulfilled, dispatch}){
             try{
                 const result = await queryFulfilled;
-                console.log(result);
                 dispatch(
                     userLoggedIn({
                         accessToken: result.data.accessToken,
@@ -113,6 +111,7 @@ export const authApi = apiSlice.injectEndpoints({
             try {
                 dispatch(userLoggedOut());
             } catch (error: any) {
+                dispatch(userLoggedOut());
                 console.error("Error during logout:", error);
             }
         }

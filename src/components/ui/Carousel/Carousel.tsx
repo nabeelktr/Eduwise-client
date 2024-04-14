@@ -7,13 +7,11 @@ import React, { useEffect, useState } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { useGetTrendingCoursesMutation } from "../../../../redux/features/courses/coursesApi";
-import { Link } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 type Props = {};
 
 const Carousell = (props: Props) => {
-  const router = useRouter();
   const [courses, { isLoading, error }] = useGetTrendingCoursesMutation();
   const [trendingCourses, setTrendingCourses] = useState<any>([]);
 
@@ -65,34 +63,7 @@ const Carousell = (props: Props) => {
       >
         {trendingCourses?.length
           ? trendingCourses.map((course: any, index: number) => (
-              <div
-                key={index}
-                className="relative flex flex-col mt-4 text-gray-700 bg-white shadow-md bg-clip-border rounded-sm w-52 800px:w-64 800px:max-h-72 max-h-52 800px:min-h-72 min-h-52 cursor-pointer"
-                onClick={() => router.push(`course/${course._id}`)}
-              >
-                <div className="relative min-h-28 800px:min-h-40 mx-2 -mt-4 overflow-hidden text-white shadow-lg bg-clip-border rounded-sm bg-blue-gray-500 shadow-blue-gray-500/40">
-                  <img
-                    src={course?.thumbnail}
-                    alt="card-image"
-                    className="transition-transform transform hover:scale-105 800px:min-h-40 min-h-32"
-                  />
-                </div>
-                <div className="p-4">
-                  <h5 className="block mb-1 text-xs 800px:text-sm antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
-                    {course.name}
-                  </h5>
-                  <p className="text-xs hidden 800px:block antialiased font-light leading-relaxed text-inherit overflow-hidden ">
-                    {course.description.length > 100
-                      ? course.description.substring(0, 100) + "..."
-                      : course.description}
-                  </p>
-                  <p className="block 800px:hidden text-xs antialiased font-light leading-relaxed text-inherit overflow-hidden ">
-                    {course.description.length > 100
-                      ? course.description.substring(0, 50) + "..."
-                      : course.description}
-                  </p>
-                </div>
-              </div>
+              <CourseCard index={index} course={course} key={index} />
             ))
           : [...Array(8)].map((item: string, index: number) => (
               <div
@@ -132,6 +103,41 @@ const CustomButtonGroup = ({ next, previous, goToSlide, ...rest }: any) => {
       <button className="carousel-button" onClick={next}>
         <ArrowRightCircleIcon className="800px:h-12 h-8 w-12 " />
       </button>
+    </div>
+  );
+};
+
+export const CourseCard = ({ index, course }: any) => {
+  const router = useRouter();
+  return (
+    <div key={index+1} className="items-center justify-center w-full flex" >
+    <div
+      className="border border-gray-400  relative flex flex-col mt-4 text-gray-700 bg-white shadow-md bg-clip-border rounded-sm w-52 800px:w-64 800px:max-h-72 max-h-52 800px:min-h-72 min-h-52 cursor-pointer"
+      onClick={() => router.push(`course/${course._id}`)}
+    >
+      <div className="relative min-h-28 800px:min-h-40 mx-2 -mt-4 overflow-hidden text-white shadow-lg bg-clip-border rounded-sm bg-blue-gray-500 shadow-blue-gray-500/40">
+        <img
+          src={course?.thumbnail}
+          alt="card-image"
+          className="transition-transform transform hover:scale-105 800px:min-h-40 min-h-32"
+        />
+      </div>
+      <div className="p-4">
+        <h5 className="block mb-1 text-xs 800px:text-sm antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
+          {course.name}
+        </h5>
+        <p className="text-xs hidden 800px:block antialiased font-light leading-relaxed text-inherit overflow-hidden ">
+          {course.description.length > 100
+            ? course.description.substring(0, 100) + "..."
+            : course.description}
+        </p>
+        <p className="block 800px:hidden text-xs antialiased font-light leading-relaxed text-inherit overflow-hidden ">
+          {course.description.length > 100
+            ? course.description.substring(0, 50) + "..."
+            : course.description}
+        </p>
+      </div>
+    </div>
     </div>
   );
 };

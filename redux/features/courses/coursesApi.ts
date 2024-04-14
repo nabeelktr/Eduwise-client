@@ -1,6 +1,8 @@
 import { url } from "inspector";
 import { apiSlice } from "../api/apiSlice";
 
+
+
 export const coursesApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     createCourse: builder.mutation({
@@ -22,6 +24,14 @@ export const coursesApi = apiSlice.injectEndpoints({
           Pragma: "no-cache",
           Expires: "0",
         },
+      }),
+    }),
+
+    getAllCourses: builder.query({
+      query: () => ({
+        url: "courses/get-all-courses",
+        method: "GET",
+        credentials: "include" as const,
       }),
     }),
 
@@ -55,7 +65,14 @@ export const coursesApi = apiSlice.injectEndpoints({
         url: `courses/get-course-wop/${id}`,
         method: "GET",
         credentials: "include" as const,
+        headers: {
+          "Cache-Control": "no-cache, no-store, must-revalidate",
+          Pragma: "no-cache",
+          Expires: "0",
+        },
       }),
+      
+
     }),
 
     getUsersCourse: builder.query({
@@ -128,4 +145,5 @@ export const {
   useAddNewQuestionMutation,
   useAddAnswerInQuestionMutation,
   useAddReviewMutation,
+  useGetAllCoursesQuery,
 } = coursesApi;

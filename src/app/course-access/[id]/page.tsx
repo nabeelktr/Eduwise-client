@@ -2,9 +2,8 @@
 import React, { useEffect } from "react";
 import { useLoadUserQuery } from "../../../../redux/features/api/apiSlice";
 import { redirect } from "next/navigation";
-import CourseContent from '../../../components/Course/CourseContent'
+import CourseContent from "../../../components/Course/CourseContent";
 import Loader from "@/components/ui/Loader/Loader";
-
 
 type Props = {
   params: any;
@@ -30,17 +29,15 @@ const page = ({ params }: Props) => {
 
   return (
     <>
-    {
-        isLoading ? (
-            <Loader />
-        ):(
-            <div>
-                <CourseContent id={id} user={data?.user} />
-            </div>
-        )
-    }
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <div>
+          <CourseContent id={id} user={data?.user} />
+        </div>
+      )}
     </>
-  )
+  );
 };
 
 export default page;
