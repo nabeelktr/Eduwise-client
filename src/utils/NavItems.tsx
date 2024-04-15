@@ -27,13 +27,12 @@ type Props = {
 }
 
 const NavItems: React.FC<Props> = ({activeItem, isMobile, user}) => {
-
   return (
     <>
         <div className='hidden 800px:flex px-3'>
             {
                 navItemsData && navItemsData.map((i, index) => (
-                    i.name === "Become a Instructor" && user && user.role === "user" ? 
+                    i.name === "Become a Instructor" && user && user.role === "user" && !user.courses  ? 
                     <Link href={`${i.url}`} key={index} passHref>
                         <div
                         className={`

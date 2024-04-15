@@ -26,9 +26,13 @@ type Props = {
 const Header: FC<Props> = ({ activeItem, setOpen, route, open, setRoute }) => {
   const [active, setActive] = useState(false);
   const [openSidebar, setopenSidebar] = useState(false);
-  const {data: userData, isLoading, refetch} = useLoadUserQuery(undefined, {})
+  const {
+    data: userData,
+    isLoading,
+    refetch,
+  } = useLoadUserQuery(undefined, {});
   const { user: reduxUser } = useSelector((state: any) => state.auth);
-  const [user, setUser] = useState<any>()
+  const [user, setUser] = useState<any>();
   const { data } = useSession();
   const [socialAuth, { isSuccess, error }] = useSocialAuthMutation();
 
@@ -52,32 +56,22 @@ const Header: FC<Props> = ({ activeItem, setOpen, route, open, setRoute }) => {
       if (data) {
         socialauth();
       }
-      refetch()
+      refetch();
     }
   }, [data]);
 
   useEffect(() => {
-    if(userData){
-      setUser(userData.user)
-    }else if(!isLoading){
-      refetch()
+    if (userData) {
+      setUser(userData.user);
+    } else if (!isLoading) {
+      refetch();
     }
-  },[reduxUser, userData])
-
-  // if(typeof window !== "undefined"){
-  //   window.addEventListener("scroll", () => {
-  //     if(window.scrollY > 85){
-  //       setActive(true)
-  //     }else{
-  //       setActive(false)
-  //     }
-  //   })
-  // }
+  }, [reduxUser, userData]);
 
   const handleClose = (e: any) => {
     if (e.target.id === "screen") {
       setopenSidebar(false);
-      refetch()
+      refetch();
     }
   };
 
@@ -113,8 +107,7 @@ const Header: FC<Props> = ({ activeItem, setOpen, route, open, setRoute }) => {
               </div>
 
               {/* for desktop */}
-              {data || user || userData  ? (
-                
+              {data || user || userData ? (
                 <Link href={"/profile"}>
                   <Image
                     src={user?.avatar ? user.avatar : "/assets/user.png"}

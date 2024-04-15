@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 type Props = {};
 
 const CreateCoursePage = (props: Props) => {
-  const {user} = useSelector((state: any) => state.auth)
+  const { user } = useSelector((state: any) => state.auth);
   return (
     <InstructorProtected>
       <Heading
@@ -20,9 +20,9 @@ const CreateCoursePage = (props: Props) => {
       />
       <div className="flex mx-auto z-[9999]">
         <div className="mx-auto 800px:w-[80%] 800px:px-[100px] pl-10 ml-10  mr-0 800px:mr-16">
-        <div className="z-[99] mb-10">
-           {user && <DashboardHero instructorId={user.id}/>}
-            </div>
+          <div className="z-[99] mb-10">
+            {user && <DashboardHero instructorId={user.id} />}
+          </div>
           <CreateCourse />
         </div>
         <Sidebar active={0} />
