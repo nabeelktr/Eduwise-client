@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import DashboardHeader from './DashboardHeader'
+import DashboardWidgets from '../../components/Instructor/Widgets/DashboardWidgets'
 type Props = {
   instructorId?:string
 }

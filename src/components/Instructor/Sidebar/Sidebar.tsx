@@ -2,9 +2,15 @@
 import React from "react";
 import SidebarControl from "../../Sidebar/SidebarControl";
 import { SidebarItem } from "../../Sidebar/SidebarItems";
-import { CloudArrowDownIcon, ComputerDesktopIcon, DocumentPlusIcon, WrenchScrewdriverIcon } from "@heroicons/react/24/outline";
+import {
+  CloudArrowDownIcon,
+  ComputerDesktopIcon,
+  DocumentPlusIcon,
+  HomeIcon,
+  PresentationChartBarIcon,
+  WrenchScrewdriverIcon,
+} from "@heroicons/react/24/outline";
 import { EISidebar } from "../../../constants/enums";
-
 
 type Props = {
   active: number;
@@ -14,6 +20,12 @@ const Sidebar: React.FC<Props> = ({ active }) => {
   return (
     <>
       <SidebarControl>
+        <SidebarItem
+          icon={<PresentationChartBarIcon className="w-6" />}
+          text={"Dashboard"}
+          routerPath="/instructor"
+          active={active === EISidebar.dashboard ? true : false}
+        />
         <SidebarItem
           icon={<DocumentPlusIcon className="w-6" />}
           text={"Create Course"}
@@ -37,6 +49,12 @@ const Sidebar: React.FC<Props> = ({ active }) => {
           text={"Upload Media"}
           routerPath="/instructor/upload-media"
           active={active === EISidebar.uploadMedia ? true : false}
+        />
+        <SidebarItem
+          icon={<HomeIcon className="w-6" />}
+          text={"Home"}
+          routerPath="/"
+          active={false}
         />
       </SidebarControl>
     </>
