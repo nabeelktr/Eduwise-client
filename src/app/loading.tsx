@@ -18,7 +18,7 @@ const loader = (props: Props) => {
         setRoute={setRoute}
         route={route}
       />
-
+      
       <Loader />
 
     </div>

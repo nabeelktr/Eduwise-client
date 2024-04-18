@@ -23,15 +23,15 @@ const DashboardHeader = ({ instructorId }: Props) => {
   const [notifications, setNotifications] = useState<any>([]);
   const [open, setOpen] = useState(false);
 
-  const [audio] = useState(
-    new Audio(
-      "https://firebasestorage.googleapis.com/v0/b/ecommerce-image-store-1d566.appspot.com/o/notification%2Fiphone_14_notification.mp3?alt=media&token=1493ecaa-d27b-4881-9220-cfc41588a45b"
-    )
-  );
+  // const [audio] = useState(
+  //   new Audio(
+  //     "https://firebasestorage.googleapis.com/v0/b/ecommerce-image-store-1d566.appspot.com/o/notification%2Fiphone_14_notification.mp3?alt=media&token=1493ecaa-d27b-4881-9220-cfc41588a45b"
+  //   )
+  // );
 
-  const playerNotificationSound = () => {
-    audio.play();
-  };
+  // const playerNotificationSound = () => {
+  //   audio.play();
+  // };
 
   const handleNotificationStatus = async (id: string) => {
     await updateNotificationStatus(id);
@@ -44,14 +44,14 @@ const DashboardHeader = ({ instructorId }: Props) => {
     if (isSuccess) {
       refetch();
     }
-    audio.load();
+    // audio.load();
   }, [data, isSuccess]);
 
   useEffect(() => {
     socketId.on("newNotification", (data) => {
       if (data.instructorId === instructorId) {
         refetch();
-        playerNotificationSound();
+        // playerNotificationSound();
         toast.message(`${data.title} recieved`, {
           position: "bottom-right",
         });
@@ -59,7 +59,7 @@ const DashboardHeader = ({ instructorId }: Props) => {
     });
   }, []);
   return (
-    <div className="w-full flex items-center justify-end p-5 fixed top-0 right-0 bg-white shadow-sm">
+    <div className="w-full flex items-center justify-end p-5 fixed top-0 right-0 bg-white shadow-sm !z-[1]">
       <div
         className="relative cursor-pointer mr-8 "
         onClick={() => setOpen(!open)}

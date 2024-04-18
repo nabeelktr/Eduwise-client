@@ -1,6 +1,6 @@
 "use client"
 import DashboardHero from '../../../components/Admin/DashboardHero'
-import Sidebar from '../../../components/Admin/Sidebar/Sidebar'
+import Sidebar from '../../../components/Instructor/Sidebar/Sidebar'
 import Heading from '../../../utils/Heading'
 import React from 'react'
 import { useSelector } from 'react-redux'

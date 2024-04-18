@@ -97,7 +97,7 @@ const page = (props: Props) => {
     await deleteUser(id);
   };
   return (
-    <AdminProtected>
+    // <AdminProtected>
       <div className="min-h-screen bg-gray-200">
         <Heading
           title="Eduwise - Admin - Users"
@@ -126,7 +126,7 @@ const page = (props: Props) => {
           />
         )}
       </div>
-    </AdminProtected>
+    // {/* </AdminProtected> */}
   );
 };
 

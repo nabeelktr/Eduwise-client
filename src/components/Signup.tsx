@@ -51,6 +51,7 @@ const schema = Yup.object().shape({
 const SignUp: React.FC<Props> = ({ setRoute }) => {
   const [show, setshow] = useState(false);
   const [register, { data, error, isSuccess }] = useRegisterMutation();
+
   const promise = () => new Promise((resolve) => setTimeout(resolve, 2000));
   const dispatch = useDispatch();
 

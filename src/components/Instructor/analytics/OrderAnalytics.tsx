@@ -12,44 +12,16 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+import Link from "next/link";
 
 type Props = {
   isDashboard?: boolean;
 };
 
 const OrderAnalytics = ({ isDashboard }: Props) => {
-  const { data, isLoading } = useGetOrdersAnalyticsQuery({});
+  const { data, isLoading } = useGetOrdersAnalyticsQuery("admin", {});
 
-  const analyticsData = [
-    {
-      name: "Page A",
-      count: 4000,
-    },
-    {
-      name: "Page B",
-      count: 3000,
-    },
-    {
-      name: "Page C",
-      count: 2000,
-    },
-    {
-      name: "Page D",
-      count: 2780,
-    },
-    {
-      name: "Page E",
-      count: 1890,
-    },
-    {
-      name: "Page F",
-      count: 2390,
-    },
-    {
-      name: "Page G",
-      count: 3490,
-    },
-  ];
+  const analyticsData = data && [...data].reverse()
 
   return (
     <>
@@ -62,13 +34,14 @@ const OrderAnalytics = ({ isDashboard }: Props) => {
               isDashboard ? "mt-[50px] pl-[40px] mb-2" : "mt-[50px]"
             }`}
           >
-            <h1
+            <Link
+            href={"/instructor/order-analytics"}
               className={`${styles.title} ${
                 isDashboard && "text-sm  px-5 !text-start "
               }`}
             >
               Order Analytics
-            </h1>
+            </Link>
             {/* <p className={`${styles.label} px-5`}>
                     Last 12 month analytics data
                 </p> */}
@@ -81,6 +54,7 @@ const OrderAnalytics = ({ isDashboard }: Props) => {
             <ResponsiveContainer
               height={isDashboard ? "100%" : "50%"}
               width={isDashboard ? "100%" : "90%"}
+              className={"text-sm"}
             >
               <LineChart
                 width={500}
@@ -94,7 +68,7 @@ const OrderAnalytics = ({ isDashboard }: Props) => {
                 }}
               >
                 <CartesianGrid strokeDasharray={"3 3"} />
-                <XAxis dataKey={"name"} />
+                <XAxis dataKey={"month"} />
                 <YAxis />
                 <Tooltip />
                 {!isDashboard && <Legend />}

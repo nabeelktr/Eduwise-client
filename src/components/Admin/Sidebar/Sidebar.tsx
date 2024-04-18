@@ -18,7 +18,7 @@ type Props = {
 
 const Sidebar: React.FC<Props> = ({ active }) => {
   return (
-    <>
+    <div className="!z-[99]">
       <SidebarControl>
         <SidebarItem
           icon={<TvIcon className="w-6" />}
@@ -60,7 +60,7 @@ const Sidebar: React.FC<Props> = ({ active }) => {
           active={active === 5 ? true : false}
         />
       </SidebarControl>
-    </>
+    </div>
   );
 };
 

@@ -16,8 +16,8 @@ const DashboardWidgets = (props: Props) => {
           <UserAnalytics isDashboard={true} />
         </div>
         <div className="justify-center items-center flex ">
-          <div className="z-[99]">
-            <div className="bg-white relative flex-col flex border border-t-[#4d62d9] border-t-[3px] shadow-sm antialiased h-32 p-3 mt-5 w-[15rem] rounded-sm ">
+          <div className=" ">
+            <div className="bg-white relative  flex-col flex border border-t-[#4d62d9] border-t-[3px] shadow-sm antialiased h-32 p-3 mt-5 w-[15rem] rounded-sm ">
               <span className="font-bold text-2xl tracking-widest pb-2">3</span>
               <span className="font-semibold text-sm text-gray-500">Users</span>
               <UsersIcon className="absolute bottom-0 right-0 h-10 w-10 m-5 text-[#302d2e] " />

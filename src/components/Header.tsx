@@ -14,6 +14,8 @@ import { useSocialAuthMutation } from "../../redux/features/auth/authApi";
 import { toast } from "sonner";
 import { useLoadUserQuery } from "../../redux/features/api/apiSlice";
 import { useSelector } from "react-redux";
+import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import SearchInput from "./SearchInput";
 
 type Props = {
   open: boolean;
@@ -86,14 +88,19 @@ const Header: FC<Props> = ({ activeItem, setOpen, route, open, setRoute }) => {
       >
         <div className="m-auto 800px:py-2 h-full ">
           <div className="w-full h-[100px] flex items-center justify-between ">
-            <div>
+            <div className="flex">
               <Link
                 href="/"
-                className={`text-[70px] font-BebasNeue font-[900] text-black dark:text-white  `}
+                className={`text-[70px] font-BebasNeue font-[900] text-black dark:text-white  mr-6 `}
               >
                 <img src="/assets/eduwise.png" className=" h-8 800px:h-10" />
               </Link>
             </div>
+
+            <div className="!z-[10]">
+              {!open && <SearchInput />}
+            </div>
+
             <div className="flex items-center">
               <NavItems activeItem={activeItem} isMobile={false} user={user} />
 
