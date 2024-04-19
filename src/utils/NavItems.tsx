@@ -15,7 +15,7 @@ export const navItemsData = [
   },
   {
     name: "About +",
-    url: "/about",
+    url: "/",
   },
   {
     name: "Become a Instructor",
