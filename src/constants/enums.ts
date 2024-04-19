@@ -11,6 +11,7 @@ export enum EISidebar{
     editCourse = 2,
     uploadMedia = 3,
     dashboard = 4,
+    live = 5,
 }
 
 export enum ProfileSidebar {

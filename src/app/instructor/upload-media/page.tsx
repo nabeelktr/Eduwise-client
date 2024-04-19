@@ -9,7 +9,7 @@ import { styles } from "@/styles/style";
 import axios from "axios";
 import { EllipsisVerticalIcon } from "@heroicons/react/24/outline";
 import CopyModal from "@/components/Instructor/Upload/CopyModal";
-import CustomDeleteModal from "@/components/ui/CustomDeleteModal";
+import CustomDeleteModal from "../../../components/ui/CustomDeleteModal";
 
 type Props = {};
 
@@ -53,8 +53,8 @@ const UploadMedia = (props: Props) => {
           info.row.original.status !== "Uploaded" ? (
             <div className="relative inline-flex">
               <div className="w-3 h-3 bg-green-400 rounded-full"></div>
-              <div className="w-3 h-3 bg-green-400 rounded-full absolute   animate-ping"></div>
-              <div className="w-3 h-3 bg-green-400 rounded-full absolute   animate-pulse"></div>
+              <div className="w-3 h-3 bg-green-400 rounded-full absolute animate-ping"></div>
+              <div className="w-3 h-3 bg-green-400 rounded-full absolute animate-pulse"></div>
             </div>
           ) : null}
           <span>{info.row.original.status}</span>
@@ -165,6 +165,7 @@ const UploadMedia = (props: Props) => {
           setOpen={setDelteModal}
           open={deleteModal}
           handleFunction={handleDelete}
+          text="Do you want to delete this data?"
         />
       )}
     </div>

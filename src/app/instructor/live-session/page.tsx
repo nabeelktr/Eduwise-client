@@ -1,12 +1,30 @@
-import Room from '../../../components/LiveSession/Room/Room'
-import React from 'react'
+import Sidebar from "@/components/Admin/Sidebar/Sidebar";
+import Room from "../../../components/LiveStream/Room/Room";
+import React from "react";
+import Heading from "@/utils/Heading";
+import { EISidebar } from "@/constants/enums";
 
-type Props = {}
+type Props = {};
 
 const page = (props: Props) => {
   return (
-    <Room />
-  )
-}
+    <div>
+      {/* <InstructorProtected > */}
+      <Heading
+        title="Eduwise - Instructor"
+        description="Platform for students to learn and get help from teachers"
+        keywords="Programming, MERN, Redux"
+      />
+      <div className="z-[9999] mx-auto flex">
+        <Sidebar active={EISidebar.live} />
 
-export default page
+        <div className="w-full px-4">
+          <Room />
+        </div>
+      </div>
+      {/* </InstructorProtected> */}
+    </div>
+  );
+};
+
+export default page;

@@ -8,6 +8,7 @@ import {
   DocumentPlusIcon,
   HomeIcon,
   PresentationChartBarIcon,
+  SignalIcon,
   WrenchScrewdriverIcon,
 } from "@heroicons/react/24/outline";
 import { EISidebar } from "../../../constants/enums";
@@ -49,6 +50,13 @@ const Sidebar: React.FC<Props> = ({ active }) => {
           text={"Upload Media"}
           routerPath="/instructor/upload-media"
           active={active === EISidebar.uploadMedia ? true : false}
+        />
+
+        <SidebarItem
+          icon={<SignalIcon className="w-7" />}
+          text={"Go Live"}
+          routerPath="/instructor/live-session"
+          active={active === EISidebar.live ? true : false}
         />
         <SidebarItem
           icon={<HomeIcon className="w-6" />}

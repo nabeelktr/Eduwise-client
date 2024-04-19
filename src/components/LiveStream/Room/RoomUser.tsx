@@ -1,20 +1,25 @@
+"use client";
+import VideoPlayer from "@/utils/VideoPlayer";
 import React from "react";
+import UserStream from "../Stream/UserStream";
 
-type Props = {};
+type Props = {
+  streamId: string;
+};
 
-const Room = (props: Props) => {
+const RoomUser = ({ streamId }: Props) => {
   return (
-    <main className="mt-[80px] h-(calc(100vh - 74px)) w-full relative text-white">
+    <main className=" h-(calc(100vh - 74px)) relative w-full bg-gray-900 text-white">
       <div className="relative flex gap-12">
-        <section className="bg-gray-900 border-r border-gray-600 overflow-y-auto w-11/12 max-w-56 fixed h-full z-50">
-          <div className="flex justify-around items-center px-4 fixed text-base bg-gray-800 w-56">
+        <section className="fixed z-50 h-full w-11/12 max-w-56 overflow-y-auto border-r border-gray-600 bg-gray-900">
+          <div className="fixed flex w-56 items-center justify-around bg-gray-800 px-4 text-base">
             <p>Participants</p>
-            <strong className="bg-gray-800 py-2 px-4 text-sm font-semibold rounded">
+            <strong className="rounded bg-gray-800 px-4 py-2 text-sm font-semibold">
               27
             </strong>
           </div>
 
-          <div className="flex flex-col gap-4 pt-20 pb-26">
+          <div className="pb-26 flex flex-col gap-4 pt-20">
             <div className="flex items-center gap-4 pl-4">
               <span className="h-2 w-2 rounded-full bg-green-500"></span>
               <p className="text-sm">Sulammita</p>
@@ -26,8 +31,9 @@ const Room = (props: Props) => {
             </div>
           </div>
         </section>
-        <section className="  bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-xs bg-gray-900 border-l border-gray-700 sm:w-full sm:relative sm:h-auto sm:border-l-0 sm:border-t sm:border-gray-700 px-4 py-2 text-white">
-          <div className="flex justify-center gap-4 py-4 sm:py-0 ">
+
+        <section className=" bottom-0 left-1/2 flex !h-[54rem] !w-full max-w-[55%] -translate-x-1/2 transform items-center justify-center border-l border-gray-700 bg-gray-900 px-4 py-2 text-white sm:relative sm:h-auto sm:w-full sm:border-l-0 sm:border-t sm:border-gray-700 ">
+          {/* <div className="flex justify-center gap-4 py-4 sm:py-0 ">
             <button className="cursor-pointer bg-gray-800 text-white rounded-md px-3 py-2 flex items-center justify-center transition duration-300 hover:bg-purple-600 hover:text-white focus:outline-none focus:ring focus:ring-purple-600">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -68,42 +74,33 @@ const Room = (props: Props) => {
                 <path d="M16 10v-5l8 7-8 7v-5h-8v-4h8zm-16-8v20h14v-2h-12v-16h12v-2h-14z" />
               </svg>
             </button>
+          </div> */}
+
+          <div className="w-full">
+            <UserStream callerid={streamId} />
           </div>
         </section>
 
         <section
-          className="absolute text-sm top-0 right-0 h-[calc(100vh - 80px)] bg-gray-900 w-full max-w-xs overflow-y-auto border-l border-gray-700"
+          className="h-[calc(100vh - 80px)] absolute right-0 top-0 w-full max-w-xs overflow-y-auto border-l border-gray-700 bg-gray-900 text-sm"
           style={{ height: "calc(100vh - 80px)" }}
         >
           <div className="w-full   overflow-y-auto">
-            <div className="mb-[6.5rem]">
-              <div className="p-2 px-5 max-w-[900px] text-gray-400">
-                <strong className="mr-2 text-purple-600">🤖 Mumble Bot</strong>
-                <p className="message__text__bot">
-                  Welcome to the room, Don't be shy, say hello!
-                </p>
-              </div>
-            </div>
-
-            <div className="flex gap-4 m-4">
-              <div className="bg-gray-800 rounded-lg p-4 w-auto max-w-[900px] ">
-                <strong className="mr-2 text-green-500 font-[600]">
+            <div className="m-4 flex gap-4">
+              <div className="w-auto max-w-[900px] rounded-lg bg-gray-800 p-2 ">
+                <strong className="mr-2 font-[600] text-green-500">
                   Sulamita
                 </strong>
                 <p className="m-0"> Great stream!</p>
               </div>
             </div>
 
-            <div className="flex gap-4 m-4">
-              <div className="bg-gray-800 rounded-lg p-4 w-auto max-w-[900px] ">
-                <strong className="mr-2 text-green-500 font-[600]">
+            <div className="m-4 flex gap-4">
+              <div className="w-auto max-w-[900px] rounded-lg bg-gray-800 p-2 ">
+                <strong className="mr-2 font-[600] text-green-500">
                   Dennis Ivy
                 </strong>
-                <p className="m-0">
-                  {" "}
-                  Convert RGB color codes to HEX HTML format for use in web
-                  design and CSS.
-                </p>
+                <p className="m-0 text-xs"> abcd efg hijk</p>
               </div>
             </div>
           </div>
@@ -113,7 +110,7 @@ const Room = (props: Props) => {
               type="text"
               name="message"
               placeholder="Send a message...."
-              className="text-white bg-gray-800 border-none rounded-md px-16 py-3 text-sm "
+              className="rounded-md border-none bg-gray-800 px-16 py-3 text-sm text-white "
             />
           </form>
         </section>
@@ -122,4 +119,4 @@ const Room = (props: Props) => {
   );
 };
 
-export default Room;
+export default RoomUser;

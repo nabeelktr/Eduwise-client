@@ -14,7 +14,6 @@ import { useSocialAuthMutation } from "../../redux/features/auth/authApi";
 import { toast } from "sonner";
 import { useLoadUserQuery } from "../../redux/features/api/apiSlice";
 import { useSelector } from "react-redux";
-import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import SearchInput from "./SearchInput";
 
 type Props = {
@@ -34,6 +33,7 @@ const Header: FC<Props> = ({ activeItem, setOpen, route, open, setRoute }) => {
     refetch,
   } = useLoadUserQuery(undefined, {});
   const { user: reduxUser } = useSelector((state: any) => state.auth);
+
   const [user, setUser] = useState<any>();
   const { data } = useSession();
   const [socialAuth, { isSuccess, error }] = useSocialAuthMutation();
@@ -76,6 +76,8 @@ const Header: FC<Props> = ({ activeItem, setOpen, route, open, setRoute }) => {
       refetch();
     }
   };
+
+
 
   return (
     <div className="w-full relative shadow-sm px-[12%] z-[9999] ">
