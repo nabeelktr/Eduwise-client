@@ -33,8 +33,8 @@ const page = (props: Props) => {
     if (search) {
       setCourses(
         data?.filter((item: any) =>
-          item.name.toLowerCase().includes(search.toLowerCase())
-        )
+          item.name.toLowerCase().includes(search.toLowerCase()),
+        ),
       );
     }
   }, [data, category, search]);

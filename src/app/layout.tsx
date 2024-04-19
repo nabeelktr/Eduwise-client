@@ -50,7 +50,7 @@ export default function RootLayout({
 
 const SocketProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
   useEffect(() => {
-    socketId.on("connection", () => {})
-  }, [])
+    socketId.on("connection", () => {});
+  }, []);
   return <>{children}</>;
 };

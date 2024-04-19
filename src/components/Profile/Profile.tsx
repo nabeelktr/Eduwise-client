@@ -5,6 +5,7 @@ import ChangePassword from "./ChangePassword";
 import { useLogOutMutation } from "../../../redux/features/auth/authApi";
 import { signOut, useSession } from "next-auth/react";
 import { ProfileSidebar } from "@/constants/enums";
+import EnrolledCourses from "./EnrolledCourses"
 
 type Props = {
   user: any;
@@ -54,6 +55,11 @@ const Profile: FC<Props> = ({ user }) => {
       {active === ProfileSidebar.changePassword && (
         <div className="w-full h-full bg-transparent mt-[80px] px-8">
           <ChangePassword />
+        </div>
+      )}
+      {active === ProfileSidebar.enrolledCourses && (
+        <div className="w-full h-full bg-transparent mt-[80px] px-8">
+          <EnrolledCourses />
         </div>
       )}
     </div>

@@ -97,9 +97,7 @@ const Header: FC<Props> = ({ activeItem, setOpen, route, open, setRoute }) => {
               </Link>
             </div>
 
-            <div className="!z-[10]">
-              {!open && <SearchInput />}
-            </div>
+            <div className="!z-[10]">{!open && <SearchInput />}</div>
 
             <div className="flex items-center">
               <NavItems activeItem={activeItem} isMobile={false} user={user} />

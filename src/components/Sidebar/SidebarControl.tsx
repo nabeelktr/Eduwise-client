@@ -18,13 +18,17 @@ interface SidebarProps {
 
 const SidebarControl: React.FC<SidebarProps> = ({ children }) => {
   const [expanded, setExpanded] = useState(false);
-  const router = useRouter()
-  const {user} = useSelector((state: any) => state.auth)
-
+  const router = useRouter();
+  const { user } = useSelector((state: any) => state.auth);
 
   return (
-    <aside className={`h-screen bg-[#1e1f20] fixed left-0 top-0 font-Poppins !z-99999 ${expanded ? "min-w-[16.6%]" : "min-w-[3.70%]"}`}>
-      <nav className="h-full flex flex-col  border-r border-gray-800 shadow-sm " onClick={() => setExpanded(!expanded)}>
+    <aside
+      className={`h-screen bg-[#1e1f20] fixed left-0 top-0 font-Poppins !z-[99999] ${expanded ? "min-w-[16.6%]" : "min-w-[3.70%]"}`}
+    >
+      <nav
+        className="h-full flex flex-col  border-r border-gray-800 shadow-sm "
+        onClick={() => setExpanded(!expanded)}
+      >
         <div className="p-4 pb-2 flex justify-between items-center mb-8 mt-6 ">
           <div className="flex">
             <HiAcademicCap
@@ -48,9 +52,16 @@ const SidebarControl: React.FC<SidebarProps> = ({ children }) => {
           <ul className="flex-1 px-1">{children}</ul>
         </SidebarContext.Provider>
 
-        <div className="border-t flex p-3 cursor-pointer" onClick={() => router.push("/profile")}>
+        <div
+          className="border-t flex p-3 cursor-pointer"
+          onClick={() => router.push("/profile")}
+        >
           <img
-            src={user.avatar ? user.avatar : "https://ui-avatars.com/api/?background=c7d2fe&color=3730a3&bold=true"}
+            src={
+              user.avatar
+                ? user.avatar
+                : "https://ui-avatars.com/api/?background=c7d2fe&color=3730a3&bold=true"
+            }
             alt=""
             className="w-10 h-10 rounded-md"
           />
@@ -61,7 +72,9 @@ const SidebarControl: React.FC<SidebarProps> = ({ children }) => {
           `}
           >
             <div className="leading-4">
-              <h4 className="font-semibold text-white text-[14px]">{user.name}</h4>
+              <h4 className="font-semibold text-white text-[14px]">
+                {user.name}
+              </h4>
               <span className="text-xs text-gray-600">{user.email}</span>
             </div>
             <MoreVertical size={20} />
@@ -72,4 +85,4 @@ const SidebarControl: React.FC<SidebarProps> = ({ children }) => {
   );
 };
 
-export default SidebarControl
+export default SidebarControl;
