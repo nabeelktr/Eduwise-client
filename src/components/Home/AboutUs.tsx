@@ -15,12 +15,12 @@ const AboutUs: React.FC<Props> = () => {
           </span>
 
           <span className="relative flex">
-            <span className="absolute bottom-0 right-1 z-[1] h-1 w-12 bg-[#FDC021] 800px:h-3 800px:w-28"></span>
+            <span className="absolute bottom-0 right-0 z-[1] h-1 w-12 bg-[#FDC021] 800px:h-3 800px:w-[7.5rem]"></span>
             <span className="z-[2] text-center text-xl md:text-6xl lg:text-7xl xl:text-6xl ">
               Fake or Real
             </span>
           </span>
-          <span className="mb-3 hidden text-sm 800px:block 800px:w-[24%]">
+          <span className="mb-3 hidden text-sm 800px:block 800px:w-[24%] mt-6">
             Lorem Ipsum has been the industry's standard dummy text ever since
             the 1500s, when an unknown printer took a galley of type and
             scrambled it to make a type specimen book. Versions of the Lorem

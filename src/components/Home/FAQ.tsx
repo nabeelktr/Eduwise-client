@@ -47,10 +47,10 @@ const FAQ: React.FC = () => {
             Frequently Asked Questions
           </h1>
 
-          <ul className="flex flex-col">
+          <ul className="flex flex-col gap-4">
             {data &&
               data.map((item: any, index: number) => (
-                <AccordionItem title={item.question} content={item.answer} />
+                <AccordionItem title={item.question} content={item.answer} key={index} />
               ))}
           </ul>
         </div>

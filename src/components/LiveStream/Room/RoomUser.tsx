@@ -2,6 +2,7 @@
 import VideoPlayer from "@/utils/VideoPlayer";
 import React from "react";
 import UserStream from "../Stream/UserStream";
+import Chat from "../Chat/Chat";
 
 type Props = {
   streamId: string;
@@ -39,39 +40,7 @@ const RoomUser = ({ streamId }: Props) => {
           </div>
         </section>
 
-        <section
-          className="h-[calc(100vh - 80px)] absolute right-0 top-0 w-full max-w-xs overflow-y-auto border-l border-gray-700 bg-gray-900 text-sm"
-          style={{ height: "calc(100vh - 80px)" }}
-        >
-          <div className="w-full   overflow-y-auto">
-            <div className="m-4 flex gap-4">
-              <div className="w-auto max-w-[900px] rounded-lg bg-gray-800 p-2 ">
-                <strong className="mr-2 font-[600] text-green-500">
-                  Sulamita
-                </strong>
-                <p className="m-0"> Great stream!</p>
-              </div>
-            </div>
-
-            <div className="m-4 flex gap-4">
-              <div className="w-auto max-w-[900px] rounded-lg bg-gray-800 p-2 ">
-                <strong className="mr-2 font-[600] text-green-500">
-                  Dennis Ivy
-                </strong>
-                <p className="m-0 text-xs"> abcd efg hijk</p>
-              </div>
-            </div>
-          </div>
-
-          <form className="fixed bottom-0 w-full bg-gray-900 p-4">
-            <input
-              type="text"
-              name="message"
-              placeholder="Send a message...."
-              className="rounded-md border-none bg-gray-800 px-16 py-3 text-sm text-white "
-            />
-          </form>
-        </section>
+       <Chat callId={streamId} isUser={true}/>
       </div>
     </main>
   );

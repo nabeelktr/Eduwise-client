@@ -1,4 +1,4 @@
-import Sidebar from "@/components/Admin/Sidebar/Sidebar";
+import Sidebar from "@/components/Instructor/Sidebar/Sidebar";
 import Room from "../../../components/LiveStream/Room/Room";
 import React from "react";
 import Heading from "@/utils/Heading";
