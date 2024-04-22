@@ -1,4 +1,4 @@
-import { styles } from "@/styles/style";
+import { styles } from "../../../styles/style";
 import { Link2Icon, PencilIcon, PlusCircle } from "lucide-react";
 import React, { useState } from "react";
 import { AiOutlineDelete, AiOutlinePlusCircle } from "react-icons/ai";

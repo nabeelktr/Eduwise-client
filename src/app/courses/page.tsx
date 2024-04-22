@@ -3,7 +3,6 @@ import { useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import {
   useGetAllCoursesQuery,
-  useGetCoursesQuery,
 } from "../../../redux/features/courses/coursesApi";
 import Loader from "../../components/ui/Loader/Loader";
 import Header from "../../components/Header";
@@ -14,7 +13,7 @@ import CategoryCarousel from "../../components/ui/Carousel/CategoryCarousel";
 
 type Props = {};
 
-const page = (props: Props) => {
+const Page = (props: Props) => {
   const searchParams = useSearchParams();
   const search = searchParams?.get("title");
   const { data, isLoading } = useGetAllCoursesQuery(undefined, {});
@@ -86,4 +85,4 @@ const page = (props: Props) => {
   );
 };
 
-export default page;
+export default Page;

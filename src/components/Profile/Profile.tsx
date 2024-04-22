@@ -4,7 +4,7 @@ import ProfileInfo from "./ProfileInfo";
 import ChangePassword from "./ChangePassword";
 import { useLogOutMutation } from "../../../redux/features/auth/authApi";
 import { signOut, useSession } from "next-auth/react";
-import { ProfileSidebar } from "@/constants/enums";
+import { ProfileSidebar } from "../../constants/enums";
 import EnrolledCourses from "./EnrolledCourses"
 
 type Props = {

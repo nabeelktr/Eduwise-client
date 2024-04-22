@@ -9,8 +9,8 @@ import {
   type User,
 } from "@stream-io/video-react-sdk";
 import "@stream-io/video-react-sdk/dist/css/styles.css";
-import { styles } from "@/styles/style";
-import { socketId } from "@/utils/socket";
+import { styles } from "../../../styles/style";
+import { socketId } from "../../../utils/socket";
 import { useSelector } from "react-redux";
 
 const user: User = {

@@ -1,7 +1,6 @@
 "use client";
 import { Badge } from "../Badge";
 import React from "react";
-import { useSelector } from "react-redux";
 
 type Props = {};
 
@@ -21,7 +20,7 @@ const AboutUs: React.FC<Props> = () => {
             </span>
           </span>
           <span className="mb-3 hidden text-sm 800px:block 800px:w-[24%] mt-6">
-            Lorem Ipsum has been the industry's standard dummy text ever since
+            Lorem Ipsum has been the industry&apos;s standard dummy text ever since
             the 1500s, when an unknown printer took a galley of type and
             scrambled it to make a type specimen book. Versions of the Lorem
             ipsum text have been used in typesetting at least since the 1960s,

@@ -1,5 +1,5 @@
 import React from "react";
-import { useGetAllCoursesQuery, useGetUserCoursesQuery } from "../../../redux/features/courses/coursesApi";
+import { useGetUserCoursesQuery } from "../../../redux/features/courses/coursesApi";
 import { CourseCard } from "../ui/Carousel/Carousel";
 
 type Props = {};

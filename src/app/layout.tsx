@@ -7,7 +7,7 @@ import { Toaster } from "sonner";
 import { Providers } from "./Provider";
 import { SessionProvider } from "next-auth/react";
 import { FC, useEffect } from "react";
-import { socketId } from "@/utils/socket";
+import { socketId } from "../utils/socket";
 
 const poppins = Poppins({
   subsets: ["latin"],

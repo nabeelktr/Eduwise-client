@@ -1,5 +1,5 @@
 "use client";
-import DashboardWidgets from "@/components/Instructor/Widgets/DashboardWidgets";
+import DashboardWidgets from "../../components/Instructor/Widgets/DashboardWidgets";
 import DashboardHero from "../../components/Admin/DashboardHero";
 import Sidebar from "../../components/Instructor/Sidebar/Sidebar";
 import { EISidebar } from "../../constants/enums";
@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 
 type Props = {};
 
-const page = (props: Props) => {
+const Page = (props: Props) => {
   const { user } = useSelector((state: any) => state.auth);
   return (
     <div className="min-h-screen bg-[#F5F5F5]">
@@ -39,4 +39,4 @@ const page = (props: Props) => {
   );
 };
 
-export default page;
+export default Page;

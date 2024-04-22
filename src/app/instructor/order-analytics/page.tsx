@@ -8,7 +8,7 @@ import OrderAnalytics from "../../../components/Instructor/analytics/OrderAnalyt
 
 type Props = {}
 
-const page = (props: Props) => {
+const Page = (props: Props) => {
     const {user} = useSelector((state:any) => state.auth)
   return (
     <div className="min-h-screen bg-[#F5F5F5]">
@@ -33,4 +33,4 @@ const page = (props: Props) => {
   )
 }
 
-export default page
+export default Page

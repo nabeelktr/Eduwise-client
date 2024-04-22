@@ -1,5 +1,5 @@
 import { styles } from "@/styles/style";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import {
   useUpdateAvatarMutation,
   useUpdatePasswordMutation,

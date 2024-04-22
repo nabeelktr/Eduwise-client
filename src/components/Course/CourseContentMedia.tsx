@@ -10,7 +10,6 @@ import {
 } from "react-icons/ai";
 import { toast } from "sonner";
 import {
-  coursesApi,
   useAddAnswerInQuestionMutation,
   useAddNewQuestionMutation,
   useAddReviewMutation,
@@ -250,7 +249,7 @@ const CourseContentMedia = ({
         {activeBar === 1 && (
           <div>
             {data[activeVideo]?.links.map((item: any, index: number) => (
-              <div className="mb-5">
+              <div className="mb-5" key={index}>
                 <h2 className="800px:text-sm 800px:inline-block ">
                   {item.title && item.title + " : "}
                 </h2>{" "}

@@ -1,7 +1,7 @@
 import React from "react";
 import { useGetCourseAnalyticsQuery } from "../../../../redux/features/analytics/analyticsApi";
-import Loader from "@/components/ui/Loader/Loader";
-import { styles } from "@/styles/style";
+import Loader from "../../../components/ui/Loader/Loader";
+import { styles } from "../../../styles/style";
 import {
   Bar,
   BarChart,

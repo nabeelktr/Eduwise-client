@@ -1,6 +1,6 @@
 "use client";
-import React, { useContext } from "react";
-import SidebarControl, { SidebarContext } from "../../Sidebar/SidebarControl";
+import React from "react";
+import SidebarControl from "../../Sidebar/SidebarControl";
 import { SidebarItem } from "../../Sidebar/SidebarItems";
 import {
   AcademicCapIcon,
@@ -10,7 +10,6 @@ import {
   TvIcon,
   UserGroupIcon,
 } from "@heroicons/react/24/outline";
-import { EISidebar } from "../../../constants/enums";
 
 type Props = {
   active: number;

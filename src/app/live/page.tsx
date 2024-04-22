@@ -2,12 +2,12 @@
 import { useSearchParams } from "next/navigation";
 import RoomUser from "../../components/LiveStream/Room/RoomUser";
 import React, { useState } from "react";
-import Heading from "@/utils/Heading";
-import Header from "@/components/Header";
+import Heading from "../../utils/Heading";
+import Header from "../../components/Header";
 
 type Props = {};
 
-const page = (props: Props) => {
+const Page = (props: Props) => {
   const searchParams = useSearchParams();
   const [route, setRoute] = useState("Login");
   const [open, setOpen] = useState(false);
@@ -29,4 +29,4 @@ const page = (props: Props) => {
   );
 };
 
-export default page;
+export default Page;

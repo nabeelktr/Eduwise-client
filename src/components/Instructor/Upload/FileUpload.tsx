@@ -2,7 +2,7 @@
 import React, { useRef, useState } from "react";
 import axios, { AxiosResponse } from "axios";
 import { RiVideoAddFill } from "react-icons/ri";
-import { styles } from "@/styles/style";
+import { styles } from "../../../styles/style";
 import { Check } from "lucide-react";
 import { toast } from "sonner";
 
@@ -32,7 +32,7 @@ const FileUpload: React.FC<Props> = ({ fetchData }) => {
 
       if (file.size > MAX_FILE_SIZE_MB * 1024 * 1024) {
         toast.warning(
-          `Selected file exceeds the maximum size limit of ${MAX_FILE_SIZE_MB}MB.`
+          `Selected file exceeds the maximum size limit of ${MAX_FILE_SIZE_MB}MB.`,
         );
         return;
       }
@@ -42,9 +42,11 @@ const FileUpload: React.FC<Props> = ({ fetchData }) => {
       video.onloadedmetadata = () => {
         if (video.duration > MAX_VIDEO_LENGTH_MINUTES * 60) {
           toast.warning(
-            `Selected video exceeds the maximum duration limit of ${MAX_VIDEO_LENGTH_MINUTES} minutes.`
+            `Selected video exceeds the maximum duration limit of ${MAX_VIDEO_LENGTH_MINUTES} minutes.`,
           );
-        } else{return}
+        } else {
+          return;
+        }
       };
       setSelectedFile(event.target.files && event.target.files[0]);
     }
@@ -79,12 +81,12 @@ const FileUpload: React.FC<Props> = ({ fetchData }) => {
         {
           onUploadProgress: (progressEvent: any) => {
             const percentCompleted = Math.round(
-              (progressEvent.loaded * 100) / progressEvent.total
+              (progressEvent.loaded * 100) / progressEvent.total,
             );
             setProgress(percentCompleted);
           },
           withCredentials: true,
-        }
+        },
       );
       fetchData();
       setUploadStatus("done");
@@ -146,9 +148,7 @@ const FileUpload: React.FC<Props> = ({ fetchData }) => {
             </svg>
             <span className="text-sm font-medium text-gray-600 ">
               Drop files to Attach, or
-              <span className="text-blue-600 underline">
-                &nbsp; browse 
-              </span>
+              <span className="text-blue-600 underline">&nbsp; browse</span>
               &nbsp;( MP4 format, up to 500MB, max 30 minutes )
             </span>
           </span>
@@ -157,18 +157,18 @@ const FileUpload: React.FC<Props> = ({ fetchData }) => {
 
       {selectedFile && (
         <>
-          <div className=" border border-gray-300 rounded-md p-4 items-center relative flex">
+          <div className=" relative flex items-center rounded-md border border-gray-300 p-4">
             <span className="material-symbols-outlined icon text-gray-900">
               <RiVideoAddFill size={30} />
             </span>
 
-            <div className="ml-4 flex-1 800px:px-5 mr-10 overflow-auto">
+            <div className="ml-4 mr-10 flex-1 overflow-auto 800px:px-5">
               <div>
                 <h6 className="text-sm font-medium">{selectedFile?.name}</h6>
 
-                <div className="progress-bg w-full h-1 bg-gray-200 rounded-lg mt-2">
+                <div className="progress-bg mt-2 h-1 w-full rounded-lg bg-gray-200">
                   <div
-                    className="progress h-full bg-gray-600 rounded-lg"
+                    className="progress h-full rounded-lg bg-gray-600"
                     style={{ width: `${progress}%` }}
                   />
                 </div>
@@ -177,12 +177,12 @@ const FileUpload: React.FC<Props> = ({ fetchData }) => {
 
             {uploadStatus === "select" ? (
               <button
-                className="absolute m-2 bg-gray-100 border border-gray-300 rounded-full p-2 right-1 hover:bg-gray-400"
+                className="absolute right-1 m-2 rounded-full border border-gray-300 bg-gray-100 p-2 hover:bg-gray-400"
                 onClick={clearFileInput}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="w-4 h-4"
+                  className="h-4 w-4"
                   viewBox="0 0 20 20"
                   fill="currentColor"
                 >
@@ -194,11 +194,11 @@ const FileUpload: React.FC<Props> = ({ fetchData }) => {
                 </svg>
               </button>
             ) : (
-              <div className="check-circle w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full  text-xs">
+              <div className="check-circle flex h-10 w-10 items-center justify-center rounded-full bg-gray-100  text-xs">
                 {uploadStatus === "uploading" ? (
                   `${progress}%`
                 ) : uploadStatus === "done" ? (
-                  <span className="material-symbols-outlined text-gray-100 text-lg">
+                  <span className="material-symbols-outlined text-lg text-gray-100">
                     <Check />
                   </span>
                 ) : null}
@@ -207,7 +207,7 @@ const FileUpload: React.FC<Props> = ({ fetchData }) => {
           </div>
 
           <button
-            className={`${styles.button}  !py-2 !px-2  my-2 !w-28 text-xs text-white !font-[100] float-end !min-h-[30px]`}
+            className={`${styles.button}  float-end my-2  !min-h-[30px] !w-28 !px-2 !py-2 text-xs !font-[100] text-white`}
             onClick={handleUpload}
           >
             {uploadStatus === "select" || uploadStatus === "uploading"

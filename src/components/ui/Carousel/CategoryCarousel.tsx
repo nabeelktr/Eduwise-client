@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { useGetCategoriesQuery } from "../../../../redux/features/admin/adminApi";
-import { ArrowLeftCircleIcon, ArrowRightCircleIcon } from "lucide-react";
 import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
 
 type Props = {

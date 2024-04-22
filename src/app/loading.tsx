@@ -5,7 +5,7 @@ import React, { useState } from "react";
 
 type Props = {};
 
-const loader = (props: Props) => {
+const Loading = (props: Props) => {
   const [open, setOpen] = useState(false);
   const [activeItem, setActiveItem] = useState(0);
   const [route, setRoute] = useState("Login");
@@ -25,4 +25,4 @@ const loader = (props: Props) => {
   );
 };
 
-export default loader;
+export default Loading;

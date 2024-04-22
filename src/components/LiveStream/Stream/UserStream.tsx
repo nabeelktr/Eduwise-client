@@ -1,15 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {
   LivestreamLayout,
   StreamCall,
   StreamVideo,
   StreamVideoClient,
-  useCall,
-  useCallStateHooks,
   type User,
 } from "@stream-io/video-react-sdk";
 import "@stream-io/video-react-sdk/dist/css/styles.css";
-import { socketId } from "@/utils/socket";
 
 const user: User = {
   id: "Jerec",

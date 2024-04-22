@@ -1,5 +1,5 @@
 import React from "react";
-import { styles } from "@/styles/style";
+import { styles } from "../../../styles/style";
 import Ratings from "../../../utils/Ratings";
 import { IoMdCheckmark } from "react-icons/io";
 import VideoPlayer from "../../../utils/VideoPlayer";

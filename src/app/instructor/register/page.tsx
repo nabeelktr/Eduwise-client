@@ -13,7 +13,7 @@ import { toast } from "sonner";
 import { useInstructorRegisterMutation } from "../../../../redux/features/instructor/instructoraApi";
 import { useRouter } from "next/navigation";
 import Protected from "../../../hooks/useProtected";
-import SubLoader from "@/components/ui/Loader/SubLoader";
+import SubLoader from "../../../components/ui/Loader/SubLoader";
 
 const name = Yup.string()
   .max(30)
@@ -25,7 +25,7 @@ const name = Yup.string()
         return !value.match(/^\s/);
       }
       return true;
-    }
+    },
   )
   .required("Please enter your name");
 
@@ -61,7 +61,8 @@ const InstructorRegister: React.FC<Props> = (props) => {
   const [open, setOpen] = useState(false);
   const [activeItem, setActiveItem] = useState(3);
   const [route, setRoute] = useState("Login");
-  const [register, { isSuccess, error, isLoading }] = useInstructorRegisterMutation();
+  const [register, { isSuccess, error, isLoading }] =
+    useInstructorRegisterMutation();
 
   useEffect(() => {
     if (isSuccess) {
@@ -118,7 +119,7 @@ const InstructorRegister: React.FC<Props> = (props) => {
       if (acceptedFiles?.length) {
         setFiles((previousFiles) => [
           ...acceptedFiles.map((file) =>
-            Object.assign(file, { preview: URL.createObjectURL(file) })
+            Object.assign(file, { preview: URL.createObjectURL(file) }),
           ),
         ]);
         setRejected([]);
@@ -127,7 +128,7 @@ const InstructorRegister: React.FC<Props> = (props) => {
         setRejected(rejectedFiles);
       }
     },
-    []
+    [],
   );
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -156,8 +157,8 @@ const InstructorRegister: React.FC<Props> = (props) => {
           route={route}
         />
 
-        <section className="bg-white dark:bg-gray-900 font-Poppins">
-          <div className="flex justify-center min-h-screen">
+        <section className="bg-white font-Poppins dark:bg-gray-900">
+          <div className="flex min-h-screen justify-center">
             <div
               className="hidden bg-cover lg:block lg:w-2/5"
               style={{
@@ -166,9 +167,9 @@ const InstructorRegister: React.FC<Props> = (props) => {
               }}
             ></div>
 
-            <div className="flex items-center w-full max-w-3xl p-8 mx-auto lg:px-12 lg:w-3/5">
+            <div className="mx-auto flex w-full max-w-3xl items-center p-8 lg:w-3/5 lg:px-12">
               <div className="w-full">
-                <h1 className="text-2xl font-semibold tracking-wider text-gray-800 dark:text-white font-Poppins uppercase">
+                <h1 className="font-Poppins text-2xl font-semibold uppercase tracking-wider text-gray-800 dark:text-white">
                   Become a Instructor
                 </h1>
 
@@ -177,10 +178,10 @@ const InstructorRegister: React.FC<Props> = (props) => {
                   className="something"
                 />
                 <form className="mt-10" onSubmit={handleSubmit}>
-                  <h1 className="text-[18px] mb-2 text-gray-900  uppercase">
+                  <h1 className="mb-2 text-[18px] uppercase  text-gray-900">
                     Education Details:
                   </h1>
-                  <div className="mb-3 grid-cols-2 grid gap-2 ml-4">
+                  <div className="mb-3 ml-4 grid grid-cols-2 gap-2">
                     <div>
                       <label className={`${styles.label} text-sm uppercase`}>
                         Latest Degree
@@ -194,10 +195,10 @@ const InstructorRegister: React.FC<Props> = (props) => {
                         placeholder="Degree"
                         className={`${
                           errors.degree && touched.degree && "border-red-500"
-                        } ${styles.input} text-sm mt-0`}
+                        } ${styles.input} mt-0 text-sm`}
                       />
                       {errors.degree && touched.degree && (
-                        <span className="text-red-500 pt-1 block text-sm">
+                        <span className="block pt-1 text-sm text-red-500">
                           {errors.degree}
                         </span>
                       )}
@@ -216,17 +217,17 @@ const InstructorRegister: React.FC<Props> = (props) => {
                           errors.institution &&
                           touched.institution &&
                           "border-red-500"
-                        } ${styles.input} text-sm mt-0`}
+                        } ${styles.input} mt-0 text-sm`}
                       />
                       {errors.institution && touched.institution && (
-                        <span className="text-red-500 pt-1 block text-sm">
+                        <span className="block pt-1 text-sm text-red-500">
                           {errors.institution}
                         </span>
                       )}
                     </div>
                   </div>
 
-                  <div className="mb-3 mt-6 grid-cols-2 grid gap-2  ml-4">
+                  <div className="mb-3 ml-4 mt-6 grid grid-cols-2  gap-2">
                     <div>
                       <label className={`${styles.label} text-sm uppercase`}>
                         Major / Subject
@@ -237,9 +238,7 @@ const InstructorRegister: React.FC<Props> = (props) => {
                         onChange={handleChange}
                         className={`${
                           errors.subject && touched.subject && "border-red-500"
-                        } ${
-                          styles.input
-                        } text-sm mt-0 cursor-pointer`}
+                        } ${styles.input} mt-0 cursor-pointer text-sm`}
                       >
                         <option value="">Select a Subject</option>
                         {subjects.map((subject) => (
@@ -249,7 +248,7 @@ const InstructorRegister: React.FC<Props> = (props) => {
                         ))}
                       </select>
                       {errors.subject && touched.subject && (
-                        <span className="text-red-500 pt-1 block text-sm">
+                        <span className="block pt-1 text-sm text-red-500">
                           {errors.subject}
                         </span>
                       )}
@@ -266,7 +265,7 @@ const InstructorRegister: React.FC<Props> = (props) => {
                           errors.yearOfCompletion &&
                           touched.yearOfCompletion &&
                           "border-red-500"
-                        } ${styles.input} text-sm mt-0 cursor-pointer`}
+                        } ${styles.input} mt-0 cursor-pointer text-sm`}
                       >
                         <option value="">Select Year</option>
                         {years.map((year) => (
@@ -276,17 +275,17 @@ const InstructorRegister: React.FC<Props> = (props) => {
                         ))}
                       </select>
                       {errors.yearOfCompletion && touched.yearOfCompletion && (
-                        <span className="text-red-500 pt-1 block text-sm">
+                        <span className="block pt-1 text-sm text-red-500">
                           {errors.yearOfCompletion}
                         </span>
                       )}
                     </div>
                   </div>
-                  <h1 className="text-[18px]  mt-6 mb-2 text-gray-900 uppercase pt-3">
+                  <h1 className="mb-2  mt-6 pt-3 text-[18px] uppercase text-gray-900">
                     Certificate Details:
                   </h1>
 
-                  <div className="mb-3 grid-cols-2 grid gap-2 ml-4">
+                  <div className="mb-3 ml-4 grid grid-cols-2 gap-2">
                     <div>
                       <label className={`${styles.label} text-sm uppercase`}>
                         Certificate Name
@@ -301,10 +300,10 @@ const InstructorRegister: React.FC<Props> = (props) => {
                           errors.certificateName &&
                           touched.certificateName &&
                           "border-red-500"
-                        } ${styles.input} text-sm mt-0`}
+                        } ${styles.input} mt-0 text-sm`}
                       />
                       {errors.certificateName && touched.certificateName && (
-                        <span className="text-red-500 pt-1 block text-sm">
+                        <span className="block pt-1 text-sm text-red-500">
                           {errors.certificateName}
                         </span>
                       )}
@@ -323,10 +322,10 @@ const InstructorRegister: React.FC<Props> = (props) => {
                           errors.authority &&
                           touched.authority &&
                           "border-red-500"
-                        } ${styles.input} text-sm mt-0`}
+                        } ${styles.input} mt-0 text-sm`}
                       />
                       {errors.authority && touched.authority && (
-                        <span className="text-red-500 pt-1 block text-sm">
+                        <span className="block pt-1 text-sm text-red-500">
                           {errors.authority}
                         </span>
                       )}
@@ -344,10 +343,10 @@ const InstructorRegister: React.FC<Props> = (props) => {
                       onChange={handleChange}
                       className={`${
                         errors.date && touched.date && "border-red-500"
-                      } ${styles.input} text-sm mt-0`}
+                      } ${styles.input} mt-0 text-sm`}
                     />
                     {errors.date && touched.date && (
-                      <span className="text-red-500 pt-1 block text-sm">
+                      <span className="block pt-1 text-sm text-red-500">
                         {errors.date}
                       </span>
                     )}
@@ -361,7 +360,7 @@ const InstructorRegister: React.FC<Props> = (props) => {
                     {...getRootProps({
                       className: "drop",
                     })}
-                    className="mt-6 cursor-pointer border-gray-400 border p-4 border-dashed ml-4"
+                    className="ml-4 mt-6 cursor-pointer border border-dashed border-gray-400 p-4"
                   >
                     <input {...getInputProps({ name: "file" })} required />
                     <div className="flex flex-col items-center justify-center gap-4 text-sm">
@@ -378,7 +377,7 @@ const InstructorRegister: React.FC<Props> = (props) => {
                   </div>
                 </form>
                 {files[0] && (
-                  <div className="mt-2 flex justify-between items-center ml-4 text-sm border-2 p-1">
+                  <div className="ml-4 mt-2 flex items-center justify-between border-2 p-1 text-sm">
                     <span>{files[0].name}</span>
                     <RiCloseCircleFill
                       onClick={removeAll}
@@ -389,7 +388,7 @@ const InstructorRegister: React.FC<Props> = (props) => {
                 {rejected.map(({ file, errors }) => (
                   <li
                     key={file.name}
-                    className="flex items-start justify-between ml-4"
+                    className="ml-4 flex items-start justify-between"
                   >
                     <ul className="text-[12px] text-red-400">
                       {errors.map((error) => (
@@ -400,17 +399,17 @@ const InstructorRegister: React.FC<Props> = (props) => {
                 ))}
                 <div className="ml-4 mt-8">
                   <button
-                    className={`${styles.button} min-h-[2.7rem]  bg-gray-900 text-white tracking-wider !font-thin dark:bg-gray-800 `}
+                    className={`${styles.button} min-h-[2.7rem]  bg-gray-900 !font-thin tracking-wider text-white dark:bg-gray-800 `}
                     onClick={() => formRef.current?.click()}
                   >
-                   { 
-                   isLoading ?
-                   <span > <SubLoader /></span>
-                   :
-                   <>
-                   Submit{" "}
-                   </>
-                   }
+                    {isLoading ? (
+                      <span>
+                        {" "}
+                        <SubLoader />
+                      </span>
+                    ) : (
+                      <>Submit </>
+                    )}
                   </button>
                 </div>
               </div>

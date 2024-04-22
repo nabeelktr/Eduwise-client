@@ -1,18 +1,17 @@
 "use client";
 import BasicTable from "../../../utils/BasicTable";
 import Sidebar from "../../../components/Instructor/Sidebar/Sidebar";
-import InstructorProtected from "../../../hooks/instructorProtected";
 import Heading from "../../../utils/Heading";
 import React, { useEffect, useState } from "react";
-import { PencilIcon, Router, Trash2 } from "lucide-react";
+import { PencilIcon, Trash2 } from "lucide-react";
 import {
   useDeleteCourseMutation,
   useGetCoursesQuery,
 } from "../../../../redux/features/courses/coursesApi";
-import CustomDeleteModal from "@/components/ui/CustomDeleteModal";
+import CustomDeleteModal from "../../../components/ui/CustomDeleteModal";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-import DashboardHero from "@/components/Admin/DashboardHero";
+import DashboardHero from "../../../components/Admin/DashboardHero";
 
 type Props = {};
 

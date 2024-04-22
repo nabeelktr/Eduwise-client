@@ -3,12 +3,12 @@ import FileUpload from "../../../components/Instructor/Upload/FileUpload";
 import Sidebar from "../../../components/Instructor/Sidebar/Sidebar";
 import Heading from "../../../utils/Heading";
 import React, { useEffect, useState } from "react";
-import BasicTable from "@/utils/BasicTable";
+import BasicTable from "../../../utils/BasicTable";
 import { Trash2 } from "lucide-react";
-import { styles } from "@/styles/style";
+import { styles } from "../../../styles/style";
 import axios from "axios";
 import { EllipsisVerticalIcon } from "@heroicons/react/24/outline";
-import CopyModal from "@/components/Instructor/Upload/CopyModal";
+import CopyModal from "../../../components/Instructor/Upload/CopyModal";
 import CustomDeleteModal from "../../../components/ui/CustomDeleteModal";
 
 type Props = {};
@@ -29,7 +29,7 @@ const UploadMedia = (props: Props) => {
         `${process.env.NEXT_PUBLIC_TRANSCODER_URI}transcode/deleteData/${editData.id}`,
         {
           withCredentials: true,
-        }
+        },
       );
       setDelteModal(false);
       fetchData();
@@ -52,9 +52,9 @@ const UploadMedia = (props: Props) => {
           info.row.original.status !== "Error occured" &&
           info.row.original.status !== "Uploaded" ? (
             <div className="relative inline-flex">
-              <div className="w-3 h-3 bg-green-400 rounded-full"></div>
-              <div className="w-3 h-3 bg-green-400 rounded-full absolute animate-ping"></div>
-              <div className="w-3 h-3 bg-green-400 rounded-full absolute animate-pulse"></div>
+              <div className="h-3 w-3 rounded-full bg-green-400"></div>
+              <div className="absolute h-3 w-3 animate-ping rounded-full bg-green-400"></div>
+              <div className="absolute h-3 w-3 animate-pulse rounded-full bg-green-400"></div>
             </div>
           ) : null}
           <span>{info.row.original.status}</span>
@@ -101,7 +101,7 @@ const UploadMedia = (props: Props) => {
                   subtitleUrl: info.row.original.subtitleUrl,
                 });
               }}
-              className="cursor-pointer w-7 "
+              className="w-7 cursor-pointer "
             />
           </div>
         ),
@@ -114,7 +114,7 @@ const UploadMedia = (props: Props) => {
         `${process.env.NEXT_PUBLIC_TRANSCODER_URI}transcode/getData`,
         {
           withCredentials: true,
-        }
+        },
       );
       setData(response.data);
     } catch (e: any) {
@@ -133,18 +133,18 @@ const UploadMedia = (props: Props) => {
         description="Platform for students to learn and get help from teachers"
         keywords="Programming, MERN, Redux"
       />
-      <div className="flex mx-auto z-[9999]">
-        <div className="mx-auto pl-14 mt-20 w-[85%]">
+      <div className="z-[9999] mx-auto flex">
+        <div className="mx-auto mt-20 w-[85%] pl-14">
           <div
-            className={`bg-white dark:bg-gray-800 relative shadow-md sm:rounded-sm overflow-hidden 800px:mx-28 p-8 flex flex-col gap-8`}
+            className={`relative flex flex-col gap-8 overflow-hidden bg-white p-8 shadow-md dark:bg-gray-800 sm:rounded-sm 800px:mx-28`}
           >
             <h5
-              className={`${styles.title} uppercase tracking-wider !pb-0 flex flex-col gap-2 font-semibold border-gray-600 shadow-sm p-10 !text-[18px] rounded-md`}
+              className={`${styles.title} flex flex-col gap-2 rounded-md border-gray-600 p-10 !pb-0 !text-[18px] font-semibold uppercase tracking-wider shadow-sm`}
             >
               Upload Media
             </h5>
             <FileUpload fetchData={fetchData} />
-            <span className="text-xs border border-gray-500 pt-4 shadow-md !rounded-md">
+            <span className="!rounded-md border border-gray-500 pt-4 text-xs shadow-md">
               <BasicTable columns={columns} datas={data} type="" />
             </span>
           </div>

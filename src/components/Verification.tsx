@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import { VscWorkspaceTrusted } from "react-icons/vsc";
 import { styles } from "../styles/style";
-import { object } from "yup";
 import { useSelector } from "react-redux";
 import {
   useActivationMutation,

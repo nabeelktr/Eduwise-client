@@ -92,4 +92,6 @@ const VideoPlayer:React.FC<Props> = ({videoUrl, subtitleUrl}) => {
   );
 };
 
+CustomPlyrInstance.displayName = 'CustomPlyrInstance';
+
 export default VideoPlayer;

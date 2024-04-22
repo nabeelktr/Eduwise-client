@@ -1,14 +1,14 @@
 "use client"
-import Sidebar from "@/components/Admin/Sidebar/Sidebar";
+import Sidebar from "../../components/Admin/Sidebar/Sidebar";
 import Heading from "../../utils/Heading";
 import React from "react";
 import DashboardHero from "../../components/Admin/DashboardHero"
 import AdminProtected from "../../hooks/adminProtected";
-import DashboardWidgets from "@/components/Instructor/Widgets/DashboardWidgets";
+import DashboardWidgets from "../../components/Instructor/Widgets/DashboardWidgets";
 
 type Props = {};
 
-const page = (props: Props) => {
+const Page = (props: Props) => {
   return (
     <div className="min-h-screen bg-gray-200">
       <AdminProtected>
@@ -30,4 +30,4 @@ const page = (props: Props) => {
   )
 };
 
-export default page;
+export default Page;

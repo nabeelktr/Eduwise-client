@@ -3,13 +3,13 @@ import React, { useEffect } from "react";
 import { useLoadUserQuery } from "../../../../redux/features/api/apiSlice";
 import { redirect } from "next/navigation";
 import CourseContent from "../../../components/Course/CourseContent";
-import Loader from "@/components/ui/Loader/Loader";
+import Loader from "../../../components/ui/Loader/Loader";
 
 type Props = {
   params: any;
 };
 
-const page = ({ params }: Props) => {
+const Page = ({ params }: Props) => {
   const id = params.id;
   const { isLoading, error, data } = useLoadUserQuery(undefined, {});
 
@@ -40,4 +40,4 @@ const page = ({ params }: Props) => {
   );
 };
 
-export default page;
+export default Page;

@@ -2,7 +2,7 @@
 import Sidebar from "../../../components/Admin/Sidebar/Sidebar";
 import DashboardHero from "../../../components/Admin/DashboardHero";
 import Heading from "../../../utils/Heading";
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   useDeleteUserMutation,
   useGetInstructorsQuery,
@@ -10,12 +10,12 @@ import {
 import { Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import BasicTable from "../../../utils/BasicTable";
-import CustomDeleteModal from "@/components/ui/CustomDeleteModal";
+import CustomDeleteModal from "../../../components/ui/CustomDeleteModal";
 import AdminProtected from "../../../hooks/adminProtected";
 
 type Props = {};
 
-const page = (props: Props) => {
+const Page = (props: Props) => {
   const [open, setOpen] = useState(false);
   const [userId, setUserId] = useState("");
   const { isLoading, data, refetch } = useGetInstructorsQuery(
@@ -117,4 +117,4 @@ const page = (props: Props) => {
   );
 };
 
-export default page;
+export default Page;

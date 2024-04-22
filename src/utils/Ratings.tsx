@@ -1,5 +1,4 @@
 import React from 'react'
-import { AiFillStar } from 'react-icons/ai';
 import { RiStarFill, RiStarHalfFill, RiStarLine } from 'react-icons/ri';
 
 type Props = {

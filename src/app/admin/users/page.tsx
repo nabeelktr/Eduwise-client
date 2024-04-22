@@ -10,11 +10,10 @@ import BasicTable from "../../../utils/BasicTable";
 import CustomDeleteModal from "../../../components/ui/CustomDeleteModal";
 import { useGetUsersCourseQuery } from "../../../../redux/features/courses/coursesApi";
 import SubLoader from "../../../components/ui/Loader/SubLoader";
-import AdminProtected from "../../../hooks/adminProtected";
 
 type Props = {};
 
-const page = (props: Props) => {
+const Page = (props: Props) => {
   const [open, setOpen] = useState(false);
   const [userId, setUserId] = useState("");
   const { isLoading, data, refetch } = useGetUsersCourseQuery(
@@ -130,4 +129,4 @@ const page = (props: Props) => {
   );
 };
 
-export default page;
+export default Page;

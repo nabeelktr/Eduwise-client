@@ -1,4 +1,4 @@
-import { styles } from "@/styles/style";
+import { styles } from "../../../styles/style";
 import React, { useState } from "react";
 import { useGetCategoriesQuery } from "../../../../redux/features/admin/adminApi";
 

@@ -3,12 +3,11 @@ import Sidebar from "../../../components/Admin/Sidebar/Sidebar";
 import DashboardHero from "../../../components/Admin/DashboardHero";
 import Heading from "../../../utils/Heading";
 import React from "react";
-import AdminProtected from "../../../hooks/adminProtected";
-import EditFAQ from "@/components/Admin/Customization/EditFAQ";
+import EditFAQ from "../../../components/Admin/Customization/EditFAQ";
 
 type Props = {};
 
-const page = (props: Props) => {
+const Page = (props: Props) => {
   
   return (
     // <AdminProtected>
@@ -33,4 +32,4 @@ const page = (props: Props) => {
   );
 };
 
-export default page;
+export default Page;

@@ -3,7 +3,7 @@ import {
   useAddCategoriesMutation,
   useGetCategoriesQuery,
 } from "../../../../redux/features/admin/adminApi";
-import { styles } from "@/styles/style";
+import { styles } from "../../../styles/style";
 import { IoMdAddCircleOutline } from "react-icons/io";
 import { toast } from "sonner";
 import { AiOutlineDelete } from "react-icons/ai";

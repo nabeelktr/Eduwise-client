@@ -1,4 +1,4 @@
-import { socketId } from "@/utils/socket";
+import { socketId } from "../../../utils/socket";
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 
@@ -22,21 +22,7 @@ const Chat = ({ callId }: Props) => {
     }
     setMsg("");
   };
-  // useEffect(() => {
-  //   socketId.on("recieveMessage", (data) => {
-  //     if (data.callId === callId) {
-  //       setChats((prev: any) => [...prev, data.content]);
-  //       if (chatContainerRef.current) {
-  //           setTimeout(() => {
-  //               chatContainerRef.current?.scrollTo({
-  //                 top: chatContainerRef.current.scrollHeight,
-  //                 behavior: 'smooth'
-  //               });
-  //             }, 30);
-  //       }
-  //     }
-  //   });
-  // }, [callId]);
+
 
   const handleReceiveMessage = (data: any) => {
     if (data.callId === callId) {

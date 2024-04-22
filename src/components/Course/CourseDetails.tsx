@@ -9,7 +9,7 @@ import CourseContentList from "../../components/Course/CourseContentList";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckOutForm from "../payment/CheckOutForm";
 import { useLoadUserQuery } from "../../../redux/features/api/apiSlice";
-import { formatDate } from "@/utils/formatDate";
+import { formatDate } from "../../utils/formatDate";
 import Image from "next/image";
 
 type Props = {

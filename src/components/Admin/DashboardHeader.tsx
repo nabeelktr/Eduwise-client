@@ -1,3 +1,4 @@
+/* eslint-disable */
 "use client";
 import React, { useEffect, useState } from "react";
 import { IoMdNotificationsOutline } from "react-icons/io";
@@ -6,8 +7,11 @@ import {
   useUpdateNotificationMutation,
 } from "../../../redux/features/notification/notificationApi";
 import { formatDate } from "../../utils/formatDate";
-import { socketId } from "@/utils/socket";
-import { toast } from "sonner";
+const isClient = typeof window !== "undefined";
+let toast: { message: (arg0: string, arg1: { position: string }) => void };
+if (isClient) {
+  toast = require("sonner").toast;
+}
 
 type Props = {
   instructorId?: string;
@@ -23,16 +27,6 @@ const DashboardHeader = ({ instructorId }: Props) => {
   const [notifications, setNotifications] = useState<any>([]);
   const [open, setOpen] = useState(false);
 
-  // const [audio] = useState(
-  //   new Audio(
-  //     "https://firebasestorage.googleapis.com/v0/b/ecommerce-image-store-1d566.appspot.com/o/notification%2Fiphone_14_notification.mp3?alt=media&token=1493ecaa-d27b-4881-9220-cfc41588a45b"
-  //   )
-  // );
-
-  // const playerNotificationSound = () => {
-  //   audio.play();
-  // };
-
   const handleNotificationStatus = async (id: string) => {
     await updateNotificationStatus(id);
   };
@@ -44,57 +38,60 @@ const DashboardHeader = ({ instructorId }: Props) => {
     if (isSuccess) {
       refetch();
     }
-    // audio.load();
   }, [data, isSuccess]);
 
   useEffect(() => {
-    socketId.on("newNotification", (data) => {
-      if (data.instructorId === instructorId) {
-        refetch();
-        // playerNotificationSound();
-        toast.message(`${data.title} recieved`, {
-          position: "bottom-right",
-        });
-      }
-    });
-  }, []);
+    if (isClient) {
+      const socketId = require("@/utils/socket").socketId;
+      const toast = require("sonner").toast;
+  
+      socketId.on("newNotification", (data: any) => {
+        if (data.instructorId === instructorId) {
+          refetch();
+          toast.message(`${data.title} received`, {
+            position: "bottom-right",
+          });
+        }
+      });
+    }
+  }, [isClient, instructorId]);
   return (
-    <div className="w-full flex items-center justify-end p-5 fixed top-0 right-0 bg-white shadow-sm !z-[1]">
+    <div className="fixed right-0 top-0 !z-[1] flex w-full items-center justify-end bg-white p-5 shadow-sm">
       <div
-        className="relative cursor-pointer mr-8 "
+        className="relative mr-8 cursor-pointer "
         onClick={() => setOpen(!open)}
       >
-        <IoMdNotificationsOutline className="text-2xl cursor-pointer dark:text-white text-black" />
-        <span className="absolute -top-2 -right-2 bg-[#3ccba0] rounded-full w-[20px] h-[20px] text-xs flex items-center justify-center text-white">
+        <IoMdNotificationsOutline className="cursor-pointer text-2xl text-black dark:text-white" />
+        <span className="absolute -right-2 -top-2 flex h-[20px] w-[20px] items-center justify-center rounded-full bg-[#3ccba0] text-xs text-white">
           {notifications?.length}
         </span>
       </div>
       {open && (
-        <div className="w-[350px] h-[50vh] dark:bg-[#111C43] bg-white shadow-xl absolute top-16 z-[9999] rounded">
-          <h5 className="text-center text-lg font-Poppins text-black dark:text-white mb-2">
+        <div className="absolute top-16 z-[9999] h-[50vh] w-[350px] rounded bg-white shadow-xl dark:bg-[#111C43]">
+          <h5 className="mb-2 text-center font-Poppins text-lg text-black dark:text-white">
             Notifications
           </h5>
           {notifications &&
             notifications.map((item: any, index: number) => (
               <div
                 key={index}
-                className="bg-[#00000013] dark:bg-[#2d3a4ea1] font-Poppins border-b dark:border-b-[#ffffff47] border-b-[#0000000f] px-2 py-1"
+                className="border-b border-b-[#0000000f] bg-[#00000013] px-2 py-1 font-Poppins dark:border-b-[#ffffff47] dark:bg-[#2d3a4ea1]"
               >
-                <div className="w-full flex items-center justify-between p-2">
-                  <p className="text-black dark:text-white text-xs">
+                <div className="flex w-full items-center justify-between p-2">
+                  <p className="text-xs text-black dark:text-white">
                     {item.title}
                   </p>
                   <p
-                    className="text-black dark:text-white cursor-pointer text-xs"
+                    className="cursor-pointer text-xs text-black dark:text-white"
                     onClick={() => handleNotificationStatus(item._id)}
                   >
                     Mark as read
                   </p>
                 </div>
-                <p className="px-2 text-black dark:text-white text-xs">
+                <p className="px-2 text-xs text-black dark:text-white">
                   {item.message}
                 </p>
-                <p className="p-2 text-gray-600 dark:text-white text-xs">
+                <p className="p-2 text-xs text-gray-600 dark:text-white">
                   {formatDate(item.createdAt)}
                 </p>
               </div>
@@ -106,3 +103,4 @@ const DashboardHeader = ({ instructorId }: Props) => {
 };
 
 export default DashboardHeader;
+/* eslint-enable */

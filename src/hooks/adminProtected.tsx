@@ -1,3 +1,4 @@
+"use client"
 import {redirect} from 'next/navigation'
 import { useSelector } from 'react-redux';
 
@@ -7,9 +8,8 @@ interface ProtectedProps{
 }
 
 
-export default function adminProtected({children}: ProtectedProps){
+export default function AdminProtected({children}: ProtectedProps){
     const {user} = useSelector((state:any) => state.auth)
-    console.log(user);
     const isAdmin = user?.role === "admin"
 
     return isAdmin ? children : redirect("/");

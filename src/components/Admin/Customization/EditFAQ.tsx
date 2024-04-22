@@ -3,7 +3,7 @@ import {
   useAddFAQMutation,
   useGetFAQQuery,
 } from "../../../../redux/features/admin/adminApi";
-import { styles } from "@/styles/style";
+import { styles } from "../../../styles/style";
 import { HiMinus, HiPlus } from "react-icons/hi";
 import { AiOutlineDelete } from "react-icons/ai";
 import { IoMdAddCircleOutline } from "react-icons/io";

@@ -1,12 +1,12 @@
-import Sidebar from "@/components/Instructor/Sidebar/Sidebar";
+import Sidebar from "../../../components/Instructor/Sidebar/Sidebar";
 import Room from "../../../components/LiveStream/Room/Room";
 import React from "react";
-import Heading from "@/utils/Heading";
-import { EISidebar } from "@/constants/enums";
+import Heading from "../../../utils/Heading";
+import { EISidebar } from "../../../constants/enums";
 
 type Props = {};
 
-const page = (props: Props) => {
+const Page = (props: Props) => {
   return (
     <div>
       {/* <InstructorProtected > */}
@@ -27,4 +27,4 @@ const page = (props: Props) => {
   );
 };
 
-export default page;
+export default Page;

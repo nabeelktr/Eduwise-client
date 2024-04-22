@@ -1,4 +1,4 @@
-import { styles } from "@/styles/style";
+import { styles } from "../../../styles/style";
 import React from "react";
 import { MdAddCircle } from "react-icons/md";
 import { toast } from "sonner";
