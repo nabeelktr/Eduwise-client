@@ -66,8 +66,8 @@ const NavItems: React.FC<Props> = ({ activeItem, isMobile, user }) => {
                   className={`
                             ${
                               activeItem === index
-                                ? "font-[550] dark:text-[#37a39a]"
-                                : "text-black dark:text-white"
+                                ? "font-[550] "
+                                : "text-black "
                             }  w-44 text-center font-Poppins  text-[14px] font-[400] tracking-wide hover:font-[600]`}
                 >
                   <span>{i.name}</span>
@@ -80,8 +80,8 @@ const NavItems: React.FC<Props> = ({ activeItem, isMobile, user }) => {
                     className={`
                             ${
                               activeItem === index
-                                ? "font-[550]  dark:text-[#37a39a]"
-                                : "text-black dark:text-white"
+                                ? "font-[550]  text-black"
+                                : "text-black"
                             }  w-24 text-center font-Poppins  text-[14px] font-[400] tracking-wide hover:font-[600]`}
                   >
                     <span>{i.name}</span>
@@ -95,7 +95,7 @@ const NavItems: React.FC<Props> = ({ activeItem, isMobile, user }) => {
             className="relative mr-8 cursor-pointer "
             href={`/live/?caller-id=${streamId}`}
           >
-            <SignalIcon className="cursor-pointer h-5 w-5 text-2xl text-black dark:text-white" />
+            <SignalIcon className="cursor-pointer h-5 w-5 text-2xl text-black" />
             <span className="absolute -right-0 -top-0 flex h-[7px] w-[7px] items-center justify-center rounded-full bg-[#3ccba0] text-xs text-white"></span>
           </Link>
         )}
@@ -104,7 +104,7 @@ const NavItems: React.FC<Props> = ({ activeItem, isMobile, user }) => {
         <div className="mt-5 800px:hidden">
           <div className="w-full py-6 text-center">
             <Link href="/" passHref>
-              <span className="font-Poppins text-[25px] font-[500] text-black dark:text-white">
+              <span className="font-Poppins text-[25px] font-[500] text-black ">
                 Eduwise
               </span>
             </Link>
@@ -117,7 +117,7 @@ const NavItems: React.FC<Props> = ({ activeItem, isMobile, user }) => {
                                 ${
                                   activeItem === index
                                     ? "text-[#FDC021] dark:text-[#37a39a]"
-                                    : "text-black dark:text-white"
+                                    : "text-black "
                                 }
                                 block px-6 py-5 font-Poppins text-[16px] font-[400]`}
                 >

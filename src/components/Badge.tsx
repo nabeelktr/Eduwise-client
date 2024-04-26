@@ -4,11 +4,11 @@ import { motion } from "framer-motion";
 
 export const Badge = ({ text, arrow }: { text: string; arrow: boolean }) => {
   return (
-    <div className="bg-gray-900 no-underline group mt-2 mb-8 cursor-pointer relative  shadow-2xl shadow-zinc-900 rounded-md p-px text-xs 800px:text-md font-Poppins font-light tracking-wider leading-6  text-white inline-block">
+    <div className="shadow-zinc-900 800px:text-md group relative mb-8 800px:mt-2 mt-4  inline-block  cursor-pointer rounded-md bg-gray-900 p-px font-Poppins text-xs font-light leading-6 tracking-wider text-white  no-underline shadow-2xl">
       <span className="absolute inset-0 overflow-hidden rounded-full">
         <span className="absolute inset-0 rounded-full bg-[image:radial-gradient(75%_100%_at_50%_0%,rgba(56,189,248,0.6)_0%,rgba(56,189,248,0)_75%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100"></span>
       </span>
-      <div className=" flex relative space-x-4 items-center z-10  uppercase bg-zinc-950 800px:py-2 800px:px-4 px-1 ring-1 ring-white/10 ">
+      <div className=" bg-zinc-950 pl-2 relative z-10 flex items-center  800px:space-x-4 px-1 uppercase ring-1 ring-white/10 800px:px-4 800px:py-2 ">
         <span>{text}</span>
         {arrow && (
           <svg
@@ -31,7 +31,7 @@ export const Badge = ({ text, arrow }: { text: string; arrow: boolean }) => {
           </svg>
         )}
       </div>
-      <span className="absolute -bottom-0 left-[1.125rem] h-px w-[calc(100%-2.25rem)] bg-gradient-to-r from-emerald-400/0 via-emerald-400/90 to-emerald-400/0 transition-opacity duration-500 group-hover:opacity-40"></span>
+      <span className="from-emerald-400/0 via-emerald-400/90 to-emerald-400/0 absolute -bottom-0 left-[1.125rem] h-px w-[calc(100%-2.25rem)] bg-gradient-to-r transition-opacity duration-500 group-hover:opacity-40"></span>
     </div>
   );
 };

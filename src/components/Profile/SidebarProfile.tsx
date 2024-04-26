@@ -26,8 +26,8 @@ const SidebarProfile: FC<Props> = ({
   return (
     <div className="w-full">
       <div
-        className={`w-full h-16 border-b flex items-center px-3 py-4 cursor-pointer shadow-md hover:bg-blue-gray-50  ${
-          active === 1 ? "dark:bg-gray-600 bg-gray-200" : "bg-transparent"
+        className={`flex h-16 w-full cursor-pointer items-center border-b px-3 py-4 shadow-md hover:bg-blue-gray-50  ${
+          active === 1 ? " bg-gray-200" : "bg-transparent"
         }`}
         onClick={() => setActive(1)}
       >
@@ -36,37 +36,35 @@ const SidebarProfile: FC<Props> = ({
           alt=""
           width={30}
           height={30}
-          className="rounded-full cursor-pointer w-[30px] h-[30px] 800px:w-30px"
+          className="800px:w-30px h-[30px] w-[30px] cursor-pointer rounded-full"
         />
-        <h5 className="pl-6 800px:block hidden font-Poppins dark:text-white text-black text-sm font-thin">
+        <h5 className="hidden pl-6 font-Poppins text-sm  font-thin text-black 800px:block">
           My Account
         </h5>
       </div>
 
       <div
-        className={`w-full h-16 border-b flex items-center px-4 py-4 cursor-pointer hover:bg-blue-gray-50  ${
-          active === 2
-            ? "dark:bg-gray-600 border-b shadow-sm bg-gray-200 "
-            : "bg-transparent"
+        className={`flex h-16 w-full cursor-pointer items-center border-b px-4 py-4 hover:bg-blue-gray-50  ${
+          active === 2 ? " border-b bg-gray-200 shadow-sm " : "bg-transparent"
         }`}
         onClick={() => setActive(2)}
       >
-        <RiLockPasswordLine size={20} className="dark:text-white text-black" />
-        <h5 className="pl-6 800px:block hidden font-Poppins dark:text-white text-black text-sm font-thin">
+        <RiLockPasswordLine size={20} className=" text-black" />
+        <h5 className="hidden pl-6 font-Poppins text-sm  font-thin text-black 800px:block">
           Change Password
         </h5>
       </div>
-      {(user.role === "user" ) && (
+      {user.role === "user" && (
         <div
-          className={`w-full h-16 border-b flex items-center px-4 py-4 cursor-pointer hover:bg-blue-gray-50 ${
+          className={`flex h-16 w-full cursor-pointer items-center border-b px-4 py-4 hover:bg-blue-gray-50 ${
             active === 3
-              ? "dark:bg-gray-600 border-b shadow-sm bg-gray-200 "
+              ? "border-b bg-gray-200 shadow-sm dark:bg-gray-600 "
               : "bg-transparent"
           }`}
           onClick={() => setActive(3)}
         >
-          <SiCoursera size={20} className="dark:text-white text-black" />
-          <h5 className="pl-6 800px:block hidden font-Poppins dark:text-white text-black text-sm font-thin">
+          <SiCoursera size={20} className=" text-black" />
+          <h5 className="hidden pl-6 font-Poppins text-sm  font-thin text-black 800px:block">
             Enrolled Courses
           </h5>
         </div>
@@ -74,14 +72,11 @@ const SidebarProfile: FC<Props> = ({
 
       {user.role === "admin" && (
         <Link
-          className={`w-full h-16 border-b flex items-center px-4 py-4 cursor-pointer hover:bg-blue-gray-50 bg-transparent`}
+          className={`flex h-16 w-full cursor-pointer items-center border-b bg-transparent px-4 py-4 hover:bg-blue-gray-50`}
           href={"/admin"}
         >
-          <MdOutlineAdminPanelSettings
-            size={20}
-            className="dark:text-white text-black"
-          />
-          <h5 className="pl-6 800px:block hidden font-Poppins dark:text-white text-black text-sm font-thin">
+          <MdOutlineAdminPanelSettings size={20} className=" text-black" />
+          <h5 className="hidden pl-6 font-Poppins text-sm font-thin text-black 800px:block">
             Admin Dashboard
           </h5>
         </Link>
@@ -89,25 +84,22 @@ const SidebarProfile: FC<Props> = ({
 
       {user.role === "instructor" && (
         <Link
-          className={`w-full h-16 border-b flex items-center px-4 py-4 cursor-pointer hover:bg-blue-gray-50 bg-transparent`}
+          className={`flex h-16 w-full cursor-pointer items-center border-b bg-transparent px-4 py-4 hover:bg-blue-gray-50`}
           href={"/instructor/create-course"}
         >
-          <HiAcademicCap
-            size={20}
-            className="dark:text-white text-black"
-          />
-          <h5 className="pl-6 800px:block hidden font-Poppins dark:text-white text-black text-sm font-thin">
+          <HiAcademicCap size={20} className="text-black " />
+          <h5 className="hidden pl-6 font-Poppins text-sm  font-thin text-black 800px:block">
             Instructor Dashboard
           </h5>
         </Link>
       )}
 
       <div
-        className={`w-full h-16 border-b flex items-center px-4 py-4 cursor-pointer hover:bg-blue-gray-5 bg-transparent hover:bg-blue-gray-50 `}
+        className={`hover:bg-blue-gray-5 flex h-16 w-full cursor-pointer items-center border-b bg-transparent px-4 py-4 hover:bg-blue-gray-50 `}
         onClick={() => logoutHandler()}
       >
-        <AiOutlineLogout size={20} className="dark:text-white text-black" />
-        <h5 className="pl-6 800px:block hidden font-Poppins  dark:text-white  text-black text-sm font-thin">
+        <AiOutlineLogout size={20} className=" text-black" />
+        <h5 className="hidden pl-6 font-Poppins text-sm  font-thin text-black 800px:block">
           Logout
         </h5>
       </div>

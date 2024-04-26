@@ -77,25 +77,26 @@ const Header: FC<Props> = ({ activeItem, setOpen, route, open, setRoute }) => {
     }
   };
 
-
-
   return (
-    <div className="w-full relative shadow-sm px-[12%] z-[9999] ">
+    <div className="relative z-[9999] w-full px-[12%] shadow-sm ">
       <div
         className={`${
           active
-            ? "dark:bg-opacity-50 dark:bg-gradient-to-b dark:from-gray-900 dark:to-black fixed top-0 left-0 w-full h-[90px] z-[80] dark:border-[#ffffff1c] shadow-xl transition duration-500"
-            : "w-full dark:border-[#ffffff1c] h-[65px] 800px:h-[90px] z-[80] dark:shadow"
+            ? "   fixed left-0 top-0 z-[80] h-[90px] w-full  shadow-xl transition duration-500"
+            : "z-[80]  h-[65px] w-full 800px:h-[90px] "
         }`}
       >
-        <div className="m-auto 800px:py-2 h-full ">
-          <div className="w-full h-[100px] flex items-center justify-between ">
+        <div className="m-auto h-full 800px:py-2 ">
+          <div className="flex h-[100px] w-full items-center justify-between ">
             <div className="flex">
               <Link
                 href="/"
-                className={`text-[70px] font-BebasNeue font-[900] text-black dark:text-white  mr-6 `}
+                className={`font-BebasNeue mr-6 text-[70px] font-[900] text-black `}
               >
-                <img src="/assets/eduwise.png" className=" h-8 800px:h-10" />
+                <img
+                  src="/assets/eduwise.png"
+                  className=" mb-6 h-8 800px:mb-0 800px:h-10"
+                />
               </Link>
             </div>
 
@@ -105,10 +106,10 @@ const Header: FC<Props> = ({ activeItem, setOpen, route, open, setRoute }) => {
               <NavItems activeItem={activeItem} isMobile={false} user={user} />
 
               {/* for mobile */}
-              <div className="800px:hidden">
+              <div className="800px:hidden ">
                 <HiOutlineMenuAlt3
                   size={25}
-                  className="cursor-pointer dark:text-white text-black"
+                  className="mb-6 cursor-pointer text-black "
                   onClick={() => setopenSidebar(true)}
                 />
               </div>
@@ -121,7 +122,7 @@ const Header: FC<Props> = ({ activeItem, setOpen, route, open, setRoute }) => {
                     alt="usericon"
                     width={40}
                     height={40}
-                    className="rounded-full cursor-pointer ml-5 hidden 800px:block"
+                    className="ml-5 hidden cursor-pointer rounded-full 800px:block"
                     style={{
                       border: activeItem === 5 ? "2px solid black" : "none",
                     }}
@@ -130,7 +131,7 @@ const Header: FC<Props> = ({ activeItem, setOpen, route, open, setRoute }) => {
               ) : (
                 <HiOutlineUser
                   size={20}
-                  className="hidden 800px:block cursor-pointer dark:text-white text-black mr-3 ml-5"
+                  className="ml-5 mr-3 hidden cursor-pointer text-black 800px:block"
                   onClick={() => setOpen(true)}
                 />
               )}
@@ -141,11 +142,11 @@ const Header: FC<Props> = ({ activeItem, setOpen, route, open, setRoute }) => {
         {/* sidebar for mobile */}
         {openSidebar && (
           <div
-            className="fixed w-full h-screen top-0 left-0 z-[99999] dark:bg-[unset] bg-[#00000024] "
+            className="fixed left-0 top-0 z-[99999] h-screen w-full bg-[#00000024] dark:bg-[unset] "
             onClick={handleClose}
             id="screen"
           >
-            <div className="w-[70%] fixed h-screen z-[99999999] bg-white dark:bg-slate-900 dark:bg-opacity-90 top-0 right-0">
+            <div className="dark:bg-slate-900 fixed right-0 top-0 z-[99999999] h-screen w-[70%] bg-white dark:bg-opacity-90">
               <NavItems activeItem={activeItem} isMobile={true} user={user} />
               {data || user || userData ? (
                 <Link href={"/profile"}>
@@ -154,7 +155,7 @@ const Header: FC<Props> = ({ activeItem, setOpen, route, open, setRoute }) => {
                     alt="usericon"
                     width={40}
                     height={40}
-                    className="rounded-full cursor-pointer ml-5 hidden 800px:block"
+                    className="ml-5 hidden cursor-pointer rounded-full 800px:block"
                     style={{
                       border: activeItem === 5 ? "2px solid black" : "none",
                     }}
@@ -163,13 +164,13 @@ const Header: FC<Props> = ({ activeItem, setOpen, route, open, setRoute }) => {
               ) : (
                 <HiOutlineUser
                   size={20}
-                  className="hidden 800px:block cursor-pointer dark:text-white text-black mr-3 ml-5"
+                  className="ml-5 mr-3 hidden cursor-pointer text-black dark:text-white 800px:block"
                   onClick={() => setOpen(true)}
                 />
               )}
               <br />
               <br />
-              <p className="text-[16px] px-2 pl-5 text-black dark:text-white">
+              <p className="px-2 pl-5 text-[16px] text-black dark:text-white">
                 Copyright @ 2024 Eduwise
               </p>
             </div>

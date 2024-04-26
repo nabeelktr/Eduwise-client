@@ -10,34 +10,37 @@ type Props = {
 const Banner:React.FC<Props> = ({setOpen}) => {
     const {user} = useSelector((state:any) => state.auth)
   return (
-    <div className="relative 800px:-mt-28 z-0 dark:text-black">
-      <div className="absolute inset-0 flex flex-col justify-center items-start pl-[12%] gap-0 800px:gap-3">
-        <span className="text-xl md:text-6xl lg:text-6xl xl:text-6xl font-[1000] text-center">
+    <div className="relative grid   1000px:-mt-[6rem] items-center justify-center  w-full h-full">
+    <div className="absolute left-0   z-[9] text-black w-[60%] ml-[12%]">
+      <div className="flex flex-col justify-center items-start 800px:text-[3.8vw]">
+        <span className="text-center font-[1000] 800px:-mb-[20px] mt-6 800px:mt-0 ">
           The Best
         </span>
-        <span className="text-xl md:text-6xl lg:text-6xl xl:text-6xl font-[1000] text-center">
+        <span className="font-[1000] 800px:-mb-[20px]">
           Platform Enroll
         </span>
-        <span className="text-xl md:text-6xl lg:text-6xl xl:text-6xl text-center ">
+        <span className="text-center 800px:-mb-[20px]">
           in Your Special
         </span>
         <span className="relative flex">
-          <span className="bg-[#FDC021] w-16 800px:w-44 h-1 800px:h-3 absolute bottom-0 left-1 z-[1]"></span>
-          <span className="text-xl md:text-6xl lg:text-7xl xl:text-6xl text-center z-[2] ">
+          <span className="bg-[#FDC021] w-full 800px:h-[1.3vh] absolute h-[.7vh] bottom-0 800px:bottom-4  z-[1]"></span>
+          <span className="text-center z-[2]">
             Course
           </span>
         </span>
-        <span className="text-sm hidden 800px:w-[30%] 800px:block mb-3">
+        <span className="text-xs 1100px:text-sm hidden 1000px:w-[50%] 1000px:block p-1 800px:-mb-[20px]">
           Lorem Ipsum has been the industry&apos;s standard dummy text ever since the
           1500s, when an unknown printer took a galley of type and scrambled it
           to make a type specimen book.
         </span>
         <span onClick={() => setOpen(true)}>
-       {!user && <Badge text="Get Started" arrow/>}
+          {!user && <Badge text="Get Started" arrow/>}
         </span>
       </div>
-      <img src="/assets/grow bb.png" className="bg-cover w-full min-h-full" />
     </div>
+    <img src="/assets/grow bb.png" className=" relative w-full " />
+  </div>
+  
   );
 };
 

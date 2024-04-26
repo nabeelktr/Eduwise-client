@@ -7,7 +7,7 @@ type Props = {};
 const AboutUs: React.FC<Props> = () => {
   return (
     <div>
-      <div className="relative z-0 dark:text-black">
+      <div className="relative z-0 text-black">
         <div className="absolute inset-0  flex flex-col items-end justify-center gap-0 pr-[12%] 800px:gap-3">
           <span className="text-center text-xl font-[1000] md:text-6xl lg:text-6xl xl:text-6xl">
             About Us

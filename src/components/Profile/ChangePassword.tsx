@@ -23,7 +23,7 @@ const schema = Yup.object().shape({
   oldPassword: passwordValidation,
   newPassword: passwordValidation.notOneOf(
     [Yup.ref("oldPassword")],
-    "New password must be different from the old password"
+    "New password must be different from the old password",
   ),
   confirmPassword: Yup.string()
     .oneOf([Yup.ref("newPassword")], "Passwords must match")
@@ -58,56 +58,50 @@ const ChangePassword = (props: Props) => {
   const { errors, touched, values, handleChange, handleSubmit } = formik;
 
   return (
-    <div className="w-full pl-7 px-2 800px:px-5 800px:pl-0">
-      <h1 className="block text-[16px] 800px:text-[30px] font-Poppins text-center font-[500] text-black dark:text-[#fff] pb-2">
+    <div className="w-full px-2 pl-7 800px:px-5 800px:pl-0">
+      <h1 className="block pb-2 text-center font-Poppins text-[16px] font-[500] text-black 800px:text-[30px]">
         Change Password
       </h1>
       <div className="w-full">
         <form onSubmit={handleSubmit} className="flex flex-col items-center">
-          <div className="w-[100%] 800px:w-[60%] mt-5">
-            <label className="block text-black dark:text-[#fff]">
-              Old Password
-            </label>
+          <div className="mt-5 w-[100%] 800px:w-[60%]">
+            <label className="block text-black ">Old Password</label>
             <input
               type="password"
               className={`${styles.input}${
                 errors.oldPassword && touched.oldPassword && "border-red-500"
-              } !w-[95%] mb-4 800px:mb-0 text-black dark:text-[#fff]`}
+              } mb-4 !w-[95%] text-black dark:text-black 800px:mb-0 `}
               required
               name="oldPassword"
               value={values.oldPassword}
               onChange={handleChange}
             />
             {errors.oldPassword && touched.oldPassword && (
-              <span className="text-red-500 pt-1 text-sm block">
+              <span className="block pt-1 text-sm text-red-500">
                 {errors.oldPassword}
               </span>
             )}
           </div>
-          <div className="w-[100%] 800px:w-[60%] mt-2">
-            <label className="block text-black dark:text-[#fff]">
-              New Password
-            </label>
+          <div className="mt-2 w-[100%] 800px:w-[60%]">
+            <label className="block text-black ">New Password</label>
             <input
               type="password"
               name="newPassword"
               className={`${styles.input}${
                 errors.newPassword && touched.newPassword && "border-red-500"
-              } !w-[95%] mb-4 800px:mb-0 text-black dark:text-[#fff]`}
+              } mb-4 !w-[95%] text-black dark:text-black 800px:mb-0`}
               required
               value={values.newPassword}
               onChange={handleChange}
             />
             {errors.newPassword && touched.newPassword && (
-              <span className="text-red-500 pt-1 text-sm block">
+              <span className="block pt-1 text-sm text-red-500">
                 {errors.newPassword}
               </span>
             )}
           </div>
-          <div className="w-[100%] 800px:w-[60%] mt-2">
-            <label className="block text-black dark:text-[#fff]">
-              Confirm Password
-            </label>
+          <div className="mt-2 w-[100%] 800px:w-[60%]">
+            <label className="block text-black ">Confirm Password</label>
             <input
               type="password"
               name="confirmPassword"
@@ -115,26 +109,26 @@ const ChangePassword = (props: Props) => {
                 errors.confirmPassword &&
                 touched.confirmPassword &&
                 "border-red-500"
-              } !w-[95%] mb-4 800px:mb-0 text-black dark:text-[#fff]`}
+              } mb-4 !w-[95%] text-black dark:text-black 800px:mb-0 `}
               required
               value={values.confirmPassword}
               onChange={handleChange}
             />
             {errors.confirmPassword && touched.confirmPassword && (
-              <span className="text-red-500 pt-1 text-sm block">
+              <span className="block pt-1 text-sm text-red-500">
                 {errors.confirmPassword}
               </span>
             )}
-             <p className="text-xs mt-1 text-gray-600 ml-2">
+            <p className="ml-2 mt-1 text-xs text-gray-600">
               - Uppercase letters (A-Z)
             </p>
-            <p className="text-xs text-gray-600 ml-2">
+            <p className="ml-2 text-xs text-gray-600">
               - Lowercase letters (a-z)
             </p>
-            <p className="text-xs text-gray-600 ml-2">- Numbers (0-9)</p>
+            <p className="ml-2 text-xs text-gray-600">- Numbers (0-9)</p>
             <input
               type="submit"
-              className={`w-[95%] h-[40px] border border-[#37a39a] text-center rounded-[3px] mt-8 cursor-pointer text-black dark:text-[#fff]`}
+              className={`mt-8 h-[40px] w-[95%] cursor-pointer rounded-[3px] border border-[#37a39a] text-center text-black dark:text-black`}
               value="Update"
             />
           </div>

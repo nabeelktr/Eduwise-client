@@ -21,23 +21,23 @@ const CategoryCarousel = ({ category, setCategory }: Props) => {
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
-      items: 1,
+      items: 4,
       slidesToSlide: 1,
     },
     mobile: {
       breakpoint: { max: 464, min: 0 },
-      items: 1,
+      items: 4,
       slidesToSlide: 1,
     },
   };
 
 
   const CustomButtonGroup = ({ next, previous }: any) => (
-    <div className="carousel-button-group ml-[100%]  -mt-[2.3rem] flex 800px:gap-1">
-       <button className="carousel-button text-gray-700 hover:bg-gray-400 p-2 rounded-full" onClick={previous}>
+    <div className="carousel-button-group ml-[100%]  -mt-[2.3rem] flex 800px:gap-1  ">
+       <button className="carousel-button text-gray-700 hover:bg-gray-400 p-2 rounded-full hidden 800px:block" onClick={previous}>
         <ArrowLeftIcon className="h-5" />
       </button>
-      <button className="carousel-button  text-gray-700 hover:bg-gray-400 p-2 rounded-full" onClick={next}>
+      <button className="carousel-button  text-gray-700 hover:bg-gray-400 p-2 rounded-full hidden 800px:block" onClick={next}>
         <ArrowRightIcon className=" h-5 " />
       </button>
     </div>
@@ -67,7 +67,7 @@ const CategoryCarousel = ({ category, setCategory }: Props) => {
         <div
         className={`h-[35px] text-xs hover:text-white hover:bg-gray-900  ${
           category === "All" ? "bg-gray-900 text-white" : "bg-gray-200"
-        } mt-6 mr-4  px-4 rounded-xl flex items-center justify-center font-Poppins cursor-pointer`}
+        } mt-6 800px:mr-4 mr-2 ml-2 px-4  rounded-xl flex items-center justify-center font-Poppins cursor-pointer`}
         onClick={() => setCategory("All")}
       >
         All

@@ -19,7 +19,8 @@ const ProfileInfo: FC<Props> = ({ avatar, user }) => {
   const [name, setName] = useState(user && user.name);
   const imageRef = useRef<HTMLInputElement>(null);
   const [updateAvatar, { isSuccess, error }] = useUpdateAvatarMutation();
-  const [editprofile, { isSuccess: profileSuccess, error: profileError }] = useEditProfileMutation();
+  const [editprofile, { isSuccess: profileSuccess, error: profileError }] =
+    useEditProfileMutation();
   const [loadUser, setLoadUser] = useState(false);
   const {} = useLoadUserQuery(undefined, { skip: loadUser ? false : true });
 
@@ -56,12 +57,12 @@ const ProfileInfo: FC<Props> = ({ avatar, user }) => {
   };
   return (
     <>
-      <div className="w-full flex justify-center">
+      <div className="flex w-full justify-center">
         <div className="relative">
           <Image
             src={user?.avatar || avatar ? user.avatar || avatar : avatarIcon}
             alt=""
-            className="w-[120px] h-[120px] cursor-pointer border-[3px] border-[#37a39a] rounded-full"
+            className="h-[120px] w-[120px] cursor-pointer rounded-full border-[3px] border-[#37a39a]"
             width={120}
             height={120}
             onClick={handleImageClick}
@@ -79,7 +80,7 @@ const ProfileInfo: FC<Props> = ({ avatar, user }) => {
           </form>
 
           <label>
-            <div className="w-[30px] h-[30px] bg-slate-900 rounded-full absolute bottom-2 right-2 flex items-center justify-center cursor-pointer">
+            <div className="bg-slate-900 absolute bottom-2 right-2 flex h-[30px] w-[30px] cursor-pointer items-center justify-center rounded-full">
               <AiOutlineCamera size={20} className="z-1" />
             </div>
           </label>
@@ -89,12 +90,12 @@ const ProfileInfo: FC<Props> = ({ avatar, user }) => {
       <br />
       <div className="w-full pl-6 800px:pl-10">
         <form onSubmit={handleSubmit}>
-          <div className="800px:w-[50%] m-auto block pb-4">
+          <div className="m-auto block pb-4 text-black 800px:w-[50%]">
             <div className="w-[100] pb-2">
               <label className="block font-Poppins"> Full Name</label>
               <input
                 type="text"
-                className={`${styles.input} !w-[95%]  800px:mb-0 text-base`}
+                className={`${styles.input} !w-[95%]  text-base  text-black dark:!text-black 800px:mb-0`}
                 required
                 value={name}
                 onChange={(e) => setName(e.target.value)}
@@ -105,13 +106,13 @@ const ProfileInfo: FC<Props> = ({ avatar, user }) => {
               <input
                 type="text"
                 readOnly
-                className={`${styles.input} !w-[95%]  800px:mb-0`}
+                className={`${styles.input} !w-[95%]  !text-black dark:!text-black 800px:mb-0`}
                 required
                 value={user?.email}
               />
             </div>
             <input
-              className={`w-[95%] 800px:w-[250px] h-[40px] border border-[#37a39a] text-center dark:text-[#fff] text-black rounded-[3px] mt-8 cursor-pointer`}
+              className={`mt-8 h-[40px] w-[95%] cursor-pointer rounded-[3px] border border-[#37a39a] text-center text-black 800px:w-[250px]`}
               required
               value="update"
               type="submit"

@@ -56,8 +56,8 @@ const Page = (props: Props) => {
             setRoute={setRoute}
             route={route}
           />
-          <div className="min-h-screen mx-auto 800px:px-[12%] bg-gray-50">
-            <div className="  items-center flex-wrap">
+          <div className="min-h-screen mx-auto 800px:px-[12%] bg-gray-50 -mt-24">
+            <div className="  items-center flex-wrap pt-24">
               <CategoryCarousel category={category} setCategory={setCategory} />
             </div>
             <br />
@@ -72,7 +72,7 @@ const Page = (props: Props) => {
                   : "No course found in this category. please try another one!"}
               </p>
             )}
-            <div className="grid grid-cols-2 gap-[20px] md:grid-cols-2 md:gap-[25px] lg:grid-cols-3 lg:gap-[25px] 1500px:grid-cols-4 1500px:gap-[35px] mb-12 border-0">
+            <div className="grid grid-cols-2 gap-[20px] md:grid-cols-2 md:gap-[25px] lg:grid-cols-3 lg:gap-[25px] 1500px:grid-cols-4 1500px:gap-[35px] mb-12 border-0 px-[5%] 800px:px-0">
               {courses &&
                 courses.map((item: any, index: number) => (
                   <CourseCard index={index} course={item} key={index} />
