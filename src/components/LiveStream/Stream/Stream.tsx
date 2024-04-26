@@ -14,7 +14,7 @@ import { socketId } from "../../../utils/socket";
 import { useSelector } from "react-redux";
 
 const user: User = {
-  id: "Jerec",
+  id: "Plo_Koon",
   name: "Oliver",
   image: "https://getstream.io/random_svg/?id=oliver&name=Oliver",
 };
