@@ -9,14 +9,13 @@ import {
 import "@stream-io/video-react-sdk/dist/css/styles.css";
 
 const user: User = {
-  id: "Jerec",
+  id: "Plo_Koon",
   name: "Oliver",
   image: "https://getstream.io/random_svg/?id=oliver&name=Oliver",
 };
 const apiKey = "mmhfdzb5evj2";
 const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiSmVyZWMiLCJpc3MiOiJodHRwczovL3Byb250by5nZXRzdHJlYW0uaW8iLCJzdWIiOiJ1c2VyL0plcmVjIiwiaWF0IjoxNzEzNTAwNTYxLCJleHAiOjE3MTQxMDUzNjZ9.gQcGxThvEJi-Z-Tm5pQPGYAX0SD1zcWrptThRNrMmaY";
-
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiUGxvX0tvb24iLCJpc3MiOiJodHRwczovL3Byb250by5nZXRzdHJlYW0uaW8iLCJzdWIiOiJ1c2VyL1Bsb19Lb29uIiwiaWF0IjoxNzE0MTQ0OTM5LCJleHAiOjE3MTQ3NDk3NDR9.vklJatekqtsE5x8B6SdYaQx3oQzAmq-o26lSlEXt1EU";
 const client = new StreamVideoClient({ apiKey, user, token });
 
 type Props = {
