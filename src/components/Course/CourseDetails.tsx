@@ -56,51 +56,51 @@ const CourseDetails: React.FC<Props> = ({
       <div className="px-[12%] m-auto py-8">
         <div className="w-full flex flex-col-reverse 800px:flex-row">
           <div className="w-full 800px:w-[65%] 800px:pr-5">
-            <h1 className="text-[24px] font-Poppins font-[600] text-black dark:text-white">
+            <h1 className="text-[24px] font-Poppins font-[600] text-black ">
               {data?.name}
             </h1>
             <div className="flex items-center gap-2 pt-1 text-sm mb-1">
               <div className="flex items-center">
                 <Ratings rating={data?.ratings} />
-                <h5 className="text-black dark:text-white">
+                <h5 className="text-black ">
                   {data?.reviews?.length} Reviews
                 </h5>
               </div>
-              <h5 className="text-black dark:text-white">
+              <h5 className="text-black ">
                 {data?.purchased} Students
               </h5>
             </div>
             <br />
-            <h1 className="text-xl font-Poppins font-[500] text-black dark:text-white pb-2">
+            <h1 className="text-xl font-Poppins font-[500] text-black pb-2">
               What will you learn from this course?
             </h1>
             {data?.benefits?.map((item: any, index: number) => (
               <div className="w-full flex 800px:items-center py-1" key={index}>
                 <div className="w-[15px] mr-1">
-                  <CheckIcon className="h-5 w-5 text-black dark:text-white" />
+                  <CheckIcon className="h-5 w-5 text-black " />
                 </div>
-                <p className="pl-2 text-black dark:text-white text-sm">
+                <p className="pl-2 text-black  text-sm">
                   {item.title}
                 </p>
               </div>
             ))}
             <br />
-            <h1 className="text-[25px] font-Poppins font-[500] text-black dark:text-white text-xl pb-2">
+            <h1 className="text-[25px] font-Poppins font-[500] text-black  text-xl pb-2">
               What are the prerequisites for starting this course?
             </h1>
             {data?.prerequisites?.map((item: any, index: number) => (
               <div className="w-full flex 800px:items-center py-1" key={index}>
                 <div className="w-[15px] mr-1">
-                  <CheckIcon className="h-5 w-5 text-black dark:text-white" />
+                  <CheckIcon className="h-5 w-5 text-black " />
                 </div>
-                <p className="pl-2 text-black dark:text-white text-sm">
+                <p className="pl-2 text-black  text-sm">
                   {item.title}
                 </p>
               </div>
             ))}
             <br />
 
-            <h1 className="text-xl font-Poppins font-[500] text-black dark:text-white">
+            <h1 className="text-xl font-Poppins font-[500] text-black">
               Course Overview
             </h1>
             <CourseContentList data={data?.courseContentData} isDemo={true} />
@@ -117,7 +117,7 @@ const CourseDetails: React.FC<Props> = ({
               <div className="800px:flex items-center">
                 <Ratings rating={data?.ratings} />
                 <div className="mb-2 800px:mb-[unset]" />
-                <h5 className="text-md font-Poppins text-black dark:text-white">
+                <h5 className="text-md font-Poppins text-black ">
                   {Number.isInteger(data?.ratings)
                     ? data?.ratings.toFixed(1)
                     : data?.ratings.toFixed(2)}{" "}
