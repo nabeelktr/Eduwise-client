@@ -139,7 +139,7 @@ const CourseDetails: React.FC<Props> = ({
                       height={30}
                       className="rounded-full ml-5 w-[30px] h-[30px]"
                     />
-                    <div className="pl-3 ">
+                    <div className="pl-3 text-black">
                       <div className="flex gap-1">
                         <h5 className="text-xs font-sans ">
                           {item?.user.name}
