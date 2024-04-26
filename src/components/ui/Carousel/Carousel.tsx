@@ -133,7 +133,7 @@ export const CourseCard = ({ index, course }: any) => {
         </p>
         <p className="block 800px:hidden text-xs antialiased font-light leading-relaxed text-inherit overflow-hidden ">
           {course.description.length > 100
-            ? course.description.substring(0, 50) + "..."
+            ? course.description.substring(0, 20) + "..."
             : course.description}
         </p>
       </div>

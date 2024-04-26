@@ -11,7 +11,6 @@ type Props = {
 
 const CategoryCarousel = ({ category, setCategory }: Props) => {
   const { data: categories } = useGetCategoriesQuery(undefined, {});
-  const [showLeftButton, setShowLeftButton] = useState(false);
 
   const responsive = {
     desktop: {
@@ -21,12 +20,12 @@ const CategoryCarousel = ({ category, setCategory }: Props) => {
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
-      items: 4,
+      items: 2,
       slidesToSlide: 1,
     },
     mobile: {
       breakpoint: { max: 464, min: 0 },
-      items: 4,
+      items: 2,
       slidesToSlide: 1,
     },
   };
@@ -65,7 +64,7 @@ const CategoryCarousel = ({ category, setCategory }: Props) => {
         customButtonGroup={<CustomButtonGroup />}
       >
         <div
-        className={`h-[35px] text-xs hover:text-white hover:bg-gray-900  ${
+        className={`h-[35px] text-xs hover:text-white hover:bg-gray-900 text-black ${
           category === "All" ? "bg-gray-900 text-white" : "bg-gray-200"
         } mt-6 800px:mr-4 mr-2 ml-2 px-4  rounded-xl flex items-center justify-center font-Poppins cursor-pointer`}
         onClick={() => setCategory("All")}

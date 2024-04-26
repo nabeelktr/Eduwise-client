@@ -155,7 +155,7 @@ const Header: FC<Props> = ({ activeItem, setOpen, route, open, setRoute }) => {
                     alt="usericon"
                     width={40}
                     height={40}
-                    className="ml-5 hidden cursor-pointer rounded-full 800px:block"
+                    className="ml-5 cursor-pointer rounded-full 800px:block"
                     style={{
                       border: activeItem === 5 ? "2px solid black" : "none",
                     }}
