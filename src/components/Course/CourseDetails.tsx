@@ -113,7 +113,7 @@ const CourseDetails: React.FC<Props> = ({
             </div>
             <br />
 
-            <div className="w-full">
+            <div className="w-full text-black">
               <div className="800px:flex items-center">
                 <Ratings rating={data?.ratings} />
                 <div className="mb-2 800px:mb-[unset]" />
@@ -157,7 +157,7 @@ const CourseDetails: React.FC<Props> = ({
             </div>
           </div>
           <div className="w-full 800px:w-[35%] relative">
-            <div className="sticky top-[100px] left-0 z-50 w-full">
+            <div className="sticky top-[100px] left-0 z-50 w-full text-black">
               <VideoPlayerMemo
                 videoUrl={data?.demoUrl}
                 subtitleUrl={data?.subtitleUrl}

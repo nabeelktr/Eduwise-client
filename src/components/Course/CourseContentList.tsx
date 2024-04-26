@@ -65,11 +65,11 @@ const CourseContentList: FC<Props> = (props) => {
           >
             <div className="w-full flex">
               <div className="w-full flex justify-between items-center">
-                <h2 className="text-sm  text-black dark:text-white !font-bold tracking-wide">
+                <h2 className="text-sm  text-black  !font-bold tracking-wide">
                   {section}
                 </h2>
                 <button
-                  className="mr-4 cursor-pointer text-black dark:text-white"
+                  className="mr-4 cursor-pointer text-black "
                   onClick={(e) => {
                     e.stopPropagation()
                     toggleSection(section)}}
@@ -82,7 +82,7 @@ const CourseContentList: FC<Props> = (props) => {
                 </button>
               </div>
             </div>
-            <h5 className={`text-black dark:text-white text-sm ${!isSectionVisible && "pb-3"} `}>
+            <h5 className={`text-black  text-sm ${!isSectionVisible && "pb-3"} `}>
               {sectionVideoCount} Lessions .{" "}
               {sectionVideoLength < 60
                 ? sectionVideoLength
@@ -123,7 +123,7 @@ const CourseContentList: FC<Props> = (props) => {
                               videoIndex === props.activeVideo
                                 ? "text-white"
                                 : "text-black"
-                            } dark:text-white`}
+                            } `}
                           >
                             {item.title}
                           </h1>
@@ -132,7 +132,7 @@ const CourseContentList: FC<Props> = (props) => {
                               videoIndex === props.activeVideo
                                 ? "text-white"
                                 : "text-black"
-                            } dark:text-white text-xs ml-1`}
+                            }  text-xs ml-1`}
                           >
                             {item.videoLength > 60
                               ? contentLength.toFixed(2)
