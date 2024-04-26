@@ -79,7 +79,7 @@ const CategoryCarousel = ({ category, setCategory }: Props) => {
                   category === item.category
                     ? "bg-gray-900 text-white"
                     : "bg-gray-200"
-                } mt-6 mr-8 px-2 rounded-xl flex items-center justify-center font-Poppins cursor-pointer`}
+                } mt-6 mr-8 px-2 rounded-xl flex items-center justify-center font-Poppins cursor-pointer text-black`}
                 onClick={() => setCategory(item.category)}
               >
                 {item.category}
