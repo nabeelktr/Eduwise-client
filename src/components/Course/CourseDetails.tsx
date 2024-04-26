@@ -52,7 +52,7 @@ const CourseDetails: React.FC<Props> = ({
     }
   };
   return (
-    <div className="bg-gray-50">
+    <div className="bg-gray-50 ">
       <div className="px-[12%] m-auto py-8">
         <div className="w-full flex flex-col-reverse 800px:flex-row">
           <div className="w-full 800px:w-[65%] 800px:pr-5">
@@ -105,8 +105,8 @@ const CourseDetails: React.FC<Props> = ({
             </h1>
             <CourseContentList data={data?.courseContentData} isDemo={true} />
             <br />
-            <div className=" text-sm 800px:w-[80%] whitespace-pre-line">
-              <h1 className="text-xl font-Poppins font-[500] pb-2 ">
+            <div className=" text-sm 800px:w-[80%] whitespace-pre-line text-black">
+              <h1 className="text-xl font-Poppins font-[500] pb-2 text-black">
                 Course Details
               </h1>
               {data?.description}
