@@ -1,3 +1,4 @@
+"use server"
 import { cookies } from "next/headers";
 import { apiSlice } from "../api/apiSlice";
 import { userLoggedIn, userLoggedOut, userRegistration } from "./authSlice";
