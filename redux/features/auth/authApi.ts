@@ -1,5 +1,3 @@
-"use server"
-import { cookies } from "next/headers";
 import { apiSlice } from "../api/apiSlice";
 import { userLoggedIn, userLoggedOut, userRegistration } from "./authSlice";
 import { signOut } from "next-auth/react";
@@ -111,14 +109,11 @@ export const authApi = apiSlice.injectEndpoints({
         }),  
         async onQueryStarted(arg, { dispatch }) {
             try {
-                const cookieStore = cookies()
                 dispatch(userLoggedOut());
-                cookieStore.getAll().forEach((cookie) => {
-                    cookieStore.delete(cookie.name);
-                  });
                 await signOut()
             } catch (error: any) {
                 dispatch(userLoggedOut());
+                await signOut()
                 console.error("Error during logout:", error);
             }
         }
