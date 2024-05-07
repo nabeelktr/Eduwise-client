@@ -2,7 +2,6 @@
 import "./globals.css";
 import { Poppins } from "next/font/google";
 import { Josefin_Sans } from "next/font/google";
-import { ThemeProvider } from "../utils/theme-provider";
 import { Toaster } from "sonner";
 import { Providers } from "./Provider";
 import { SessionProvider } from "next-auth/react";
@@ -34,12 +33,12 @@ export default function RootLayout({
         <Providers>
           {/* <PersistGate loading={null} persistor={persistor}> */}
           <SessionProvider>
-            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            {/* <ThemeProvider attribute="class" defaultTheme="system" enableSystem> */}
               <SocketProvider>
                 {children}
                 <Toaster position="top-center" />
               </SocketProvider>
-            </ThemeProvider>
+            {/* </ThemeProvider> */}
           </SessionProvider>
           {/* </PersistGate> */}
         </Providers>
