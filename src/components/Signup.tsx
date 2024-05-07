@@ -99,7 +99,7 @@ const SignUp: React.FC<Props> = ({ setRoute }) => {
 
   const { errors, touched, values, handleChange, handleSubmit } = formik;
   return (
-    <div className="w-full">
+    <div className="w-full text-black">
       <h1 className={`${styles.title} text-2xl  tracking-wider mb-6 mt-5 uppercase`}>Sign up</h1>
       <form onSubmit={handleSubmit} className="px-8">
         <div className="mb-3">
@@ -187,7 +187,7 @@ const SignUp: React.FC<Props> = ({ setRoute }) => {
         </div>
         <br />
 
-        <h5 className="text-center pt-4 font-Poppins text-sm text-black dark:text-white">
+        <h5 className="text-center pt-4 font-Poppins text-sm text-black ">
           Or join with
         </h5>
 
