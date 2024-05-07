@@ -63,10 +63,13 @@ const CourseContentMedia = ({
       isLoading: reviewCreationLoading,
     },
   ] = useAddReviewMutation();
-  const {data:courseData, refetch: courseRefetch} = useGetCourseDetailsQuery(id, {refetchOnMountOrArgChange: true})
+  const { data: courseData, refetch: courseRefetch } = useGetCourseDetailsQuery(
+    id,
+    { refetchOnMountOrArgChange: true },
+  );
   const course = courseData;
   const isReviewExists = course?.reviews?.find(
-    (item: any) => item.user._id === user.id
+    (item: any) => item.user._id === user.id,
   );
 
   const handleQuestion = async () => {
@@ -79,7 +82,7 @@ const CourseContentMedia = ({
           avatar: user.avatar,
           role: user.role,
           instructorId: course.instructorId,
-          courseName: course.name
+          courseName: course.name,
         },
         question,
         questionReplies: [],
@@ -123,7 +126,7 @@ const CourseContentMedia = ({
         },
         rating,
         comment: review,
-        commentReplies: []
+        commentReplies: [],
       };
       addReview({ reviewList, courseId: id });
     }
@@ -137,7 +140,7 @@ const CourseContentMedia = ({
       socketId.emit("notification", {
         title: "New Question",
         instructorId: course.instructorId,
-      })
+      });
     }
 
     if (answerSuccess) {
@@ -187,16 +190,16 @@ const CourseContentMedia = ({
   ]);
 
   return (
-    <div className="w-[95%] 800px:w-[86%] py-4 m-auto">
+    <div className="m-auto w-[95%] py-4 800px:w-[86%]">
       <VideoPlayerMemo
         subtitleUrl={data[activeVideo]?.subtitleUrl}
         videoUrl={data[activeVideo]?.videoUrl}
       />
-      <div className="w-full flex items-center justify-between my-3">
+      <div className="my-3 flex w-full items-center justify-between">
         <div
           className={`${
             styles.button
-          } !w-[unset] !min-h-[35px] !py-[unset] text-white items-center font-thin !text-xs ${
+          } !min-h-[35px] !w-[unset] items-center !py-[unset] !text-xs font-thin text-white ${
             activeVideo === 0 && "!cursor-no-drop opacity-[0.8]"
           }`}
           onClick={() =>
@@ -210,14 +213,14 @@ const CourseContentMedia = ({
         <div
           className={`${
             styles.button
-          } !w-[unset] !min-h-[35px] !py-[unset] text-white items-center font-thin !text-xs ${
+          } !min-h-[35px] !w-[unset] items-center !py-[unset] !text-xs font-thin text-white ${
             data.length - 1 === activeVideo && "!cursor-no-drop opacity-[0.8]"
           }`}
           onClick={() =>
             setActiveVideo(
               data && data.length - 1 === activeVideo
                 ? activeVideo
-                : activeVideo + 1
+                : activeVideo + 1,
             )
           }
         >
@@ -227,12 +230,12 @@ const CourseContentMedia = ({
       </div>
       <h1 className="pt-2 text-xl font-[600]">{data[activeVideo]?.title}</h1>
       <br />
-      <div className="w-full p-2 px-4  flex items-center justify-between bg-gray-500 bg-opacity-20 backdrop-blur shadow-[bg-gray-700] rounded shadow-inner">
+      <div className="flex w-full items-center  justify-between rounded bg-gray-500 bg-opacity-20 p-2 px-4 shadow-inner shadow-[bg-gray-700] backdrop-blur">
         {["Overview", "Resources", "Q&A", "Reviews"].map((text, index) => (
           <h5
             key={index}
-            className={`800px:text-sm cursor-pointer ${
-              activeBar === index ? "text-red-500 font-[600]" : "text-black"
+            className={`cursor-pointer 800px:text-sm ${
+              activeBar === index ? "font-[600] text-red-500" : "text-black"
             }`}
             onClick={() => setActiveBar(index)}
           >
@@ -240,9 +243,9 @@ const CourseContentMedia = ({
           </h5>
         ))}
       </div>
-      <div className="px-4 bg-gray-100 py-4">
+      <div className="bg-gray-100 px-4 py-4 text-black">
         {activeBar === 0 && (
-          <p className="text-sm whitespace-pre-line mb-3">
+          <p className="mb-3 whitespace-pre-line text-sm">
             {data[activeVideo]?.description}
           </p>
         )}
@@ -250,11 +253,11 @@ const CourseContentMedia = ({
           <div>
             {data[activeVideo]?.links.map((item: any, index: number) => (
               <div className="mb-5" key={index}>
-                <h2 className="800px:text-sm 800px:inline-block ">
+                <h2 className="800px:inline-block 800px:text-sm ">
                   {item.title && item.title + " : "}
                 </h2>{" "}
                 <a
-                  className="inline-block text-[#4395c4] 800px:text-sm 800px:pl2"
+                  className="800px:pl2 inline-block text-[#4395c4] 800px:text-sm"
                   href={item.url}
                 >
                   {item.url}
@@ -271,7 +274,7 @@ const CourseContentMedia = ({
                 alt="usericon"
                 width={30}
                 height={30}
-                className="rounded-full ml-5 w-[30px] h-[30px]"
+                className="ml-5 h-[30px] w-[30px] rounded-full"
               />
               <textarea
                 name=""
@@ -281,14 +284,14 @@ const CourseContentMedia = ({
                 cols={40}
                 rows={5}
                 placeholder="write your questions.."
-                className="outline-none bg-transparent ml-3 border !border-black 800px:w-full p-2 rounded w-[90%] 800px:text-sm font-Poppins"
+                className="ml-3 w-[90%] rounded border !border-black bg-transparent p-2 font-Poppins outline-none 800px:w-full 800px:text-sm"
               ></textarea>
             </div>
-            <div className="w-full flex justify-end">
+            <div className="flex w-full justify-end">
               <div
                 className={`${
                   styles.button
-                } !w-[100px] !h-[30px] items-center !text-xs text-white font-thin mt-3
+                } mt-3 !h-[30px] !w-[100px] items-center !text-xs font-thin text-white
                 ${addQuestionLoading && "cursor-not-allowed"}
                 `}
                 onClick={addQuestionLoading ? () => {} : handleQuestion}
@@ -297,7 +300,7 @@ const CourseContentMedia = ({
               </div>
             </div>
             <br />
-            <div className="w-full h-[1px] bg-[#ffffff3b] "></div>
+            <div className="h-[1px] w-full bg-[#ffffff3b] "></div>
             <div>
               <CommentReply
                 data={data}
@@ -323,13 +326,13 @@ const CourseContentMedia = ({
                       alt="usericon"
                       width={30}
                       height={30}
-                      className="rounded-full ml-5 w-[30px] h-[30px]"
+                      className="ml-5 h-[30px] w-[30px] rounded-full"
                     />
                     <div className="w-full">
                       <h5 className="pl-3 text-sm font-[500] ">
                         Give a Rating <span className="text-red-500">*</span>
                       </h5>
-                      <div className="flex w-full ml-2 pb-3 ">
+                      <div className="ml-2 flex w-full pb-3 ">
                         {[1, 2, 3, 4, 5].map((i) =>
                           rating >= i ? (
                             <AiFillStar
@@ -347,7 +350,7 @@ const CourseContentMedia = ({
                               size={25}
                               onClick={() => setRating(i)}
                             />
-                          )
+                          ),
                         )}
                       </div>
                       <textarea
@@ -358,15 +361,15 @@ const CourseContentMedia = ({
                         cols={40}
                         rows={5}
                         placeholder="write your comment.."
-                        className="outline-none bg-transparent border !border-black 800px:w-full p-2 rounded w-[90%] 800px:text-sm font-Poppins"
+                        className="w-[90%] rounded border !border-black bg-transparent p-2 font-Poppins outline-none 800px:w-full 800px:text-sm"
                       ></textarea>
                     </div>
                   </div>
-                  <div className="w-full flex justify-end">
+                  <div className="flex w-full justify-end">
                     <div
                       className={`${
                         styles.button
-                      } !w-[100px] !h-[30px] items-center !text-xs text-white font-thin mt-1 ${
+                      } mt-1 !h-[30px] !w-[100px] items-center !text-xs font-thin text-white ${
                         reviewCreationLoading && "cursor-no-drop"
                       }`}
                       onClick={
@@ -380,38 +383,40 @@ const CourseContentMedia = ({
               )}
             </>
             <br />
-        <div className="w-full h-[1px] bg-[#ffffff3b]"></div>
-        <div className="w-full">
-          {(course?.reviews && [...course.reviews].reverse()).map(
-            (item: any, index: number) => (
-              <div className="w-full flex  my-5  " key={index}>
-              <Image
-                src={
-                  item?.user?.avatar ? item.user.avatar : "/assets/user.png"
-                }
-                alt="usericon"
-                width={30}
-                height={30}
-                className="rounded-full ml-5 w-[30px] h-[30px]"
-              />
-              <div className="pl-3 ">
-                <div className="flex gap-1">
-                  <h5 className="text-xs font-sans ">{item?.user.name}</h5>{" "}
-                  <small className="text-xs text-gray-600">
-                    {item.createdAt && formatDate(item?.createdAt)}
-                  </small>
-                </div>
-                <Ratings rating={item.rating} />
-                <p className="text-sm">{item?.comment}</p>
-              </div>
+            <div className="h-[1px] w-full bg-[#ffffff3b]"></div>
+            <div className="w-full">
+              {(course?.reviews && [...course.reviews].reverse()).map(
+                (item: any, index: number) => (
+                  <div className="my-5 flex  w-full  " key={index}>
+                    <Image
+                      src={
+                        item?.user?.avatar
+                          ? item.user.avatar
+                          : "/assets/user.png"
+                      }
+                      alt="usericon"
+                      width={30}
+                      height={30}
+                      className="ml-5 h-[30px] w-[30px] rounded-full"
+                    />
+                    <div className="pl-3 ">
+                      <div className="flex gap-1">
+                        <h5 className="font-sans text-xs ">
+                          {item?.user.name}
+                        </h5>{" "}
+                        <small className="text-xs text-gray-600">
+                          {item.createdAt && formatDate(item?.createdAt)}
+                        </small>
+                      </div>
+                      <Ratings rating={item.rating} />
+                      <p className="text-sm">{item?.comment}</p>
+                    </div>
+                  </div>
+                ),
+              )}
             </div>
-            )
-          )}
-        </div>
           </div>
-          
         )}
-       
       </div>
     </div>
   );
@@ -433,7 +438,7 @@ const CommentReply = ({
 }: any) => {
   return (
     <>
-      <div className="w-full my-3">
+      <div className="my-3 w-full">
         {data[activeVideo]?.questions?.map((item: any, index: number) => (
           <CommentItem
             key={index}
@@ -467,18 +472,18 @@ const CommentItem = ({
   return (
     <>
       <div className="my-4">
-        <div className="flex mb-2">
+        <div className="mb-2 flex">
           <Image
             src={item.user?.avatar ? item.user.avatar : "/assets/user.png"}
             alt="usericon"
             width={30}
             height={30}
-            className="rounded-full ml-5 w-[30px] h-[30px]"
+            className="ml-5 h-[30px] w-[30px] rounded-full"
           />
 
           <div className="pl-3 ">
             <div className="flex gap-1">
-              <h5 className="text-xs font-sans ">{item?.user.name}</h5>
+              <h5 className="font-sans text-xs ">{item?.user.name}</h5>
               <small className="text-xs text-gray-600">
                 {item.createdAt && formatDate(item?.createdAt)}
               </small>
@@ -487,9 +492,9 @@ const CommentItem = ({
           </div>
         </div>
 
-        <div className="w-full flex">
+        <div className="flex w-full">
           <span
-            className="800px:pl-16 cursor-pointer  mr-2 text-xs text-gray-700"
+            className="mr-2 cursor-pointer  text-xs text-gray-700 800px:pl-16"
             onClick={() => {
               setReplyActive(!replyActive);
               setQuestionId(item._id);
@@ -502,14 +507,14 @@ const CommentItem = ({
               : "Hide Replies"}
           </span>
           <MdMessage className="cursor-pointer text-gray-700 " />
-          <span className="pl-1 cursor-pointer text-xs  text-gray-700">
+          <span className="cursor-pointer pl-1 text-xs  text-gray-700">
             {item?.questionReplies?.length}
           </span>
         </div>
         {replyActive && (
           <>
             {item?.questionReplies.map((item: any, index: number) => (
-              <div className="w-full flex 800px:ml-16 my-5  " key={index}>
+              <div className="my-5 flex w-full 800px:ml-16  " key={index}>
                 <Image
                   src={
                     item?.user?.avatar ? item.user.avatar : "/assets/user.png"
@@ -517,11 +522,11 @@ const CommentItem = ({
                   alt="usericon"
                   width={30}
                   height={30}
-                  className="rounded-full ml-5 w-[30px] h-[30px]"
+                  className="ml-5 h-[30px] w-[30px] rounded-full"
                 />
                 <div className="pl-3 ">
                   <div className="flex gap-1">
-                    <h5 className="text-xs font-sans ">{item?.user.name}</h5>{" "}
+                    <h5 className="font-sans text-xs ">{item?.user.name}</h5>{" "}
                     {item.user.role === "instructor" && (
                       <MdVerifiedUser className="text-[#369eff]" />
                     )}
@@ -534,19 +539,19 @@ const CommentItem = ({
               </div>
             ))}
             <>
-              <div className="w-full px-2 flex relative text-sm mt-2 ">
+              <div className="relative mt-2 flex w-full px-2 text-sm ">
                 <input
                   type="text"
                   placeholder="Enter your answer.."
                   value={answer}
                   onChange={(e: any) => setAnswer(e.target.value)}
-                  className={`placeholder:text-gray-600 block 800px:ml-12 outline-none bg-transparent border-b border-gray-700 p-[5px] w-[95%] ${
+                  className={`block w-[95%] border-b border-gray-700 bg-transparent p-[5px] outline-none placeholder:text-gray-600 800px:ml-12 ${
                     answer === "" || (addAnswerLoading && "cursor-no-drop")
                   }`}
                 />
                 <button
                   type="submit"
-                  className="absolute right-4 bottom-1 text-xs !font-thin uppercase"
+                  className="absolute bottom-1 right-4 text-xs !font-thin uppercase"
                   onClick={handleAnswerSubmit}
                   disabled={answer === "" || addAnswerLoading}
                 >
