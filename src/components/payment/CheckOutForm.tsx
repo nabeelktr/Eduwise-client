@@ -8,15 +8,15 @@ import React, { useEffect, useState } from "react";
 import { useCreateOrderMutation } from "../../../redux/features/order/orderApi";
 import { useLoadUserQuery } from "../../../redux/features/api/apiSlice";
 import { styles } from "../../styles/style";
-import { redirect } from "next/navigation";
 import { toast } from "sonner";
 
 type Props = {
   setOpen: any;
   data: any;
+  refetch: any;
 };
 
-const CheckOutForm = ({ setOpen, data }: Props) => {
+const CheckOutForm = ({ setOpen, data, refetch }: Props) => {
   const stripe = useStripe();
   const elements = useElements();
   const [message, setMessage] = useState<any>("");
@@ -48,6 +48,7 @@ const CheckOutForm = ({ setOpen, data }: Props) => {
     if (orderData) {
       setLoadUser(true);
       setOpen(false)
+      refetch();
       // redirect(`/course/${data._id}`);
     }
     if (error) {

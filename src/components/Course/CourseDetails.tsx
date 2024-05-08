@@ -212,7 +212,7 @@ const CourseDetails: React.FC<Props> = ({
               <div className="w-full px-2">
                 {stripePromise && clientSecret && (
                   <Elements stripe={stripePromise} options={{ clientSecret }}>
-                    <CheckOutForm setOpen={setOpen} data={data} />
+                    <CheckOutForm setOpen={setOpen} data={data} refetch={refetch} />
                   </Elements>
                 )}
               </div>

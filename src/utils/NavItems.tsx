@@ -15,7 +15,7 @@ export const navItemsData = [
   },
   {
     name: "About +",
-    url: "/",
+    url: "/#aboutus",
   },
   {
     name: "Become a Instructor",
@@ -42,6 +42,7 @@ const NavItems: React.FC<Props> = ({ activeItem, isMobile, user }) => {
       setStreamId(data.streamId);
     }
   };
+
   useEffect(() => {
     socketId.on("joinStream", (data) => {
       handleNotification(data);
@@ -83,6 +84,7 @@ const NavItems: React.FC<Props> = ({ activeItem, isMobile, user }) => {
                                 ? "font-[550]  text-black"
                                 : "text-black"
                             }  w-24 text-center font-Poppins  text-[14px] font-[400] tracking-wide hover:font-[600]`}
+                            
                   >
                     <span>{i.name}</span>
                   </div>
@@ -100,6 +102,7 @@ const NavItems: React.FC<Props> = ({ activeItem, isMobile, user }) => {
           </Link>
         )}
       </div>
+
       {isMobile && (
         <div className="mt-5 800px:hidden">
           <div className="w-full py-6 text-center">

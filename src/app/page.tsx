@@ -1,5 +1,5 @@
 "use client";
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import Header from "../components/Header";
 import Heading from "../utils/Heading";
 import Banner from "../components/Home/Banner";
@@ -13,7 +13,19 @@ const Page: FC<Props> = (props) => {
   const [open, setOpen] = useState(false);
   const [activeItem, setActiveItem] = useState(0);
   const [route, setRoute] = useState("Login");
+
+  useEffect(() => {
+    const hash = window.location.hash;
+
+    if (hash === "#aboutus") {
+      const aboutUsSection = document.getElementById("aboutus-section");
+      if (aboutUsSection) {
+        aboutUsSection.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, []);
   return (
+  
     <div>
       <Heading
         description="Eduwise is a platform for students to learn and get help from teachers"
@@ -30,7 +42,9 @@ const Page: FC<Props> = (props) => {
       <Banner setOpen={setOpen} />
 
       <Categories />
-      <AboutUs />
+      <div id="aboutus-section">
+        <AboutUs />
+      </div>
       <FAQ />
       <Footer />
     </div>
