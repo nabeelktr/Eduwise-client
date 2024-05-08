@@ -112,7 +112,7 @@ const CoursesPage = (props: Props) => {
         <div className="mx-auto pl-14 mt-20 w-[85%]">
           
           <div className="z-[99]">
-           {data && <DashboardHero instructorId={data[0].instructorId}/>}
+           {data && <DashboardHero instructorId={data[0]?.instructorId ? data[0]?.instructorId : "" }/>}
             </div>
           {data && (
             <div
